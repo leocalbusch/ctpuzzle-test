@@ -1,0 +1,108 @@
+var TelaNome = function () {
+	this.campo = new Image();
+	this.campo = tdsImagens[0];
+	this.cursor = new Image();
+	this.cursor = tdsImagens[1]	
+	this.instrucaoMenina1 = new Image();
+	this.instrucaoMenina1 = tdsImagens[2];	
+	this.instrucaoMenina2 = new Image();
+	this.instrucaoMenina2 = tdsImagens[3];		
+	this.instrucaoMenino1 = new Image();
+	this.instrucaoMenino1 = tdsImagens[4];
+	this.instrucaoMenino2 = new Image();
+	this.instrucaoMenino2 = tdsImagens[5];
+	this.botaoContinuar = new Image();
+	this.botaoContinuar = tdsImagens[6];
+	this.botaoContinuarOver = new Image();
+	this.botaoContinuarOver = tdsImagens[6];
+	this.ativo=true;
+	this.cont=0;
+	this.fala=true;
+	this.contCursor=0;
+	this.mostraCursor=true;
+	this.keyCode="none";
+	this.clicouContinuar=false;
+};
+
+TelaNome.prototype.Draw = function(){
+	this.cont++;
+	if(this.cont>10){
+		this.cont=0;
+		this.fala=!this.fala;
+	}
+	this.contCursor++;
+	if(this.contCursor>20){
+		this.contCursor=0;
+		this.mostraCursor=!this.mostraCursor;
+	}
+	if(genero==0){	//variável global do main
+		if(this.fala)context.drawImage(this.instrucaoMenina1, 0, 0);
+		else context.drawImage(this.instrucaoMenina2, 0, 0);
+	}else{		
+		if(this.fala)context.drawImage(this.instrucaoMenino1, 0, 0);
+		else context.drawImage(this.instrucaoMenino2, 0, 0);
+	}
+	context.font="40px Georgia";
+	context.drawImage(this.campo, 100, 250);
+	if(nomeJogador==""){//variável global do main
+		if(this.mostraCursor)context.drawImage(this.cursor, 120, 268);
+	}
+	context.fillText(nomeJogador,130,320);
+	context.drawImage(this.botaoContinuar, 400, 500);
+	if(this.clicouContinuar)context.drawImage(this.botaoContinuarOver, 400, 500);
+}
+
+TelaNome.prototype.MouseDown = function(mouseEvent){
+	if(posMouseX>400 && posMouseX<697 && posMouseY>500 && posMouseY<544){
+		this.clicouContinuar=true;
+	}
+}
+
+TelaNome.prototype.MouseUp = function(mouseEvent) {
+	//se clicou em "continuar"
+	if(posMouseX>400 && posMouseX<697 && posMouseY>500 && posMouseY<544){
+		this.clicouContinuar=false;
+		//libera o main pra ir pra próxima tela
+		this.ativo=false;
+	}
+}
+
+TelaNome.prototype.KeyDown = function (keyCode){
+	this.keyCode=keyCode;
+	if(nomeJogador.length<18){//bug: se chegar no 18 não dá mais backspace
+		switch (this.keyCode) {
+			case 81: nomeJogador+="q"; break;
+			case 87: nomeJogador+="w"; break;
+			case 69: nomeJogador+="e"; break;
+			case 82: nomeJogador+="r"; break;
+			case 84: nomeJogador+="t"; break;
+			case 89: nomeJogador+="y"; break;
+			case 85: nomeJogador+="u"; break;
+			case 73: nomeJogador+="i"; break;
+			case 79: nomeJogador+="o"; break;
+			case 80: nomeJogador+="p"; break;
+			case 65: nomeJogador+="a"; break;
+			case 83: nomeJogador+="s"; break;
+			case 68: nomeJogador+="d"; break;
+			case 70: nomeJogador+="f"; break;
+			case 71: nomeJogador+="g"; break;
+			case 72: nomeJogador+="h"; break;
+			case 74: nomeJogador+="j"; break;
+			case 75: nomeJogador+="k"; break;
+			case 76: nomeJogador+="l"; break;
+			case 186: nomeJogador+="ç"; break;
+			case 90: nomeJogador+="z"; break;
+			case 88: nomeJogador+="x"; break;
+			case 67: nomeJogador+="c"; break;
+			case 86: nomeJogador+="v"; break;
+			case 66: nomeJogador+="b"; break;
+			case 78: nomeJogador+="n"; break;
+			case 77: nomeJogador+="m"; break;
+			case 32: nomeJogador+=" "; break;
+			//se for enter
+			case 13: this.ativo=false; break;
+			//se for backspace retira o último char
+			case 8: var newName=""; for(var i=0; i<nomeJogador.length-1; i++){ newName+= nomeJogador.charAt(i);} nomeJogador=newName; break;
+		}
+	}
+}

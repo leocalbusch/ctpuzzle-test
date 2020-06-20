@@ -1,0 +1,44 @@
+[14-May-2020 08:25:23 America/Fortaleza] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;nspro16.hostgator.com.br&quot; (162.241.60.113) and accepting
+	TCP/IP connections on port 5432? in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:25:23 America/Fortaleza] PHP Warning:  pg_query() expects parameter 1 to be resource, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:25:23 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:32:13 America/Fortaleza] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;nspro16.hostgator.com.br&quot; (162.241.60.113) and accepting
+	TCP/IP connections on port 5432? in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:32:13 America/Fortaleza] PHP Warning:  pg_query() expects parameter 1 to be resource, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:32:13 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:32:37 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:32:37 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:32:37 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:32:37 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:34:28 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:34:28 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:34:28 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:34:28 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:20 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:20 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:20 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:20 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:27 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:27 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:27 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:27 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:28 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:28 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:35:28 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:35:28 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:36:39 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:36:39 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:36:39 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:36:39 America/Fortaleza] PHP Warning:  pg_last_error() expects parameter 1 to be resource, null given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:37:26 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:37:26 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:37:26 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 36
+[14-May-2020 08:37:26 America/Fortaleza] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, bool given in /home2/calbus59/public_html/ctpuzzleold/index.php on line 37
+[14-May-2020 08:41:56 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:41:56 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:42:51 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:42:51 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:44:48 America/Fortaleza] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
+[14-May-2020 08:44:48 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home2/calbus59/public_html/ctpuzzleold/index.php on line 35
