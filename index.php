@@ -26,6 +26,7 @@
 <canvas id="gameCanvas" width="800" height="600">
     <script>
         begin();
+        teste
     </script>
 </canvas>
 <br>
@@ -43,7 +44,6 @@ if (mysqli_errno($conexao) > 0) {
     die();
 }
 echo "tabela criada com sucesso";*/
-
 
 ?>
 </body>
