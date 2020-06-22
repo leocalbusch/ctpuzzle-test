@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Pensamento Computacional</title>
+    <script src="js/utils.js"></script>
     <script src="js/Matriz.js"></script>
     <script src="js/Imagem.js"></script>
     <script src="js/Programacao.js"></script>
@@ -15,6 +16,7 @@
     <script src="js/PersonagemProg.js"></script>
     <script src="js/TelaEscolha.js"></script>
     <script src="js/TelaNome.js"></script>
+    <script src="js/InstrucoesPassoAPasso.js"></script>
     <script src="js/Instrucoes.js"></script>
     <script src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -26,7 +28,6 @@
 <canvas id="gameCanvas" width="800" height="600">
     <script>
         begin();
-        teste
     </script>
 </canvas>
 <br>

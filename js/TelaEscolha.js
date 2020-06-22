@@ -33,7 +33,7 @@ TelaEscolha.prototype.MouseMove = function (mouseEvent) {
   }
 }
 TelaEscolha.prototype.MouseUp = function (mouseEvent) {
-  //Seleção do personagem (bug: permite clicar sobre um, arrastar até o outro
+  // Seleção do personagem (bug: permite clicar sobre um, arrastar até o outro
   // e selecionar o que não está realçado pois o que conta é o MouseUp
   if (posMouseX > 16 && posMouseX < 411 && posMouseY > 137) {
     genero = 1;
