@@ -37,15 +37,16 @@ var Instrucoes = function (indice) {
 
   this.indice = indice;
 
-  faseAtual = fases[indice];
-  let personagem = personagensMap[genero];
-  instrucoesPassoAPasso = new InstrucoesPassoAPasso(context, personagem);
-  instrucoesPassoAPasso.onFinishSteps = function () {
-    self.ativo = false;
-  }
-
   let nomeGenero = genero == 0 ? 'girl' : 'boy';
+  faseAtual = fases[indice];
+
   if (this.indice == 1) {
+    let personagem = personagensMap[genero];
+    instrucoesPassoAPasso = new InstrucoesPassoAPasso(context, personagem);
+    instrucoesPassoAPasso.onFinishSteps = function () {
+      self.ativo = false;
+    }
+
     // mesma imagem pros dois casos (boca fechada e aberta)
     // a troca de boca fechada/aberta para fala é controlada pela imagem do sprite unicamente
     // e NÃO de todo o fundo, o que não parece ser uma boa prática

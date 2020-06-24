@@ -1,10 +1,10 @@
 var instrucoes = {
   programacao: [
-    { text: 'Preciso chegar na parte laranja', x: 370, y: 95 },
-    { text: 'Aqui ficam os comandos', x: 390, y: 95 },
-    { text: 'Você deve arrastá-los \npara a área de programa', x: 380, y: 90 },
+    { text: 'Olá,\nPreciso chegar na parte laranja\ndo mapa. Pode me ajudar?', x: 370, y: 85 },
+    { text: 'Aqui ficam os comandos que\nvocê pode utilizar', x: 370, y: 90 },
+    { text: 'Você pode arrastá-los para \no PROGRAMA e montar \no caminho', x: 370, y: 85 },
     { text: 'Clicando aqui, eu começo andar', x: 370, y: 95 },
-    { text: 'E aqui, apaga todo o caminho', x: 370, y: 95 },
+    { text: 'E clicando aqui, o caminho é \nzerado', x: 370, y: 95 },
   ]
 }
 
@@ -25,36 +25,40 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
         self.zeraInstrucoes();
       }
       self.faseAtual = nomeFase;
-    }
-    const imagePath = self.rootImagesPath + self.faseAtual + "/frame000" + self.indiceInstrucaoAtual + ".png";
-    loadImage(imagePath, {
-      onLoad: function (image) {
-        self.canvasContext.drawImage(image, 0, 0);
-      },
-      onError: function () {
-        console.log('Imagem ' + imagePath + ' não carregada.')
-        self.onFinishSteps();
-        self.zeraInstrucoes();
+      const imagePath = self.rootImagesPath + self.faseAtual + "/frame000" + self.indiceInstrucaoAtual + ".png";
+      loadImage(imagePath, {
+        onLoad: function (image) {
+          self.canvasContext.drawImage(image, 0, 0);
+        },
+        onError: function () {
+          console.log('Imagem ' + imagePath + ' não carregada.')
+          self.onFinishSteps();
+          self.zeraInstrucoes();
+        }
       }
+      );
+      self._desenhaPersonagem(self.faseAtual, falando);
     }
-    );
-    self._desenhaPersonagem(self.faseAtual, falando);
   }
 
   self._desenhaPersonagem = function (nomeFase, falando) {
-    let instrucao = instrucoes[nomeFase][self.indiceInstrucaoAtual];
-    let textoFala = instrucao.text
-    let sprite = self.personagem.spriteTalk;
-    let framePath = sprite.images[falando ? 0 : 1]
-    self.canvasContext.fillStyle = "black";
-    self.canvasContext.font = "13pt Arial"
-    printAtWordWrap(self.canvasContext, textoFala, instrucao.x, instrucao.y, 17)
-    loadImage(framePath, {
-      onLoad: function (image) {
-        self.canvasContext.drawImage(image, sprite.x, sprite.y);
+    const instrucaoFase = instrucoes[nomeFase];
+    if (instrucaoFase) {
+      let instrucao = instrucaoFase[self.indiceInstrucaoAtual];
+      if (instrucao) {
+        let textoFala = instrucao.text
+        let sprite = self.personagem.spriteTalk;
+        let framePath = sprite.images[falando ? 0 : 1]
+        self.canvasContext.fillStyle = "black";
+        self.canvasContext.font = "13pt Arial"
+        printAtWordWrap(self.canvasContext, textoFala, instrucao.x, instrucao.y, 18)
+        loadImage(framePath, {
+          onLoad: function (image) {
+            self.canvasContext.drawImage(image, sprite.x, sprite.y);
+          }
+        })
       }
-    })
-
+    }
   }
 
   self.zeraInstrucoes = function () {
