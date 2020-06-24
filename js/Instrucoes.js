@@ -278,7 +278,7 @@ Instrucoes.prototype.Draw = function () {
         else if (!this.parteInst[11]) this.parteInst[11] = true;
         else if (!this.parteInst[12]) this.parteInst[12] = true;
       }
-      context.drawImage(this.imgExtra[0].img, 0, 0);
+      context.Image(this.imgExtra[0].img, 0, 0);
       if (this.parteInst[0]) {
         context.drawImage(this.imgExtra[1].img, 0, 0);
       } if (this.parteInst[1]) {
@@ -349,7 +349,8 @@ Instrucoes.prototype.Draw = function () {
     }
 
     let fundo = this.fala ? this.fundoBocaAberta : this.fundoBocaFechada;
-    context.drawImage(fundo, 0, 0);
+    if (fundo.complete)
+      context.drawImage(fundo, 0, 0);
 
     if (this.indice == 5) {
       for (this.i = 0; this.i < 4; this.i++) {
