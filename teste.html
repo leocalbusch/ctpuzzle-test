@@ -1,30 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pensamento Computacional</title>
+    <script src="js/Matriz.js"></script>
+    <script src="js/Imagem.js"></script>
+    <script src="js/Programacao.js"></script>
+    <script src="js/Match.js"></script>
+    <script src="js/Pontos.js"></script>
+    <script src="js/Tangram.js"></script>
+    <script src="js/Escore.js"></script>
+    <script src="js/Sequencia.js"></script>
+    <script src="js/Classifica.js"></script>
+    <script src="js/ObjClassifica.js"></script>
+    <script src="js/PersonagemProg.js"></script>
+    <script src="js/TelaEscolha2.js"></script>
+    <script src="js/TelaNome.js"></script>
+    <script src="js/Instrucoes.js"></script>
+    <script src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        str = "dataHora=Wed May 27 2020 16:55:58 GMT-0300 (Horário Padrão de Brasília)&aluno=dasdasdsa&pontosGeral0=0&pontosDica0=0&pontosClicks0=0&pontosTempo0=0&pontosLimpar0=0&pontosPulou0=true&pontosGeral1=0&pontosDica1=0&pontosClicks1=0&pontosTempo1=1&pontosLimpar1=0&pontosPulou1=true&pontosGeral2=0&pontosDica2=0&pontosClicks2=0&pontosTempo2=0&pontosLimpar2=0&pontosPulou2=true&pontosGeral3=0&pontosDica3=0&pontosClicks3=0&pontosTempo3=2&pontosLimpar3=0&pontosPulou3=true&matchGeral0=0&matchDica0=0&matchClicks0=0&matchTempo0=1&matchGiros0=0&matchPulou0=true&matchGeral1=0&matchDica1=0&matchClicks1=0&matchTempo1=2&matchGiros1=0&matchPulou1=true&tangramGeral0=0&tangramDica0=0&tangramClicks0=0&tangramTempo0=1&tangramGiros0=0&tangramPulo0=true&tangramGeral1=0&tangramDica1=0&tangramClicks1=0&tangramTempo1=1&tangramGiros1=0&tangramPulo1=true&classificaGeral=1&classificaTempo=0&classificaDica=0&classificaTentativa=0&classificaLimpar=0&classificaPulou=0&sequenciaGeral0=1&sequenciaTempo0=0&sequenciaDica0=0&sequenciaTentativa0=0&sequenciaPulou0=false&sequenciaGeral1=1&sequenciaTempo1=0&sequenciaDica1=0&sequenciaTentativa1=0&sequenciaPulou1=false&progGeral0=0&progTempo0=1&progInstrucoes0=0&progApagou0=0&progApagouAll0=0&progPlay0=0&progPulou0=true&progGeral1=0&progTempo1=1&progInstrucoes1=0&progApagou1=0&progApagouAll1=0&progPlay1=0&progPulou1=true&progGeral2=0&progTempo2=0&progInstrucoes2=0&progApagou2=0&progApagouAll2=0&progPlay2=0&progPulou2=true&progGeral3=0&progTempo3=1&progInstrucoes3=0&progApagou3=0&progApagouAll3=0&progPlay3=0&progPulou3=true&progGeral4=0&progTempo4=1&progInstrucoes4=0&progApagou4=0&progApagouAll4=0&progPlay4=0&progPulou4=true&progGeral5=0&progTempo5=1&progInstrucoes5=0&progApagou5=0&progApagouAll5=0&progPlay5=0&progPulou5=true&progGeral6=0&progTempo6=2&progInstrucoes6=0&progApagou6=0&progApagouAll6=0&progPlay6=0&progPulou6=true&progLoopGeral0=0&progTempoLoop0=1&progInstrucoesLoop0=0&progApagouLoop0=0&progApagouAllLoop0=0&progPlayLoop0=0&progLoopLoop0=0&progInstrucoesLoopLoop0=0&progPulouLoop0=true&progLoopGeral1=0&progTempoLoop1=2&progInstrucoesLoop1=0&progApagouLoop1=0&progApagouAllLoop1=0&progPlayLoop1=0&progLoopLoop1=0&progInstrucoesLoopLoop1=0&progPulouLoop1=true&abstracao=0.19512195121951223&decomposicao=0.1476510067114094&reconhecimento=0.21153846153846154&programacao=0";
-        str="dataHora=Wed May 27 2020 16:55:58 GMT-0300 (Horário Padrão de Brasília)&aluno=dasdasdsa";
-        // Adiciona resultado no BD
-        $.ajax({
-            type: "POST",
-            url: "teste.php",
-            cache: false,
-            data: str,
-            dataType: "application/x-www-form-urlencoded",
-            success: function(response) {
-                if (!response.error) {
-                    alert(response.msg);
-                } else {
-                    alert(response.msg);
-                }
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+<br>
+<br>
+<canvas id="gameCanvas" width="800" height="600">
+    <script>
+        begin();
+    </script>
+</canvas>
+<br>
+<br>
 
 </body>
 </html>

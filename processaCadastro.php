@@ -1,7 +1,17 @@
 <?php
-session_start();
-$_SESSION=array();
-session_destroy();
+require "conexao.php";
+$sql="INSERT INTO usuarios (nome, email, senha, dataNascimento, genero, tipoUsuario, ativo) VALUES (";
+$sql.= "'".$_POST['cadastroNome']."', ";
+$sql.= "'".$_POST['cadastroEmail']."', ";
+$sql.= "'".md5($_POST['cadastroSenha'])."', ";
+$sql.= "'".$_POST['cadastroNascimento']."', ";
+$sql.= $_POST['cadastroGenero'].", ";
+$sql.= $_POST['tipo'].", ";
+$sql.= ($_POST['tipo']==3?1:0);
+$sql.= ")";
+
+require "executaQuery.php";
+mysqli_close($conexao);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +25,7 @@ session_destroy();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CT Puzzle Test</title>
 </head>
-<body>
+<body onload="$('#exampleModal').modal('show')">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,26 +74,29 @@ session_destroy();
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location='index.php';">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p><a class="btn btn-success" style="color:#fff;" href="novoCadastro.php?tipo=3">Área do Estudante</a></p>
-                <p><a class="btn btn-warning" href="novoCadastro.php?tipo=2">Área do Aplicador</a></p>
+                <p>Cadastro efetuado com sucesso!
+                <?php
+                echo ($_POST["tipo"]==3?"Por favor, efetue login na página inicial.":"Por favor, aguarde a liberação do seu cadastro. Você receberá um e-mail confirmando a liberação do seu acesso. Em caso de dúvidas, envie um e-mail para contato@ctpuzzletest.com");
+                ?>
+                </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location='index.php';">Entendi</button>
             </div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col">
         </div>
         <div class="col">
+
         </div>
         <div class="col">
         </div>

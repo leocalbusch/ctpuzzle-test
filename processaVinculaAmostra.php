@@ -1,7 +1,30 @@
 <?php
-session_start();
-$_SESSION=array();
-session_destroy();
+require "sessao.php";
+require "conexao.php";
+
+$sql="SELECT * FROM amostras WHERE chave = '".$_POST["chaveAmostra"]."' AND aberta = 1";
+require "executaQuery.php";
+
+if(mysqli_num_rows($result)==0){
+    $chave = false;
+    $msg = "Chave inválida ou teste não liberado. Favor contatar o responsável.";
+}else {
+    $amostra = mysqli_fetch_array($result);
+    $_SESSION["idAmostra"]=$amostra["idAmostra"];
+    $sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $amostra["idAmostra"];
+    require "executaQuery.php";
+    if (mysqli_num_rows($result)) {
+        $chave = true;
+        $resultados = mysqli_fetch_array($result);
+        $_SESSION["idResultado"]=$resultados["idResultado"];
+        $msg =  "Você já iniciou o teste uma vez. Se iniciar novamente, perderá os resultados anteriores. Tem certeza que deseja reiniciar o teste?";
+    } else {
+        $chave = true;
+        $_SESSION["idResultado"]=0;
+        $msg = "Tudo pronto. Vamos iniciar o teste?";
+    }
+}
+mysqli_close($conexao);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +37,18 @@ session_destroy();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CT Puzzle Test</title>
+    <script>
+        $(document).ready(function(){
+            $('#exampleModal').modal("show");
+            $('#exampleModal').on('hide.bs.modal', function (e) {
+                window.location.href = "dashboard.php";
+            });
+            $("#iniciarTeste").click(function(){
+                window.location.href = "teste.php";
+            });
+        });
+
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -46,14 +81,11 @@ session_destroy();
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <span class="nav-link">Olá <?php echo $_SESSION["nome"]; ?>!</span>
+            </li>
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" method="post" action="processaLogin.php">
-                    <input class="form-control mr-sm-2 form-control-sm" type="email" placeholder="e-mail" aria-label="e-mail" required name="loginEmail">
-                    <input class="form-control mr-sm-2 form-control-sm" type="password" placeholder="senha" aria-label="senha" required name="loginSenha">
-                    <button class="btn px-0 nav-link" type="submit"><i class="fa fa-sign-in mr-sm-1"></i>Entrar</button>
-                    <span class="nav-link disabled pr-0">/</span>
-                    <button class="btn nav-link" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user-plus mr-sm-1"></i>Cadastrar-se</button>
-                </form>
+                <button class="btn nav-link" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-sign-out mr-sm-1"></i>Sair</button>
             </li>
         </ul>
     </div>
@@ -69,23 +101,12 @@ session_destroy();
                 </button>
             </div>
             <div class="modal-body">
-                <p><a class="btn btn-success" style="color:#fff;" href="novoCadastro.php?tipo=3">Área do Estudante</a></p>
-                <p><a class="btn btn-warning" href="novoCadastro.php?tipo=2">Área do Aplicador</a></p>
+                <p><?php echo $msg; ?></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                <?php if ($chave) echo "<button type='button' class='btn btn-success' id='iniciarTeste' >Vamos lá!</button>"; ?>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
         </div>
     </div>
 </div>
