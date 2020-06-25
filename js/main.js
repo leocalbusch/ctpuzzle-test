@@ -298,6 +298,11 @@ function carregarImagens() {
   loadImage('img/Instrucoes/guias/programacao/frame0003.png');
   loadImage('img/Instrucoes/guias/programacao/frame0004.png');
 
+  loadImage('img/Instrucoes/guias/girl0000.png');
+  loadImage('img/Instrucoes/guias/girl0001.png');
+  loadImage('img/Instrucoes/guias/boy0000.png');
+  loadImage('img/Instrucoes/guias/boy0001.png');
+
   tdsImagens[12].src = "img/Instrucoes/Instrucoes1b.png";
   tdsImagens[13].src = "img/Instrucoes/Instrucoes2a.png";
   tdsImagens[14].src = "img/Instrucoes/Instrucoes2b.png";
