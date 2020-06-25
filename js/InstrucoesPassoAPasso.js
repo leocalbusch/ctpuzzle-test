@@ -37,7 +37,6 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
         onError: function () {
           console.log('Imagem ' + imagePath + ' não carregada.')
           self.onFinishSteps();
-          self.zeraInstrucoes();
         }
       }
       );
