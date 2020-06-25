@@ -16,6 +16,10 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
   self.personagem = personagem;
   self.onFinishSteps = function () { console.log('not implemented ') }
 
+  self.buildImageName = function (index) {
+    return self.rootImagesPath + self.faseAtual + "/frame000" + index + ".png"
+  }
+
   /**
   * Desenha a ajuda utilizando o nome da fase e o índice do passo atual para carregar a imagem
   */
@@ -25,7 +29,7 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
         self.zeraInstrucoes();
       }
       self.faseAtual = nomeFase;
-      const imagePath = self.rootImagesPath + self.faseAtual + "/frame000" + self.indiceInstrucaoAtual + ".png";
+      const imagePath = self.buildImageName(self.indiceInstrucaoAtual);
       loadImage(imagePath, {
         onLoad: function (image) {
           self.canvasContext.drawImage(image, 0, 0);
