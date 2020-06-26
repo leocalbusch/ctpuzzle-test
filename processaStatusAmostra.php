@@ -1,3 +1,25 @@
+<?php
+
+    require "sessao.php";
+    require "conexao.php";
+    foreach ($_POST["amostras"] as $amostra) {
+        $abertas .= $amostra . ",";
+    }
+    $abertas = substr($abertas, 0, -1);
+
+// atualiza as abertas
+    $sql = "UPDATE amostras SET aberta = 1 WHERE idAplicador = $_SESSION[idUsuario]";
+    if (isset($_POST["amostras"])) $sql .= " AND idAmostra IN ($abertas)";
+    require "executaQuery.php";
+
+//atualiza as fechadas (que não vieram via post)
+    $sql = "UPDATE amostras SET aberta = 0 WHERE idAplicador = $_SESSION[idUsuario]";
+    if (isset($_POST["amostras"])) $sql .= " AND idAmostra NOT IN ($abertas)";
+    require "executaQuery.php";
+
+    mysqli_close($conexao);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +40,8 @@
     <script>
         $(document).ready(function () {
             $("#exampleModal").modal("show");
-            $("#logout").click(function (e) {
-                window.location.href = "index.php";
-            });
-            $("#logoutx").click(function (e) {
-                window.location.href = "index.php";
+            $("#exampleModal").on("hide.bs.modal", function (e) {
+                window.location.href = "dashboard.php";
             });
         });
 
@@ -30,20 +49,21 @@
 </head>
 <body>
 <!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
-                <button type="button" class="close" id="logoutx" aria-label="Close">
+                <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p><?php if(isset($erro)) echo $erro; elseif(isset($_GET["logout"])) echo "Saída efetuada com sucesso."; ?></p>
+                <p>Alterações efetuadas com sucesso!</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="logout">Entendi</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Entendi</button>
             </div>
         </div>
     </div>

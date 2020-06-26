@@ -13,9 +13,9 @@ require "sessao.php";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
         $(document).ready(function(){
-            $('#exampleModal2').on('hide.bs.modal', function (e) {
-                window.location.href = "index.php";
-            })
+            $("#logout").click(function(){
+                window.location.href = "modalErro.php?logout=1";
+            });
         });
 
     </script>
@@ -41,45 +41,7 @@ require "sessao.php";
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-sm-2">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><?php echo $_SESSION["idResultado"]; ?></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <span class="nav-link">Olá <?php echo $_SESSION["nome"]; ?>!</span>
-            </li>
-            <li class="nav-item">
-                <button class="btn nav-link" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-sign-out mr-sm-1"></i>Sair</button>
-            </li>
-        </ul>
-    </div>
-</nav>
+<?php require "navBar.php"; ?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -95,27 +57,7 @@ require "sessao.php";
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal2">Sim, quero sair</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal 2-->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Saída efetuada com sucesso.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="logout">Sim, quero sair</button>
             </div>
         </div>
     </div>

@@ -1,10 +1,6 @@
 <?php
 require "sessao.php";
 require "conexao.php";
-$sql = "SELECT * FROM amostras WHERE idAplicador = " . $_SESSION["idUsuario"];
-require "executaQuery.php";
-if (mysqli_num_rows($result) > 0) {
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,68 +20,51 @@ if (mysqli_num_rows($result) > 0) {
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>CT Puzzle Test</title>
     <script>
-        $(document).ready(function () {
-            $('#exampleModal2').on('hide.bs.modal', function (e) {
-                window.location.href = "index.php";
-            })
+        $(document).ready(function(){
+            $("#logout").click(function(){
+                window.location.href = "modalErro.php?logout=1";
+            });
+            $('#minhasAmostras').on('hide.bs.modal', function (e) {
+                window.location.href = "dashboard.php";
+            });
+            $("#minhaAmostra tr td a").on("click",function(e){
+                var idAmostra = $(this).attr('data-idamostra');
+                // AJAX
+                $.ajax({
+                    url: 'buscaAmostra.php',
+                    type: 'post',
+                    data: {idAmostra: idAmostra},
+                    dataType: 'json',
+                    success: function (response) {
+
+                        var len = Object.keys(response).length;
+                        console.log(len);
+                        if (len > 0) {
+                            // Set value to textboxes
+                            console.log(response);
+                            document.getElementById('editaNome').value = response['nome'];
+                            document.getElementById('editaDescricao').value = response['descricao'];
+                            document.getElementById('editaData').value = response['dataAmostra'];
+                            document.getElementById('editaChave').value = response['chave'];
+                            document.getElementById('editaInstituicao').value = response['instituicao'];
+                            document.getElementById('editaCidade').value = response['cidade'];
+                            document.getElementById('editaEstado').value = response['estado'];
+                            document.getElementById('editaPais').value = response['pais'];
+                            document.getElementById('idAmostra').value = response['idAmostra'];
+                        }
+
+                    }
+                });
+            });
         });
 
     </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <span class="nav-link">Olá <?php echo $_SESSION["nome"]; ?>!</span>
-            </li>
-            <?php
-            if ($_SESSION["tipoUsuario"] == 2) {
-                echo '
-            <li class="nav-item" >
-                <button class="btn nav-link" type = "button" data-toggle = "modal" data-target = "#minhasAmostras" ><i class="fa fa-signal mr-sm-1" ></i >Minhas Amostras</button >
-            </li >';
-            }
-            ?>
-            <li class="nav-item">
-                <button class="btn nav-link" type="button" data-toggle="modal" data-target="#exampleModal"><i
-                            class="fa fa-sign-out mr-sm-1"></i>Sair
-                </button>
-            </li>
-        </ul>
-    </div>
-</nav>
+<?php require "navBar.php"; ?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -102,76 +81,34 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal"
-                        data-target="#exampleModal2">Sim, quero sair
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal 2-->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Saída efetuada com sucesso.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" id="logout">Sim, quero sair</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Minhas Amostras -->
-<div class="modal fade" id="minhasAmostras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Minhas Amostras</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?php require "minhasAmostras.php"; ?>
 
 <div class="container">
     <div class="row">
         <div class="col">
         </div>
         <div class="col">
-            <?php
-            if ($_SESSION["tipoUsuario"] == 3) {
-                echo "<p>Olá $_SESSION[nome]! Para iniciar seu teste, você precisa informar sua chave! Ainda não possui uma? Consulte a pessoa responsável pela aplicacão do teste!</p>
+            <?php if ($_SESSION["tipoUsuario"] == 3) { ?>
+            <p>Olá <?php echo $_SESSION[nome]; ?>! Para iniciar seu teste, você precisa informar sua chave! Ainda não possui uma? Consulte a pessoa responsável pela aplicacão do teste!</p>
             <form action='processaVinculaAmostra.php' method='post' >
                 <div class='form-group'>
                     <label for='chaveAmostra'>Chave:</label>
                     <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'>
                 </div>
                 <button type='submit' class='btn btn-primary'>Iniciar</button>
-            </form>";
+            </form>
+            <?php
             }
-            if ($_SESSION["tipoUsuario"] == 2) {
+            if ($_SESSION["tipoUsuario"] == 2) {?>
 
-                echo '<p>Olá ' . $_SESSION[nome] . '! Para iniciar seu teste, você precisa cadastrar uma amostra e atribuir uma chave de cesso a ela.</p>
+            <h3>Cadastrar uma nova amostra</h3>
             <form action="processaNovaAmostra.php" method="post" >
                 <div class="form-group">
                     <label for="cadastroNome">Nome identificador da amostra</label>
@@ -206,10 +143,10 @@ if (mysqli_num_rows($result) > 0) {
                     <input type="text" class="form-control" id="cadastroPais" name="cadastroPais" required>
                 </div>                                                             
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </form>';
-            }
-            ?>
+            </form>
+            <?php } ?>
         </div>
+
         <div class="col">
         </div>
     </div>
