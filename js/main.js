@@ -1,3 +1,25 @@
+function loadImage(path, callbacksObjects) {
+  const cachedImage = tdsImagens[path];
+  if (cachedImage) {
+    if (callbacksObjects) {
+      callbacksObjects.onLoad(cachedImage)
+    }
+    return;
+  }
+  let image = new Image()
+  image.onload = function () {
+    tdsImagens[path] = image
+    if (callbacksObjects) {
+      callbacksObjects.onLoad(image)
+    }
+  }
+  if (callbacksObjects) {
+    image.onerror = callbacksObjects.onError
+  }
+  image.src = path;
+  return image;
+}
+
 var mouseImg = new Image();
 mouseImg.src = "img/pointer.png";
 var posMouseX = 0;
@@ -270,11 +292,16 @@ function carregarImagens() {
   tdsImagens['programacao_girl'] = new Image();
   tdsImagens['programacao_girl'].src = "img/Instrucoes/guias/programacao_girl.png";
 
-  /* tdsImagens['boy_boca_aberta'] = new Image();
-  tdsImagens['boy_boca_aberta'].src = "img/Instrucoes/guias/programacao/boy_boca_aberta.png";
+  loadImage('img/Instrucoes/guias/programacao/frame0000.png');
+  loadImage('img/Instrucoes/guias/programacao/frame0001.png');
+  loadImage('img/Instrucoes/guias/programacao/frame0002.png');
+  loadImage('img/Instrucoes/guias/programacao/frame0003.png');
+  loadImage('img/Instrucoes/guias/programacao/frame0004.png');
 
-  tdsImagens['boy_boca_fechada'] = new Image();
-  tdsImagens['boy_boca_fechada'].src = "img/Instrucoes/guias/programacao/boy_boca_fechada.png"; */
+  loadImage('img/Instrucoes/guias/girl0000.png');
+  loadImage('img/Instrucoes/guias/girl0001.png');
+  loadImage('img/Instrucoes/guias/boy0000.png');
+  loadImage('img/Instrucoes/guias/boy0001.png');
 
   tdsImagens[12].src = "img/Instrucoes/Instrucoes1b.png";
   tdsImagens[13].src = "img/Instrucoes/Instrucoes2a.png";
@@ -535,47 +562,4 @@ function carregarImagens() {
   tdsImagens[273].src = "img/Match/MatchDown.png";
   tdsImagens[274].src = "img/Match/MatchUp.png";
   tdsImagens[275].src = "img/Match/MatchLeft.png";
-}
-
-function loadImage(path, callbacksObjects) {
-  const cachedImage = tdsImagens[path];
-  if (cachedImage) {
-    if (callbacksObjects) {
-      callbacksObjects.onLoad(cachedImage)
-    }
-    return;
-  }
-  let image = new Image()
-  image.onload = function () {
-    tdsImagens[path] = image
-    if (callbacksObjects) {
-      callbacksObjects.onLoad(image)
-    }
-  }
-  if (callbacksObjects) {
-    image.onerror = callbacksObjects.onError
-  }
-  image.src = path;
-  return image;
-}
-
-function createSvgImage(canvasContext, svg) {
-  var data = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">' +
-    '<foreignObject width="100%" height="100%">' +
-    '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:50px">' +
-    'Simply Easy ' +
-    '<span style="color:blue;">' +
-    'Learning</span>' +
-    '</div>' +
-    '</foreignObject>' +
-    '</svg>';
-  var DOMURL = window.URL || window.webkitURL || window;
-  var img1 = new Image();
-  var svg = new Blob([data], { type: 'image/svg+xml' });
-  var url = DOMURL.createObjectURL(svg);
-  img1.onload = function () {
-    ctx.drawImage(img1, 25, 70);
-    DOMURL.revokeObjectURL(url);
-  }
-  img1.src = url;
 }

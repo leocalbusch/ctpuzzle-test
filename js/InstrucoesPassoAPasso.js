@@ -16,6 +16,14 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
   self.personagem = personagem;
   self.onFinishSteps = function () { console.log('not implemented ') }
 
+  self.buildImageName = function (index) {
+    return self.rootImagesPath + self.faseAtual + "/frame000" + index + ".png"
+  }
+  self.finishedInstrucionsSteps = function () {
+    const instrucoesFase = instrucoes[self.faseAtual];
+    return !instrucoesFase || self.indiceInstrucaoAtual >= instrucoesFase.length;
+  }
+
   /**
   * Desenha a ajuda utilizando o nome da fase e o índice do passo atual para carregar a imagem
   */
@@ -25,19 +33,21 @@ var InstrucoesPassoAPasso = function (canvasContext, personagem) {
         self.zeraInstrucoes();
       }
       self.faseAtual = nomeFase;
-      const imagePath = self.rootImagesPath + self.faseAtual + "/frame000" + self.indiceInstrucaoAtual + ".png";
-      loadImage(imagePath, {
-        onLoad: function (image) {
-          self.canvasContext.drawImage(image, 0, 0);
-        },
-        onError: function () {
-          console.log('Imagem ' + imagePath + ' não carregada.')
-          self.onFinishSteps();
-          self.zeraInstrucoes();
+      if (self.finishedInstrucionsSteps()) {
+        self.onFinishSteps();
+      } else {
+        const imagePath = self.buildImageName(self.indiceInstrucaoAtual);
+        loadImage(imagePath, {
+          onLoad: function (image) {
+            self.canvasContext.drawImage(image, 0, 0);
+          },
+          onError: function () {
+            console.log('Imagem ' + imagePath + ' não carregada.')
+          }
         }
+        );
+        self._desenhaPersonagem(self.faseAtual, falando);
       }
-      );
-      self._desenhaPersonagem(self.faseAtual, falando);
     }
   }
 
