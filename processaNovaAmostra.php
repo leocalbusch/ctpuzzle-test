@@ -2,27 +2,47 @@
 require "sessao.php";
 require "conexao.php";
 
-$sql="SELECT * FROM amostras WHERE chave = '".$_POST["chaveAmostra"]."'";
+
+$sql="SELECT * FROM amostras WHERE chave = '".$_POST["cadastroChave"]."'";
+if(isset($_POST["editar"])){
+    $sql.=" AND idAmostra <> ".$_POST["idAmostra"];
+}
 require "executaQuery.php";
 
 if(mysqli_num_rows($result)>0){
     $chave = false;
-    $msg = "Chave inválida.";
+    $msg = "Chave inválida. Nenhuma alteração foi realizada";
 }else {
-    $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, instituicao, cidade, estado, pais, idAplicador) VALUES ";
-    $sql.= "('".$_POST["cadastroNome"]."'";
-    $sql.= ",'".$_POST["cadastroDescricao"]."'";
-    $sql.= ",'".$_POST["cadastroData"]."'";
-    $sql.= ",0";
-    $sql.= ",'".$_POST["cadastroChave"]."'";
-    $sql.= ",'".$_POST["cadastroInstituicao"]."'";
-    $sql.= ",'".$_POST["cadastroCidade"]."'";
-    $sql.= ",'".$_POST["cadastroEstado"]."'";
-    $sql.= ",'".$_POST["cadastroPais"]."'";
-    $sql.= ",".$_SESSION["idUsuario"];
-    $sql.= ")";
+    $chave=true;
+    if(isset($_POST["editar"])){
+        $sql = "UPDATE amostras SET ";
+        $sql.= "nome = '$_POST[cadastroNome]',";
+        $sql.= "descricao = '$_POST[cadastroDescricao]',";
+        $sql.= "dataAplicacao = '$_POST[cadastroData]',";
+        $sql.= "chave = '$_POST[cadastroChave]',";
+        $sql.= "instituicao = '$_POST[cadastroInstituicao]',";
+        $sql.= "cidade = '$_POST[cadastroCidade]',";
+        $sql.= "estado = '$_POST[cadastroEstado]',";
+        $sql.= "pais = '$_POST[cadastroPais]' ";
+        $sql.= "WHERE idAmostra = ".$_POST["idAmostra"]." AND idAplicador=".$_SESSION["idUsuario"];
+        $msg = "Informações atualizadas com sucesso!";
+    }
+    else {
+        $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, instituicao, cidade, estado, pais, idAplicador) VALUES ";
+        $sql .= "('" . $_POST["cadastroNome"] . "'";
+        $sql .= ",'" . $_POST["cadastroDescricao"] . "'";
+        $sql .= ",'" . $_POST["cadastroData"] . "'";
+        $sql .= ",0";
+        $sql .= ",'" . $_POST["cadastroChave"] . "'";
+        $sql .= ",'" . $_POST["cadastroInstituicao"] . "'";
+        $sql .= ",'" . $_POST["cadastroCidade"] . "'";
+        $sql .= ",'" . $_POST["cadastroEstado"] . "'";
+        $sql .= ",'" . $_POST["cadastroPais"] . "'";
+        $sql .= "," . $_SESSION["idUsuario"];
+        $sql .= ")";
+        $msg = "Amostra cadastrada com sucesso! Chave: $_POST[cadastroChave]";
+    }
     require "executaQuery.php";
-    $msg = "Amostra cadastrada com sucesso! Chave: $_POST[cadastroChave]";
 }
 mysqli_close($conexao);
 ?>
