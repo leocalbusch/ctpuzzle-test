@@ -84,7 +84,6 @@ Sequencia.prototype.Draw = function(){
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
 		// *ver MouseUp
-		// se já se passaram 2 segundos, desativa essa tela para passar para a próxima fase
 		if(!this.pause)this.ativo=false;
 	}else if(this.perdeu){
 		//Essa parte é responsável por contar os erros
@@ -142,12 +141,12 @@ Sequencia.prototype.Draw = function(){
 	//Desenhando o botão pular
 	context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
 	
-	/*context.fillText("" + this.trace,150,70);
+	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	context.fillText("" + this.msg2,150,570);
 	context.fillText("" + this.msg,20,540);
 	context.fillText("" + this.msg3,150,540);
-	context.font="28px Georgia";
+	/*context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
 	context.fillText("Tentativas: " + this.errou ,160,40);

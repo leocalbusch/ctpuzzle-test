@@ -265,9 +265,9 @@ Pontos.prototype.Draw = function(){
 	context.font="24px Georgia";
 	//MENSAGEM AVISANDO SE PERDEU OU GANHOU
 	// Informações sobre as interações, ocultadas conforme debriefing
-/*	context.fillText("" + this.msg,150,540);
+	context.fillText("" + this.msg,150,540);
 	context.font="28px Georgia";
-	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
+/*	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
 	context.fillText("Cliques: " + this.cliques,160,40);
 	context.fillStyle="#FF8A00";

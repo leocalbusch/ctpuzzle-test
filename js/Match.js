@@ -191,30 +191,11 @@ Match.prototype.Draw = function(){
 	context.font="40px Georgia";
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto",220,590);
-		// aqui espera 2 segundos na tela de "correto" e depois parte para a próxima fase
-		this.agora = new Date();
-		// pega o "segundos" atual
-		this.segundos = this.agora.getSeconds();
-		// "pause" começa com 0 pois na primeira vez precisa passar dessa função para redesenhar a tela
-		while(this.pause > 0 && this.pause <= 2){
-			// se o "pause" for 0, é a primeira vez que está passando por aqui,
-			// e por isso precisa deixar passar pra aparecer o "correto" na tela
-			// a partir da segunda vez que passar por aqui, fica preso no loop
-			// enquanto "pause" não chegar a 2 segundos
-			this.agora = new Date();
-			// a cada loop pega o "segundos" atual,
-			// se for diferente do anterior, incrementa o "pause" e atualiza o "segundos" para o atual
-			if(this.segundos!=this.agora.getSeconds()){
-				this.pause++;
-				this.segundos=this.agora.getSeconds();
-			}
-		}
-		//se for a primeira vez que estiver passando por aqui, vai passar o pause pra 1
-		// e seguir com a atualização da tela para fazer o "correto" aparecer
-		if(this.pause==0)this.pause++;
-		// se já se passaram 2 segundos, desativa essa tela para passar para a próxima fase
-		if(this.pause>2)this.ativo=false;
+		context.fillText("Correto",150,590);
+		// A variável "pause" fica setada para true até que o usuário clique na tela
+		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
+		// *ver MouseUp
+		if(!this.pause)this.ativo=false;
 	}
 	//Aqui mostra as dicas
 	if(this.dicaAtual!=-1){
@@ -425,14 +406,14 @@ Match.prototype.Draw = function(){
 	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	context.fillText("" + this.msg,420,40);
-	context.font="28px Georgia";
+/*	context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
 	context.fillText("Cliques: " + this.cliques,160,40);
 	context.fillStyle="#FF8A00";
 	context.fillText("Giros: " + this.giros,320,40);
 	context.fillStyle="#FABE28";
-	context.fillText("Dicas: " + this.contDicas,470,40);
+	context.fillText("Dicas: " + this.contDicas,470,40);*/
 	context.fillStyle="black";
 	context.font="40px Georgia";
 	if(this.pulou){
@@ -495,6 +476,10 @@ Match.prototype.MouseDown = function(mouseEvent) {
 
 Match.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
+		if (this.pause && this.ganhou){
+			this.pause = false;
+			return;
+		}
 		if(this.selected==-1){
 			if(this.fase==1)for(this.i=0;this.i<this.figs.length;this.i++)this.figs[this.i].img=tdsImagens[171];
 			else if(this.fase==2)for(this.i=0;this.i<this.figs.length;this.i++)this.figs[this.i].img=tdsImagens[173];
@@ -566,13 +551,19 @@ Match.prototype.MouseUp = function(mouseEvent) {
 		this.follow=-1;
 
 		//aqui tenho que fazer a verificação se tá na posicão certa
-		this.ganhou=true;
-		for(this.i=0;this.i<this.acertou.length;this.i++)if(!this.acertou[this.i])this.ganhou=false;
-	}else{
-		if(posMouseX>455 && posMouseX<590 && posMouseY>365 && posMouseY<445){
-			this.pulou=false;
-		}else if(posMouseX>210 && posMouseX<340 && posMouseY>365 && posMouseY<445){
-			this.ativo=false;
+		this.ganhou = true;
+		this.pause = true;
+		for (this.i = 0; this.i < this.acertou.length; this.i++){
+			if (!this.acertou[this.i]) {
+				this.ganhou = false;
+				this.pause = false;
+			}
+		}
+	} else {
+		if (posMouseX > 455 && posMouseX < 590 && posMouseY > 365 && posMouseY < 445) {
+			this.pulou = false;
+		} else if (posMouseX > 210 && posMouseX < 340 && posMouseY > 365 && posMouseY < 445) {
+			this.ativo = false;
 		}
 	}
 }

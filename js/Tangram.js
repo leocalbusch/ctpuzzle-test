@@ -297,14 +297,14 @@ Tangram.prototype.Draw = function(){
 	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	context.fillText("" + this.msg,420,40);
-	context.font="28px Georgia";
+/*	context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
 	context.fillText("Cliques: " + this.cliques,160,40);
 	context.fillStyle="#FF8A00";
 	context.fillText("Giros: " + this.giros,320,40);
 	context.fillStyle="#FABE28";
-	context.fillText("Dicas: " + this.contDicas,470,40);
+	context.fillText("Dicas: " + this.contDicas,470,40);*/
 	context.fillStyle="black";
 	context.font="40px Georgia";
 	
