@@ -16,7 +16,7 @@ var Sequencia = function (fase) {
 	this.agora = new Date();
 	this.segundos = this.agora.getSeconds();
 	// essa var serve para pausar a tela no "correto" antes de mudar de nível/fase
-	this.pause = 0;
+	this.pause = true;
 	//
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
@@ -78,62 +78,23 @@ Sequencia.prototype.Draw = function(){
 
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		if(this.fase==1)context.fillText("Correto",220,590);
-		else context.fillText("Correto",220,510);
+		if(this.fase==1)context.fillText("Correto! Continuar",150,590);
+		else context.fillText("Correto! Continuar",150,510);
 		this.msg="";
-		// aqui espera 2 segundos na tela de "correto" e depois parte para a próxima fase
-		this.agora = new Date();
-		// pega o "segundos" atual
-		this.segundos = this.agora.getSeconds();
-		// "pause" começa com 0 pois na primeira vez precisa passar dessa função para redesenhar a tela
-		while(this.pause > 0 && this.pause <= 2){
-			// se o "pause" for 0, é a primeira vez que está passando por aqui,
-			// e por isso precisa deixar passar pra aparecer o "correto" na tela
-			// a partir da segunda vez que passar por aqui, fica preso no loop
-			// enquanto "pause" não chegar a 2 segundos
-			this.agora = new Date();
-			// a cada loop pega o "segundos" atual,
-			// se for diferente do anterior, incrementa o "pause" e atualiza o "segundos" para o atual
-			if(this.segundos!=this.agora.getSeconds()){
-				this.pause++;
-				this.segundos=this.agora.getSeconds();
-			}
-		}
-		//se for a primeira vez que estiver passando por aqui, vai passar o pause pra 1
-		// e seguir com a atualização da tela para fazer o "correto" aparecer
-		if(this.pause==0)this.pause++;
+		// A variável "pause" fica setada para true até que o usuário clique na tela
+		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
+		// *ver MouseUp
 		// se já se passaram 2 segundos, desativa essa tela para passar para a próxima fase
-		if(this.pause>2)this.ativo=false;
+		if(!this.pause)this.ativo=false;
 	}else if(this.perdeu){
 		//Essa parte é responsável por contar os erros
-		if(this.fase==1)context.fillText("Errado",220,590);
-		else context.fillText("Errado",220,510);
+		if(this.fase==1)context.fillText("Errado Continuar",220,590);
+		else context.fillText("Errado! Continuar",220,510);
 		this.msg="";
 		this.follow=-1;
-		// aqui espera 2 segundos na tela de "correto" e depois parte para a próxima fase
-		this.agora = new Date();
-		// pega o "segundos" atual
-		this.segundos = this.agora.getSeconds();
-		// "pause" começa com 0 pois na primeira vez precisa passar dessa função para redesenhar a tela
-		while(this.pause > 0 && this.pause <= 2){
-			// se o "pause" for 0, é a primeira vez que está passando por aqui,
-			// e por isso precisa deixar passar pra aparecer o "correto" na tela
-			// a partir da segunda vez que passar por aqui, fica preso no loop
-			// enquanto "pause" não chegar a 2 segundos
-			this.agora = new Date();
-			// a cada loop pega o "segundos" atual,
-			// se for diferente do anterior, incrementa o "pause" e atualiza o "segundos" para o atual
-			if(this.segundos!=this.agora.getSeconds()){
-				this.pause++;
-				this.segundos=this.agora.getSeconds();
-			}
-		}
-		//se for a primeira vez que estiver passando por aqui, vai passar o pause pra 1
-		// e seguir com a atualização da tela para fazer o "correto" aparecer
-		if(this.pause==0)this.pause++;
+
 		// se já se passaram 2 segundos, desativa o "pause" para recomeçar o nível
-		if(this.pause>2) {
-			this.pause=0;
+		if(!this.pause) {
 			this.perdeu = false;
 			this.iRespostas = shuffle(this.iRespostas);
 			this.respostas = new Array();
@@ -181,7 +142,7 @@ Sequencia.prototype.Draw = function(){
 	//Desenhando o botão pular
 	context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
 	
-	context.fillText("" + this.trace,150,70);
+	/*context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	context.fillText("" + this.msg2,150,570);
 	context.fillText("" + this.msg,20,540);
@@ -191,7 +152,7 @@ Sequencia.prototype.Draw = function(){
 	context.fillStyle="#FF003C";
 	context.fillText("Tentativas: " + this.errou ,160,40);
 	context.fillStyle="#FF8A00";
-	context.fillText("Dicas: " + this.contDicas,320,40);
+	context.fillText("Dicas: " + this.contDicas,320,40);*/
 	context.fillStyle="black";
 	context.font="40px Georgia";
 	if(this.pulou){
@@ -223,6 +184,14 @@ Sequencia.prototype.MouseDown = function(mouseEvent) {
 
 Sequencia.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
+		if (this.pause && this.ganhou){
+			this.pause = false;
+			return;
+		}
+		if (this.pause && this.perdeu){
+			this.pause = false;
+			return;
+		}
 		if(!this.perdeu && !this.ganhou){
 		//Pular a fase
 			if(this.tempo>=0){
@@ -239,6 +208,7 @@ Sequencia.prototype.MouseUp = function(mouseEvent) {
 						this.perdeu=true;
 						this.errou++;
 					}
+					this.pause=true;
 					this.respostas[this.follow].x=this.posRespCorreta.x;
 					this.respostas[this.follow].y=this.posRespCorreta.y;
 				}	

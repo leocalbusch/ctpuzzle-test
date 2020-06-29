@@ -144,31 +144,12 @@ Pontos.prototype.Draw = function(){
 
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto",220,590);
+		context.fillText("Correto! Continuar",110,590);
 		this.msg="";
-		// aqui espera 2 segundos na tela de "correto" e depois parte para a próxima fase
-		this.agora = new Date();
-		// pega o "segundos" atual
-		this.segundos = this.agora.getSeconds();
-		// "pause" começa com 0 pois na primeira vez precisa passar dessa função para redesenhar a tela
-		while(this.pause > 0 && this.pause <= 2){
-			// se o "pause" for 0, é a primeira vez que está passando por aqui,
-			// e por isso precisa deixar passar pra aparecer o "correto" na tela
-			// a partir da segunda vez que passar por aqui, fica preso no loop
-			// enquanto "pause" não chegar a 2 segundos
-			this.agora = new Date();
-			// a cada loop pega o "segundos" atual,
-			// se for diferente do anterior, incrementa o "pause" e atualiza o "segundos" para o atual
-			if(this.segundos!=this.agora.getSeconds()){
-				this.pause++;
-				this.segundos=this.agora.getSeconds();
-			}
-		}
-		//se for a primeira vez que estiver passando por aqui, vai passar o pause pra 1
-		// e seguir com a atualização da tela para fazer o "correto" aparecer
-		if(this.pause==0)this.pause++;
-		// se já se passaram 2 segundos, desativa essa tela para passar para a próxima fase
-		if(this.pause>2)this.ativo=false;
+		// A variável "pause" fica setada para true até que o usuário clique na tela
+		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
+		this.pause = true;
+		// *ver MouseUp
 	}
 	
 	//aqui mostra quando o desenho está correto
@@ -283,7 +264,8 @@ Pontos.prototype.Draw = function(){
 	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	//MENSAGEM AVISANDO SE PERDEU OU GANHOU
-	context.fillText("" + this.msg,150,540);
+	// Informações sobre as interações, ocultadas conforme debriefing
+/*	context.fillText("" + this.msg,150,540);
 	context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
@@ -291,7 +273,7 @@ Pontos.prototype.Draw = function(){
 	context.fillStyle="#FF8A00";
 	context.fillText("Limpou: " + this.limpou,320,40);
 	context.fillStyle="#FABE28";
-	context.fillText("Dicas: " + this.contDicas,470,40);
+	context.fillText("Dicas: " + this.contDicas,470,40);*/
 	context.fillStyle="black";
 	context.font="40px Georgia";
 	if(this.pulou){
@@ -303,6 +285,12 @@ Pontos.prototype.MouseDown = function(mouseEvent) {}
 
 Pontos.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
+		//Se já está na tela de correto que aguarda o clique para ir pra próxima fase,
+		//só seta o ativo da tela para false e a próxima atualização da tela faz seguir o jogo
+		if (this.pause && this.ganhou){
+			this.ativo = false;
+			return;
+		}
 		if(!this.perdeu && !this.ganhou){
 			//Pular a fase
 			if(this.tempo>=0){

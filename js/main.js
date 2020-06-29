@@ -32,9 +32,17 @@ var escore = new Escore();
 var touchDown = false;
 var touchUp = false;
 var delayTouch = 50000;
-
+// essas vars são somente para ajudar no desenvolvimento,
+// para ir direto a uma fase específica.
+// Devem ser removidas da versão final.
+var arrayFases =      ["Programacao1",  "Pontos1",    "Pontos2","Programacao2", "Pontos3",    "Pontos4", "Programacao3",  "Match1",     "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
+var arrayTelaAtual =  ["Instrucoes1",   "Instrucoes2","Pontos1","Instrucoes4",  "Instrucoes3","Pontos3", "Instrucoes6",   "Instrucoes5","Match1", "Instrucoes9", "Instrucoes7", "Tangram1", "Instrucoes9",  "Instrucoes10", "Sequencia1", "Instrucoes13", "Instrucoes12", "Instrucoes14", "Instrucoes15","Programacao8"];
+var msgEscolhaFase = "Escolha a fase para iniciar:\r\n";
+for(i=0;i<arrayFases.length;i++){
+  msgEscolhaFase+= i + ". "+arrayFases[i]+"\r\n";
+}
+// remover até aqui
 var telaAtual = "EscolhaPersonagem";
-//var telaAtual = "Classifica";
 var tela;
 var genero = 1;//0=menina//1=menino
 var nomeJogador = "";
@@ -73,12 +81,20 @@ function draw() {
   context.clearRect(0, 0, gameWidth, gameHeight);
   /*--------------AQUI DESENHA O JOGO OU ANIMAÇÃO--------------------------------*/
   tela.Draw(context);
-
+  // se telaAtual foi setado pra false significa que está na tela final onde mostra os resultados
+  // essa tela faz parar de atualizar o frame
   if (!telaAtual) tela = new Instrucoes(18);
+  // se telaAtual estiver setado pra alguma tela, continua o jogo
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
-      tela = new Instrucoes(1);
-      telaAtual = "Instrucoes1";
+      telaAtual = window.prompt(msgEscolhaFase);
+      if (!isNaN(telaAtual) && telaAtual >= 0 && telaAtual <= 20) {
+        telaAtual = arrayTelaAtual[telaAtual];
+      } else {
+        telaAtual = "EscolhaPersonagem";
+      }
+      //tela = new Instrucoes(1);
+      //telaAtual = "Instrucoes1";
     } else if (telaAtual == "Instrucoes1") {
       tela = new Programacao(1);
       telaAtual = "Programacao1";

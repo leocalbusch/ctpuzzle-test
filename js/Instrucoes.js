@@ -275,7 +275,7 @@ Instrucoes.prototype.Draw = function () {
         else if (!this.parteInst[11]) this.parteInst[11] = true;
         else if (!this.parteInst[12]) this.parteInst[12] = true;
       }
-      context.Image(this.imgExtra[0].img, 0, 0);
+      context.drawImage(this.imgExtra[0].img, 0, 0);
       if (this.parteInst[0]) {
         context.drawImage(this.imgExtra[1].img, 0, 0);
       } if (this.parteInst[1]) {

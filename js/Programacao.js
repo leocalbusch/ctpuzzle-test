@@ -63,7 +63,7 @@ var Programacao = function (fase) {
 	this.agora = new Date();
 	this.segundos = this.agora.getSeconds();
 	// essa var serve para pausar a tela no "correto" antes de mudar de nível/fase
-	this.pause = 0;
+	this.pause = false;
 	//
 	this.comIniX=15;
 	this.comIniY=388;
@@ -438,31 +438,12 @@ Programacao.prototype.Draw = function(){
 			}
 		}else */
 		if(this.ganhou && !this.executaComando){
-			//Essa parte � respons�vel por mostrar que est� certo e ir pra pr�xima fase
-			context.fillText("Correto",220,590);
-			// aqui espera 2 segundos na tela de "correto" e depois parte para a próxima fase
-			this.agora = new Date();
-			// pega o "segundos" atual
-			this.segundos = this.agora.getSeconds();
-			// "pause" começa com 0 pois na primeira vez precisa passar dessa função para redesenhar a tela
-			while(this.pause > 0 && this.pause <= 2){
-				// se o "pause" for 0, é a primeira vez que está passando por aqui,
-				// e por isso precisa deixar passar pra aparecer o "correto" na tela
-				// a partir da segunda vez que passar por aqui, fica preso no loop
-				// enquanto "pause" não chegar a 2 segundos
-				this.agora = new Date();
-				// a cada loop pega o "segundos" atual,
-				// se for diferente do anterior, incrementa o "pause" e atualiza o "segundos" para o atual
-				if(this.segundos!=this.agora.getSeconds()){
-					this.pause++;
-					this.segundos=this.agora.getSeconds();
-				}
-			}
-			//se for a primeira vez que estiver passando por aqui, vai passar o pause pra 1
-			// e seguir com a atualização da tela para fazer o "correto" aparecer
-			if(this.pause==0)this.pause++;
-			// se já se passaram 2 segundos, desativa essa tela para passar para a próxima fase
-			if(this.pause>2)this.ativo=false;
+			//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
+			context.fillText("Correto! Continuar",110,590);
+			// A variável "pause" fica setada para true até que o usuário clique na tela
+			// Isso faz com que a tela fique parada mostrando "Correto" até o clique
+			this.pause = true;
+			// *ver MouseUp
 
 		}else{
 			if(!this.pulou){
@@ -765,8 +746,8 @@ Programacao.prototype.Draw = function(){
 		}
 		context.drawImage(this.demo.imagem, this.demo.x, this.demo.y);
 
-				
-		if(this.fase==8 || this.fase==9){
+		// contagem das interações: ocultamos conforme debriefing
+/*		if(this.fase==8 || this.fase==9){
 			context.font="24px Georgia";
 			context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 			context.fillStyle="#556270";
@@ -792,7 +773,7 @@ Programacao.prototype.Draw = function(){
 			context.fillText("Excluiu todos: " + this.contApagouAll,500,40);
 			context.fillStyle="#88C100";
 			context.fillText("Play: " + this.contPlay,710,40)
-		}
+		}*/
 		context.fillStyle="black";
 		context.font="30px Georgia";
 		context.fillText("" + this.trace,150,70);
@@ -831,7 +812,14 @@ Programacao.prototype.MouseDown = function(mouseEvent) {
 }
 
 Programacao.prototype.MouseUp = function(mouseEvent) {
+
 	if(!this.pulou){
+		//Se já está na tela de correto que aguarda o clique para ir pra próxima fase,
+		//só seta o ativo da tela para false e a próxima atualização da tela faz seguir o jogo
+		if (this.pause && this.ganhou){
+			this.ativo = false;
+			return;
+		}
 		if(!this.executaComando){
 			if(!this.ganhou){
 				//Se apertar no bot�o play
