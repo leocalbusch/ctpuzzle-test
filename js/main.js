@@ -37,7 +37,7 @@ var delayTouch = 50000;
 // Devem ser removidas da versão final.
 var arrayFases =      ["Programacao1",  "Pontos1",    "Pontos2","Programacao2", "Pontos3",    "Pontos4", "Programacao3",  "Match1",     "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
 var arrayTelaAtual =  ["Instrucoes1",   "Instrucoes2","Pontos1","Instrucoes4",  "Instrucoes3","Pontos3", "Instrucoes6",   "Instrucoes5","Match1", "Instrucoes9", "Instrucoes7", "Tangram1", "Instrucoes9",  "Instrucoes10", "Sequencia1", "Instrucoes13", "Instrucoes12", "Instrucoes14", "Instrucoes15","Programacao8"];
-var msgEscolhaFase = "Escolha a fase para iniciar:\r\n";
+var msgEscolhaFase = "Escolha a fase para iniciar ou CANCELAR para iniciar normalmente:\r\n";
 for(i=0;i<arrayFases.length;i++){
   msgEscolhaFase+= i + ". "+arrayFases[i]+"\r\n";
 }
@@ -91,10 +91,10 @@ function draw() {
       if (!isNaN(telaAtual) && telaAtual >= 0 && telaAtual <= 20) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
-        telaAtual = "EscolhaPersonagem";
+        tela = new Instrucoes(1);
+        telaAtual = "Instrucoes1";
       }
-      //tela = new Instrucoes(1);
-      //telaAtual = "Instrucoes1";
+
     } else if (telaAtual == "Instrucoes1") {
       tela = new Programacao(1);
       telaAtual = "Programacao1";
