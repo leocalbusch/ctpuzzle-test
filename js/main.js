@@ -83,7 +83,7 @@ function draw() {
   tela.Draw(context);
   // se telaAtual foi setado pra false significa que está na tela final onde mostra os resultados
   // essa tela faz parar de atualizar o frame
-  if (!telaAtual) tela = new Instrucoes(18);
+  //if (!telaAtual) tela = new Instrucoes(18);
   // se telaAtual estiver setado pra alguma tela, continua o jogo
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
@@ -224,10 +224,11 @@ function draw() {
       escore.ProgramacaoLoop(1, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
-    } else if (telaAtual == "Instrucoes16") {
+      escore.Calcula();
+    } /*else if (telaAtual == "Instrucoes16") {
       tela = new Instrucoes(17);
       telaAtual = "Instrucoes17";
-    }
+    }*/
   }
   //verificando se a tela tem ficado ativa ou não
   //context.fillText(" " + tela.ativo ,160,40);
