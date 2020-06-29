@@ -87,7 +87,7 @@ Classifica.prototype.Draw = function(){
 
 	}else if(this.perdeu){
 		//Essa parte é responsável por contar os erros
-		context.fillText("Errado",100,590);
+		context.fillText("Errado! Continuar",100,590);
 		this.msg="";
 		this.follow=-1;
 

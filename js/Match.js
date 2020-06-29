@@ -191,7 +191,7 @@ Match.prototype.Draw = function(){
 	context.font="40px Georgia";
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto",150,590);
+		context.fillText("Correto! Continuar",150,590);
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
 		// *ver MouseUp
