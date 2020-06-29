@@ -88,7 +88,7 @@ function draw() {
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
       telaAtual = window.prompt(msgEscolhaFase);
-      if (!isNaN(telaAtual) && telaAtual >= 0 && telaAtual <= 20) {
+      if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 20) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
         tela = new Instrucoes(1);

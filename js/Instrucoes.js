@@ -346,12 +346,10 @@ Instrucoes.prototype.Draw = function () {
     }
 
     let fundo = this.fala ? this.fundoBocaAberta : this.fundoBocaFechada;
-    try {
+
       if (fundo.complete)
         context.drawImage(fundo, 0, 0);
-    } catch (e) {
-      console.log(e);
-    }
+
 
     if (this.indice == 5) {
       for (this.i = 0; this.i < 4; this.i++) {
