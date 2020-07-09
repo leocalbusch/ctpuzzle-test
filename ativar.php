@@ -1,33 +1,27 @@
 <?php
 require "conexao.php";
-
-$sql="SELECT * FROM usuarios WHERE email = '$_POST[cadastroEmail]'";
+$sql = "select email, senha, ativo, tipoUsuario from usuarios where email = '$_GET[email]'";
 require "executaQuery.php";
-
 if(mysqli_num_rows($result)>0){
-    $erro = "E-mail já cadastrado.";
-    require "modalErro.php";
-    mysqli_close($conexao);
-    exit();
+    $usuario = mysqli_fetch_array($result);
+    $email = $usuario["email"];
+    $senha = $usuario["senha"];
+    $ativo = $usuario["ativo"];
+    $tipoUsuario = $usuario["tipoUsuario"];
+    if($ativo){
+        $erro = "Sua conta já foi ativada! Efetue login na página inicial.";
+        require "modalErro.php";
+    }elseif(md5($email.$senha)!=$_GET["token"] || $tipoUsuario!=3){
+        $erro = "A chave de ativação da conta está incorreta ou expirou. Pode ser necessário se cadastrar novamente. Em caso de dúvidas, entre em contato com a equipe do CT Puzzle Test.";
+        require "modalErro.php";
+    }else{
+        $sql = "UPDATE usuarios SET ativo = 1 WHERE email = '$email'";
+        require "executaQuery.php";
+        mysqli_close($conexao);
+    }
 }
 
-$sql="INSERT INTO usuarios (nome, email, senha, dataNascimento, genero, tipoUsuario, ativo) VALUES (";
-$sql.= "'".$_POST['cadastroNome']."', ";
-$sql.= "'".$_POST['cadastroEmail']."', ";
-$sql.= "'".md5($_POST['cadastroSenha'])."', ";
-$sql.= "'".$_POST['cadastroNascimento']."', ";
-$sql.= $_POST['cadastroGenero'].", ";
-$sql.= $_POST['tipo'].", ";
-$sql.= 0;
-$sql.= ")";
 
-require "executaQuery.php";
-$tokenAtivarConta = md5($_POST['cadastroEmail'].md5($_POST['cadastroSenha']));
-mysqli_close($conexao);
-$assuntoEmail = ucfirst(explode(' ',trim($_POST[cadastroNome]))[0]).", ative sua conta no CT Puzzle Test";
-$textoEmail="<h3>Olá ".ucfirst(explode(' ',trim($_POST[cadastroNome]))[0])."!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Clique <a href='http://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>aqui</a> para ativar sua conta.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
-$destinoEmail = $_POST['cadastroEmail'];
-require "enviaEmail.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +89,7 @@ require "enviaEmail.php";
                 </button>
             </div>
             <div class="modal-body">
-                <p>É necessário ativar sua conta! Por favor, verifique o e-mail que acabamos de enviar para o endereço que você informou. Pode levar alguns minutos até o e-mail chegar. Não esqueça de verificar sua pasta de "Spam" ou "Lixo ELetrônico". Se você usa o Gmail, não esqueça também de verificar a aba "Promoções".</p>
+                <p>Conta ativada! Vá para a página inicial e efetue seu login.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location='index.php';">Entendi</button>
@@ -117,3 +111,4 @@ require "enviaEmail.php";
 
 </body>
 </html>
+

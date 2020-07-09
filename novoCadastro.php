@@ -13,6 +13,17 @@ session_destroy();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#formCadastro").on('input', function () {
+                $("#cadastroSenha")[0].setCustomValidity($("#cadastroSenha")[0].value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g) ? "" : "Sua senha precisa conter no mínimo 8 caracteres, e deve ser formada por letra minúsculas, letras maiúsculas e números.");
+                $("#cadastroConfirmacao")[0].setCustomValidity(!$("#cadastroConfirmacao")[0].value.localeCompare($("#cadastroSenha")[0].value) ? "" : "A confirmação de senha não confere.");
+                $("#cadastroEmail")[0].setCustomValidity($("#cadastroEmail")[0].value.match(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i)?"":"Formato inválido! Verifique o e-mail informado.");
+            });
+
+
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -25,7 +36,7 @@ session_destroy();
             ?>
         </div>
         <div class="col">
-            <form action="processaCadastro.php" method="post" oninput='cadastroConfirmacao.setCustomValidity(cadastroConfirmacao.value != cadastroSenha.value ? "Passwords do not match." : "")'>
+            <form id="formCadastro" action="processaCadastro.php" method="post" >
                 <div class="form-group">
                     <label for="cadastroNome">Seu nome completo</label>
                     <input type="text" class="form-control" id="cadastroNome" name="cadastroNome" required>
@@ -37,7 +48,8 @@ session_destroy();
                 </div>
                 <div class="form-group">
                     <label for="cadastroSenha">Senha</label>
-                    <input type="password" class="form-control" id="cadastroSenha" name="cadastroSenha" required>
+                    <input type="password" class="form-control" id="cadastroSenha" name="cadastroSenha"
+                           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
                 </div>
                 <div class="form-group">
                     <label for="cadastroConfirmacao">Confirmação de senha</label>
