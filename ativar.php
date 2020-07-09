@@ -11,7 +11,7 @@ if(mysqli_num_rows($result)>0){
     if($ativo){
         $erro = "Sua conta já foi ativada! Efetue login na página inicial.";
         require "modalErro.php";
-    }elseif(md5($email.$senha)!=$_GET["token"] || $tipoUsuario!=3){
+    }elseif(md5($email.$senha)!=$_GET["token"]){
         $erro = "A chave de ativação da conta está incorreta ou expirou. Pode ser necessário se cadastrar novamente. Em caso de dúvidas, entre em contato com a equipe do CT Puzzle Test.";
         require "modalErro.php";
     }else{

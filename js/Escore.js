@@ -611,7 +611,6 @@ Escore.prototype.Calcula = function(){
 			}
 		}
 	});
-	window.alert("Banco de dados atualizado com suesso.");
 
 }
 
