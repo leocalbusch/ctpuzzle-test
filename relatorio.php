@@ -1,6 +1,7 @@
 <?php
 require "sessao.php";
 require "conexao.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,19 +97,53 @@ require "conexao.php";
     <div class="row">
         <div class="col">
         </div>
-        <div class="col">
-            <?php
-            if ($_SESSION["tipoUsuario"] == 3) { ?>
-                <p>Olá <?php echo $_SESSION[nome]; ?>! Para iniciar seu teste, você precisa informar sua chave! Ainda não possui uma? Consulte a pessoa responsável pela aplicacão do teste!</p>
-                <form action='processaVinculaAmostra.php' method='post' >
-                    <div class='form-group'>
-                        <label for='chaveAmostra'>Chave:</label>
-                        <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'>
-                    </div>
-                    <button type='submit' class='btn btn-primary'>Iniciar</button>
-                </form>
+        <div class="col-8">
+            <table class="table table-sm table-hover mb-0" id="minhaAmostra">
+
                 <?php
-            } ?>
+                $sql = "select usuarios.nome, usuarios.email, resultados.*, amostras.nome as nomeAmostra, date_format(amostras.dataAplicacao,'%d/%m/%Y') as dataAplicacao from resultados, amostras_resultados, usuarios, amostras WHERE resultados.idResultado = amostras_resultados.idResultado AND amostras.idAmostra = amostras_resultados.idAmostra AND amostras_resultados.idAmostra = $_GET[idAmostra] AND resultados.idEstudante = usuarios.idUsuario AND amostras.idAplicador = $_SESSION[idUsuario]";
+                require "executaQuery.php";
+                $cont = 0;
+                if (mysqli_num_rows($result) > 0) {
+                    while ($amostra = mysqli_fetch_array($result)){
+                        $thead = "
+                <thead>
+                <tr>
+                    <th colspan='7'>Amostra: $amostra[nomeAmostra]<br/>Data da aplicação: $amostra[dataAplicacao]</th>
+                </tr>
+                <tr>
+                    <th scope='col'>#</th>
+                    <th scope='col'>Nome</th>
+                    <th scope='col'>E-mail</th>
+                    <th scope='col' class='text-center'>Abstração</th>
+                    <th scope='col' class='text-center'>Decomposição</th>
+                    <th scope='col' class='text-center'>Rec. Padrões</th>
+                    <th scope='col' class='text-center'>Algoritmos</th>
+                </tr>
+                </thead>
+                <tbody>                    
+                    ";
+
+                        $cont++;
+                        $tbody.= "
+                            <tr> 
+                                <th scope='col'>$cont</th>
+                                <td>$amostra[nome]</td>
+                                <td>$amostra[email]</td>
+                                <td>$amostra[abstracao]</td>
+                                <td>$amostra[decomposicao]</td>
+                                <td>$amostra[reconhecimento]</td>
+                                <td>$amostra[algoritmo]</td>
+                            </tr>
+                        ";
+                    }
+                    echo $thead.$tbody;
+                }
+
+                ?>
+                </tbody>
+            </table>
+            <p><a href="dashboard.php" class="btn btn-outline-danger">Fechar relatório</a></p>
         </div>
 
         <div class="col">

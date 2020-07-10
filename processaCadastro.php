@@ -30,15 +30,16 @@ if ($_POST['tipo'] == 3) {
     $destinoEmail = $_POST['cadastroEmail'];
     require "enviaEmail.php";
 } else {
+    //E-mail para  aplicador
     $assuntoEmail = ucfirst(explode(' ', trim($_POST["cadastroNome"]))[0]) . ", recebemos seu pedido de cadastro no CT Puzzle Test";
     $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($_POST["cadastroNome"]))[0]) . "!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Nossa equipe precisa confirmar sua elegibilidade como aplicador do teste. Assim que validarmos suas informações, você receberá um novo e-mail informando a liberação do seu acesso.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
     $destinoEmail = $_POST['cadastroEmail'];
     require "enviaEmail.php";
+    //E-mail para o Adm (que precisa ativar a conta de aplicador)
+    //obs.: um novo require "enviaEmail.php" dá erro, então pra enviar um segundo e-mail tive que setar as mudanças manualmente
     $assuntoEmail = "CT Puzzle Test - Ativar Novo Aplicador - $_POST[cadastroNome]";
-    file_put_contents("log.txt", $assuntoEmail);
     $textoEmail = "<h3>$_POST[cadastroNome]</h3><p>$_POST[cadastroEmail] - <a href='http://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>Ativar</a></p><h4>CT Puzzle Test Team</h4>";
-    file_put_contents("log.txt", $textoEmail);
-    $destinoEmail = "leonardocalbusch@icloud.com";
+    $destinoEmail = "leonardocalbusch@gmail.com"; //e-mail do Adm
     $mail->Subject = $assuntoEmail;
     $mail->Body = $textoEmail;
     $mail->clearAllRecipients();
