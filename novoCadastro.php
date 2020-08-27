@@ -27,35 +27,12 @@ session_destroy();
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="index.php">CT Puzzle Test</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
-
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><button class="btn px-0 nav-link" type="button" data-toggle="modal" data-target="#modalLogin"><i class="fa fa-sign-in mr-sm-1"></i>Entrar</button></li>
             <li class="nav-item"><button class="btn nav-link" type="button" data-toggle="modal" data-target="#modalEsqueceu"><i class="fa fa-lock mr-sm-1"></i><i class="fa fa-question mr-sm-1"></i>Recuperar senha</button></li>
@@ -155,7 +132,7 @@ session_destroy();
         <div class="col">
             <?php
                 $msg[2] = "Agradecemos seu interesse em aplicar o CT Puzzle Test! Para se cadastrar como aplicador, é necessário que nossa equipe valide sua elegibilidade. Preencha seus dados e aguarde um e-mail de confirmação da liberação do seu acesso.";
-                $msg[3] = "Olá estudante! Preencha seus dados";
+                $msg[3] = "Olá estudante! Preencha seus dados:";
                 echo "<p>".$msg[$_GET[tipo]]."</p>";
             ?>
         </div>

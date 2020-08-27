@@ -116,6 +116,10 @@ require "conexao.php";
                     <button type='submit' class='btn btn-primary'>Iniciar</button>
                 </form>
                 <?php
+            }
+            if ($_SESSION["tipoUsuario"] == 2) { ?>
+            <p>Olá <?php echo $_SESSION[nome]; ?>! Por favor, utilize o menu superior para acessar as opções do site.</p>
+            <?php
             } ?>
         </div>
 
