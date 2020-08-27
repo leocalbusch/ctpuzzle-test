@@ -13,10 +13,10 @@
     $mail->Host = "calbusch.com.br";
     $mail->Port = 465; // or 587
     $mail->IsHTML(true);
-    $mail->Username = "leonardo@calbusch.com.br";
-    $mail->Password = "drkLVSch12";
-    $mail->SetFrom("leonardo@calbusch.com.br", "CT Puzzle Team");
-    $mail->AddReplyTo("leonardo@calbusch.com.br", "CT Puzzle Team");
+    $mail->Username = "ctpuzzletest@calbusch.com.br";
+    $mail->Password = "sSBAb&DLcN";
+    $mail->SetFrom("ctpuzzletest@calbusch.com.br", "CT Puzzle Team");
+    $mail->AddReplyTo("ctpuzzletest@calbusch.com.br", "CT Puzzle Team");
     $mail->Subject = $assuntoEmail;
     $mail->Body = $textoEmail;
     $mail->AddAddress($destinoEmail);
