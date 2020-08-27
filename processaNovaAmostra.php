@@ -20,6 +20,8 @@ if(mysqli_num_rows($result)>0){
         $sql.= "descricao = '$_POST[cadastroDescricao]',";
         $sql.= "dataAplicacao = '$_POST[cadastroData]',";
         $sql.= "chave = '$_POST[cadastroChave]',";
+        $sql.= "serie = '$_POST[cadastroSerie]',";
+        $sql.= "turma = '$_POST[cadastroTurma]',";
         $sql.= "instituicao = '$_POST[cadastroInstituicao]',";
         $sql.= "cidade = '$_POST[cadastroCidade]',";
         $sql.= "estado = '$_POST[cadastroEstado]',";
@@ -28,12 +30,14 @@ if(mysqli_num_rows($result)>0){
         $msg = "Informações atualizadas com sucesso!";
     }
     else {
-        $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, instituicao, cidade, estado, pais, idAplicador) VALUES ";
+        $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, serie, turma, instituicao, cidade, estado, pais, idAplicador) VALUES ";
         $sql .= "('" . $_POST["cadastroNome"] . "'";
         $sql .= ",'" . $_POST["cadastroDescricao"] . "'";
         $sql .= ",'" . $_POST["cadastroData"] . "'";
         $sql .= ",0";
         $sql .= ",'" . $_POST["cadastroChave"] . "'";
+        $sql .= ",'" . $_POST["cadastroSerie"] . "'";
+        $sql .= ",'" . $_POST["cadastroTurma"] . "'";
         $sql .= ",'" . $_POST["cadastroInstituicao"] . "'";
         $sql .= ",'" . $_POST["cadastroCidade"] . "'";
         $sql .= ",'" . $_POST["cadastroEstado"] . "'";

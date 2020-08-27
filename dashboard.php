@@ -10,8 +10,8 @@ require "conexao.php";
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -20,16 +20,23 @@ require "conexao.php";
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <title>CT Puzzle Test</title>
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
     <script>
         $(document).ready(function(){
+            // seta a data atual na data de criação da amostra
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+            $('#cadastroData').val(new Date(Date.now() - tzoffset).toISOString().slice(0, 10));
+            //seta a função popover para o help dos campos
+            $('[data-toggle="popover"]').popover();
+            //chama o modal de logout
             $("#logout").click(function(){
                 window.location.href = "modalErro.php?logout=1";
             });
+            //recarrega a página ao fechar o modal principal
             $('#minhasAmostras').on('hide.bs.modal', function (e) {
                 window.location.href = "dashboard.php";
             });
+            //quando clica em uma amostra, carrega e popula o formulário de edit
             $("#minhaAmostra tr td a").on("click",function(e){
                 var idAmostra = $(this).attr('data-idamostra');
                 // AJAX
@@ -41,14 +48,14 @@ require "conexao.php";
                     success: function (response) {
 
                         var len = Object.keys(response).length;
-                        console.log(len);
                         if (len > 0) {
                             // Set value to textboxes
-                            console.log(response);
                             document.getElementById('editaNome').value = response['nome'];
                             document.getElementById('editaDescricao').value = response['descricao'];
                             document.getElementById('editaData').value = response['dataAmostra'];
                             document.getElementById('editaChave').value = response['chave'];
+                            document.getElementById('editaSerie').value = response['serie'];
+                            document.getElementById('editaTurma').value = response['turma'];
                             document.getElementById('editaInstituicao').value = response['instituicao'];
                             document.getElementById('editaCidade').value = response['cidade'];
                             document.getElementById('editaEstado').value = response['estado'];
@@ -62,6 +69,7 @@ require "conexao.php";
         });
 
     </script>
+    <title>CT Puzzle Test</title>
 </head>
 <body>
 <?php require "navBar.php"; ?>

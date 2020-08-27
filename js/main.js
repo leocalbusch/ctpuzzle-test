@@ -87,7 +87,7 @@ function draw() {
   // se telaAtual estiver setado pra alguma tela, continua o jogo
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
-      telaAtual = window.prompt(msgEscolhaFase);
+      //telaAtual = window.prompt(msgEscolhaFase);
       if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 20) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
