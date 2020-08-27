@@ -13,7 +13,7 @@ if(mysqli_num_rows($result)>0){
     if(!$ativo){
         $erro = "Sua conta ainda não foi ativada! Verifique seu e-mail.";
         $assuntoEmail = ucfirst(explode(' ',trim($nome))[0]).", ative sua conta no CT Puzzle Test";
-        $textoEmail="<h3>Olá ".ucfirst(explode(' ',trim($nome))[0])."!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Clique <a href='http://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>aqui</a> para ativar sua conta.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
+        $textoEmail="<h3>Olá ".ucfirst(explode(' ',trim($nome))[0])."!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Clique <a href='https://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>aqui</a> para ativar sua conta.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
         $destinoEmail = $_POST['cadastroEmail'];
         require "enviaEmail.php";
         require "modalErro.php";
