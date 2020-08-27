@@ -1,9 +1,10 @@
 <?php
 require "conexao.php";
-$sql = "select email, senha, ativo, tipoUsuario from usuarios where email = '$_GET[email]'";
+$sql = "select nome, email, senha, ativo, tipoUsuario from usuarios where email = '$_GET[email]'";
 require "executaQuery.php";
 if(mysqli_num_rows($result)>0){
     $usuario = mysqli_fetch_array($result);
+    $nome = $usuario["nome"];
     $email = $usuario["email"];
     $senha = $usuario["senha"];
     $ativo = $usuario["ativo"];
@@ -18,6 +19,11 @@ if(mysqli_num_rows($result)>0){
         $sql = "UPDATE usuarios SET ativo = 1 WHERE email = '$email'";
         require "executaQuery.php";
         mysqli_close($conexao);
+        //E-mail confirmando ativação
+        $assuntoEmail = ucfirst(explode(' ', trim($nome))[0]) . ", seu cadastro no CT Puzzle Test foi ativado!";
+        $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($nome))[0]) . "!</h3><p>Seu cadastro no CT Puzzle Test foi ativado com sucesso! Você já pode efetuar login <a href='http://calbusch.com.br/ctpuzzlehtml5'>aqui</a>. Obrigado por se cadastrar no CT Puzzle Test!</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
+        $destinoEmail = $email;
+        require "enviaEmail.php";
     }
 }
 
@@ -37,34 +43,12 @@ if(mysqli_num_rows($result)>0){
 </head>
 <body onload="$('#exampleModal').modal('show')">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">CT Puzzle Test</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0" method="post" action="processaLogin.php">

@@ -4,6 +4,8 @@
     require("PHPMailer/src/SMTP.php");
 
     $mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
     $mail->IsSMTP(); // enable SMTP
     $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
     $mail->SMTPAuth = true; // authentication enabled
