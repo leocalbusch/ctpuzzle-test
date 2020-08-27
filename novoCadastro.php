@@ -64,7 +64,92 @@ session_destroy();
 
     </div>
 </nav>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><a class="btn btn-success" style="color:#fff;" href="novoCadastro.php?tipo=3">Área do Estudante</a></p>
+                <p><a class="btn btn-warning" href="novoCadastro.php?tipo=2">Área do Aplicador</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalEsqueceu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="esqueceuSenha.php">
+                <div class="modal-body">
+                    <p>Esqueceu sua senha? Informe abaixo seu e-mail e lhe enviaremos um link para que você possa cadastrar uma nova senha.</p>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="esqueceuEmail">Seu e-mail</label>
+                            <input class="form-control" type="email" placeholder="e-mail"
+                                   aria-label="e-mail" required name="esqueceuEmail">
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <button class="btn btn-primary">Recuperar senha</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CT Puzzle Test</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="processaLogin.php">
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="loginEmail">Seu e-mail</label>
+                            <input class="form-control" type="email" placeholder="e-mail"
+                                   aria-label="e-mail" required name="loginEmail">
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="loginSenha">Sua senha</label>
+                            <input class="form-control" type="password" placeholder="senha" aria-label="senha" required name="loginSenha">
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <button class="btn btn-primary">Entrar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col">
