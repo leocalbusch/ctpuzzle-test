@@ -2,12 +2,16 @@ var Programacao = function (fase) {
 	this.random=(Math.random()*101);
 	this.random2=(Math.random()*101);
 	this.fundo = new Image();
+	// "img/Programacao/Fundo.png"
 	this.fundo = tdsImagens[75];
 	this.obst = new Image();
+	// "img/Programacao/ObstaculoProg.png"
 	this.obst = tdsImagens[76];
 	this.cenario = new Image();
+	// "img/Programacao/Cenario.png" = tabuleiro
 	this.cenario = tdsImagens[77];
 	this.square = new Image();
+	// "img/Programacao/OrangeSquare.png" = destino
 	this.square = tdsImagens[78];
 	this.botaoPlay = new Imagem(480,558,21,29,"");
 	this.botaoPlay.img = tdsImagens[79];
@@ -319,7 +323,7 @@ var Programacao = function (fase) {
 				else if((this.i==4 && this.j==5) || (this.i==3 && this.j==7))this.status[this.i].j[this.j].status="Obst";
 			}
 		}
-	}else if(this.fase>7){
+	}else if(this.fase==8||this.fase==9){
 		this.comLoop= new Imagem(625,550,69,39,"");	
 		this.comLoop.img = tdsImagens[88];
 		this.rectComLoop=new Imagem(625,550,69,39,"");
@@ -368,7 +372,93 @@ var Programacao = function (fase) {
 				}
 			}
 		}
+	}else if(this.fase==11) {
+		// Nível fácil: 5 passos dem mudar a direção
+		this.pontoInicialX = 3;
+		this.pontoInicialY = 1;
+		this.pontoFinalX = 3;
+		this.pontoFinalY = 6;
+		this.direcaoInicial = "Down";
+		this.status = new Array();
+		for (this.i = 0; this.i < 8; this.i++) {
+			this.status[this.i] = new Matriz(8);
+			for (this.j = 0; this.j < 8; this.j++) {
+				// coloca vazio em tudo
+				this.status[this.i].j[this.j].status = "Vazio";
+				// coloca obstáculos em todas as posições exceto a linha 3
+				if (this.i != 3) this.status[this.i].j[this.j].status = "Obst";
+				// na linha 3 coloca obstáculos na posição 0 e 7
+				else if (this.j==0 || this.j==7) this.status[this.i].j[this.j].status = "Obst";
+			}
+		}
+	}else if(this.fase==12) {
+		// Nível fácil: 8 passos mudando a direção 1x
+		this.pontoInicialX = 5;
+		this.pontoInicialY = 6;
+		this.pontoFinalX = 2;
+		this.pontoFinalY = 1;
+		this.direcaoInicial = "Left";
+		this.status = new Array();
+		for (this.i = 0; this.i < 8; this.i++) {
+			this.status[this.i] = new Matriz(8);
+			for (this.j = 0; this.j < 8; this.j++) {
+				// coloca vazio em tudo
+				this.status[this.i].j[this.j].status = "Vazio";
+				// coloca obstáculos em todas as posições exceto a linha 2 e coluna 6
+				if (this.i != 2 && this.j != 6) this.status[this.i].j[this.j].status = "Obst";
+				// na linha 2 coloca obstáculos na posição 0 e 7
+				else if (this.i==2 && (this.j==0 || this.j==7)) this.status[this.i].j[this.j].status = "Obst";
+				// na coluna 6 coloca obstáculos na posição 0, 1, 6 e 7
+				else if (this.j==6 && (this.i<2 || this.i>5)) this.status[this.i].j[this.j].status = "Obst";
+			}
+		}
+	}else if(this.fase==13) {
+		// Nível médio: 10 passos mudando a direção 2x
+		this.pontoInicialX = 1;
+		this.pontoInicialY = 1;
+		this.pontoFinalX = 6;
+		this.pontoFinalY = 6;
+		this.direcaoInicial = "Right";
+		this.status = new Array();
+		for (this.i = 0; this.i < 8; this.i++) {
+			this.status[this.i] = new Matriz(8);
+			for (this.j = 0; this.j < 8; this.j++) {
+				// coloca obstáculos em tudo
+				this.status[this.i].j[this.j].status = "Obst";
+				// tira os obstáculos da primeira parte do caminho
+				if (this.j == 1 && (this.i>0 && this.i<4)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos da segunda parte do caminho
+				else if (this.i==3 && (this.j>1 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos da terceira parte do caminho
+				else if (this.j==6 && (this.i>3 && this.i<7)) this.status[this.i].j[this.j].status = "Vazio";
+			}
+		}
+	}else if(this.fase==14) {
+		// Nível Difícil: 12 passos mudando a direção 3x
+		this.pontoInicialX = 6;
+		this.pontoInicialY = 6;
+		this.pontoFinalX = 5;
+		this.pontoFinalY = 1;
+		this.direcaoInicial = "Up";
+		this.status = new Array();
+		for (this.i = 0; this.i < 8; this.i++) {
+			this.status[this.i] = new Matriz(8);
+			for (this.j = 0; this.j < 8; this.j++) {
+				// coloca obstáculos em tudo
+				this.status[this.i].j[this.j].status = "Obst";
+				// tira os obstáculos da primeira parte do caminho
+				if (this.i == 6 && (this.j>3 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos da segunda parte do caminho
+				else if (this.j==4 && (this.i>1 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos da terceira parte do caminho
+				else if (this.i==2 && (this.j>0 && this.j<4)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos da quarta parte do caminho
+				else if (this.j==1 && (this.i>2 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+
+			}
+		}
 	}
+
 	//---------------------
 	this.ativo=true;
 	this.comLeft=new Imagem(575,486,83,48,"");
@@ -521,7 +611,7 @@ Programacao.prototype.Draw = function(){
 					this.comRight.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
 					this.mouseAntY=posMouseY;
-				}else if(this.fase>7 && this.follow=="Loop"){
+				}else if((this.fase==8||this.fase==9) && this.follow=="Loop"){
 					this.comLoop.x+=posMouseX-this.mouseAntX;
 					this.comLoop.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
@@ -536,7 +626,7 @@ Programacao.prototype.Draw = function(){
 					this.comLeft.y=this.rectComLeft.y;
 					this.comRight.x=this.rectComRight.x;
 					this.comRight.y=this.rectComRight.y;
-					if(this.fase>7){				
+					if(this.fase==8||this.fase==9){
 						this.comLoop.x=this.rectComLoop.x;
 						this.comLoop.y=this.rectComLoop.y;
 					}
@@ -557,7 +647,7 @@ Programacao.prototype.Draw = function(){
 								//Aqui faz o bot�o excluir ser posicionado em cima do comando
 								this.botaoExclui.x=this.comandoPosicao[this.i].x;
 								this.botaoExclui.y=this.comandoPosicao[this.i].y;
-								if(this.fase>7 && this.comando[this.i].substring(0,4)=="Loop"){
+								if((this.fase==8||this.fase==9) && this.comando[this.i].substring(0,4)=="Loop"){
 									this.cont=this.i;
 									this.cont2=this.i;
 									if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
@@ -721,7 +811,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.personagem.imagem, this.personagem.x, this.personagem.y);
 		context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
 		for(this.i=0; this.i<this.comandoPosicao.length; this.i++){
-			if(this.fase>7 && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
+			if((this.fase==8||this.fase==9) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
 				context.drawImage(this.loopPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
 				if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
 					context.font="15px Georgia";
@@ -741,7 +831,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.comRight.img, this.comRight.x, this.comRight.y);
 		context.drawImage(this.comUp.img, this.comUp.x, this.comUp.y);
 		context.drawImage(this.comDown.img, this.comDown.x, this.comDown.y);
-		if(this.fase>7){
+		if((this.fase==8||this.fase==9)){
 			context.drawImage(this.comLoop.img, this.comLoop.x, this.comLoop.y);	
 		}
 		context.drawImage(this.demo.imagem, this.demo.x, this.demo.y);
@@ -803,7 +893,7 @@ Programacao.prototype.MouseDown = function(mouseEvent) {
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Left";
-		}else if(this.fase>7 && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
+		}else if((this.fase==8||this.fase==9) && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Loop";
