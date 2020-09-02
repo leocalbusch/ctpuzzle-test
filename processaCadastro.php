@@ -26,7 +26,7 @@ $tokenAtivarConta = md5($_POST['cadastroEmail'] . md5($_POST['cadastroSenha']));
 mysqli_close($conexao);
 if ($_POST['tipo'] == 3) {
     $assuntoEmail = ucfirst(explode(' ', trim($_POST["cadastroNome"]))[0]) . ", ative seu cadastro no CT Puzzle Test";
-    $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($_POST["cadastroNome"]))[0]) . "!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Clique <a href='https://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>aqui</a> para ativar sua conta.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
+    $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($_POST["cadastroNome"]))[0]) . "!</h3><p>Recebemos seu cadastro no CT Puzzle Test. Clique <a href='http://lite.acad.univali.br/ctpuzzle/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>aqui</a> para ativar sua conta.</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
     $destinoEmail = $_POST['cadastroEmail'];
     require "enviaEmail.php";
 } else {
@@ -38,7 +38,7 @@ if ($_POST['tipo'] == 3) {
     //E-mail para o Adm (que precisa ativar a conta de aplicador)
     //obs.: um novo require "enviaEmail.php" dá erro, então pra enviar um segundo e-mail tive que setar as mudanças manualmente
     $assuntoEmail = "CT Puzzle Test - Ativar Novo Aplicador - $_POST[cadastroNome]";
-    $textoEmail = "<h3>$_POST[cadastroNome]</h3><p>$_POST[cadastroEmail] - <a href='https://calbusch.com.br/ctpuzzlehtml5/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>Ativar</a></p><h4>CT Puzzle Test Team</h4>";
+    $textoEmail = "<h3>$_POST[cadastroNome]</h3><p>$_POST[cadastroEmail] - <a href='http://lite.acad.univali.br/ctpuzzle/ativar.php?email=$_POST[cadastroEmail]&token=$tokenAtivarConta'>Ativar</a></p><h4>CT Puzzle Test Team</h4>";
     $destinoEmail = "leonardocalbusch@gmail.com"; //e-mail do Adm
     $mail->Subject = $assuntoEmail;
     $mail->Body = $textoEmail;

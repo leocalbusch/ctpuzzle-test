@@ -21,7 +21,7 @@ if(mysqli_num_rows($result)>0){
         mysqli_close($conexao);
         //E-mail confirmando ativação
         $assuntoEmail = ucfirst(explode(' ', trim($nome))[0]) . ", seu cadastro no CT Puzzle Test foi ativado!";
-        $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($nome))[0]) . "!</h3><p>Seu cadastro no CT Puzzle Test foi ativado com sucesso! Você já pode efetuar login <a href='https://calbusch.com.br/ctpuzzlehtml5'>aqui</a>. Obrigado por se cadastrar no CT Puzzle Test!</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
+        $textoEmail = "<h3>Olá " . ucfirst(explode(' ', trim($nome))[0]) . "!</h3><p>Seu cadastro no CT Puzzle Test foi ativado com sucesso! Você já pode efetuar login <a href='http://lite.acad.univali.br/ctpuzzle'>aqui</a>. Obrigado por se cadastrar no CT Puzzle Test!</p><h4>CT Puzzle Test Team</h4><span>Observação: se você não solicitou o cadastro no nosso site, por favor desconsidere essa mensagem.</span>";
         $destinoEmail = $email;
         require "enviaEmail.php";
     }
