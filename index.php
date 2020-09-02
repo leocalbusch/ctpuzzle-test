@@ -3,7 +3,7 @@ session_start();
 $_SESSION=array();
 session_destroy();
 ?>
-<!DOCTYPE html><!-- teste -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
