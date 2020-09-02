@@ -96,7 +96,7 @@ function draw() {
       }
 
     } else if (telaAtual == "Instrucoes1") {
-      tela = new Programacao(1);
+      tela = new Programacao(14);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {
       escore.Programacao(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);

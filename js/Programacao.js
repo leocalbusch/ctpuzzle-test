@@ -13,6 +13,11 @@ var Programacao = function (fase) {
 	this.square = new Image();
 	// "img/Programacao/OrangeSquare.png" = destino
 	this.square = tdsImagens[78];
+	this.squareBonus = new Image();
+	// "img/Programacao/OrangeSquare.png" = destino
+	this.squareBonus = tdsImagens[78];
+	this.pegouBonus = false;
+	this.pegouFinal = false;
 	this.botaoPlay = new Imagem(480,558,21,29,"");
 	this.botaoPlay.img = tdsImagens[79];
 	this.novaInter = new Imagem(15,350,770,249,"");
@@ -376,6 +381,8 @@ var Programacao = function (fase) {
 		// Nível fácil: 5 passos dem mudar a direção
 		this.pontoInicialX = 3;
 		this.pontoInicialY = 1;
+		this.pontoBonusX = 3;
+		this.pontoBonusY = 4;
 		this.pontoFinalX = 3;
 		this.pontoFinalY = 6;
 		this.direcaoInicial = "Down";
@@ -437,6 +444,8 @@ var Programacao = function (fase) {
 		// Nível Difícil: 12 passos mudando a direção 3x
 		this.pontoInicialX = 6;
 		this.pontoInicialY = 6;
+		this.pontoBonusX = 3;
+		this.pontoBonusY = 4;
 		this.pontoFinalX = 5;
 		this.pontoFinalY = 1;
 		this.direcaoInicial = "Up";
@@ -454,6 +463,7 @@ var Programacao = function (fase) {
 				else if (this.i==2 && (this.j>0 && this.j<4)) this.status[this.i].j[this.j].status = "Vazio";
 				// tira os obstáculos da quarta parte do caminho
 				else if (this.j==1 && (this.i>2 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+				else if (this.i==5 && (this.j== 2 || this.j==3)) this.status[this.i].j[this.j].status = "Vazio";
 
 			}
 		}
@@ -742,8 +752,21 @@ Programacao.prototype.Draw = function(){
 								}
 								//Se chegou no x e y certinho ou andou parado at� 40, ent�o faz as verifica��es finais
 								if((this.xOk && this.yOk) || this.contAnda>40){
-									//AQUI VERIFICA SE GANHOU OU N�O
+									// verifica se passou pelo bonus
+									if(this.pontoX==this.pontoBonusX && this.pontoY==this.pontoBonusY){
+										this.squareBonus = tdsImagens[95];
+										this.pegouBonus = true;
+									}
+									// verifica se passou pelo final
 									if(this.pontoX==this.pontoFinalX && this.pontoY==this.pontoFinalY){
+										this.square = tdsImagens[95];
+										this.pegouFinal = true;
+									}
+									//AQUI VERIFICA SE GANHOU OU N�O
+									if(this.pegouFinal && this.pegouBonus){
+										this.ganhou=true;
+									}
+/*									if(this.pontoX==this.pontoFinalX && this.pontoY==this.pontoFinalY){
 										if((this.indice+this.comTotalLoop[this.indice])==this.comando.length-1 && this.quantidade[this.indice]<=1){
 											//Muda o quadrado pra verde se ganhou
 											this.square = tdsImagens[95];
@@ -752,7 +775,7 @@ Programacao.prototype.Draw = function(){
 										//mas n�o parou no lugar certo
 										}else this.square = tdsImagens[96];
 									//Muda pra azul que � o normal se n�o conseguiu
-									}else this.square = tdsImagens[97];
+									}else this.square = tdsImagens[97];*/
 									//Zera tudo pra pr�xuma vez----
 									this.contAnda=0;
 									this.andaParado=false;
@@ -801,6 +824,7 @@ Programacao.prototype.Draw = function(){
 
 		context.drawImage(this.novaInter.img, this.novaInter.x, this.novaInter.y);
 		context.drawImage(this.square, this.pontos[this.pontoFinalX].j[this.pontoFinalY].x-34, this.pontos[this.pontoFinalX].j[this.pontoFinalY].y-25,75,42);//55,31
+		context.drawImage(this.squareBonus, this.pontos[this.pontoBonusX].j[this.pontoBonusY].x-34, this.pontos[this.pontoBonusX].j[this.pontoBonusY].y-25,75,42);//55,31
 		for(this.i=7; this.i>=0; this.i--){
 			for(this.j=0; this.j<8; this.j++){
 				if(this.pontos[this.i].j[this.j].status=="Obst")context.drawImage(this.obst, this.pontos[this.i].j[this.j].x-24, this.pontos[this.i].j[this.j].y-34);//50,43
