@@ -96,7 +96,19 @@ function draw() {
       }
 
     } else if (telaAtual == "Instrucoes1") {
+      tela = new Programacao(11);
+      telaAtual = "Programacao11";
+    } else if (telaAtual == "Programacao11") {
+      tela = new Programacao(12);
+      telaAtual = "Programacao12";
+    } else if (telaAtual == "Programacao12") {
+      tela = new Programacao(13);
+      telaAtual = "Programacao13";
+    } else if (telaAtual == "Programacao13") {
       tela = new Programacao(14);
+      telaAtual = "Programacao14";
+    } else if (telaAtual == "Programacao14") {
+      tela = new Programacao(1);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {
       escore.Programacao(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);

@@ -378,11 +378,11 @@ var Programacao = function (fase) {
 			}
 		}
 	}else if(this.fase==11) {
-		// Nível fácil: 5 passos dem mudar a direção
+		// Nível fácil: 5 passos sem mudar a direção
 		this.pontoInicialX = 3;
 		this.pontoInicialY = 1;
 		this.pontoBonusX = 3;
-		this.pontoBonusY = 4;
+		this.pontoBonusY = 3;
 		this.pontoFinalX = 3;
 		this.pontoFinalY = 6;
 		this.direcaoInicial = "Down";
@@ -401,29 +401,32 @@ var Programacao = function (fase) {
 	}else if(this.fase==12) {
 		// Nível fácil: 8 passos mudando a direção 1x
 		this.pontoInicialX = 5;
-		this.pontoInicialY = 6;
-		this.pontoFinalX = 2;
+		this.pontoInicialY = 5;
+		this.pontoBonusX = 3;
+		this.pontoBonusY = 5;
+		this.pontoFinalX = 1;
 		this.pontoFinalY = 1;
 		this.direcaoInicial = "Left";
 		this.status = new Array();
 		for (this.i = 0; this.i < 8; this.i++) {
 			this.status[this.i] = new Matriz(8);
 			for (this.j = 0; this.j < 8; this.j++) {
-				// coloca vazio em tudo
-				this.status[this.i].j[this.j].status = "Vazio";
-				// coloca obstáculos em todas as posições exceto a linha 2 e coluna 6
-				if (this.i != 2 && this.j != 6) this.status[this.i].j[this.j].status = "Obst";
-				// na linha 2 coloca obstáculos na posição 0 e 7
-				else if (this.i==2 && (this.j==0 || this.j==7)) this.status[this.i].j[this.j].status = "Obst";
-				// na coluna 6 coloca obstáculos na posição 0, 1, 6 e 7
-				else if (this.j==6 && (this.i<2 || this.i>5)) this.status[this.i].j[this.j].status = "Obst";
+				// coloca obstáculos em tudo
+				this.status[this.i].j[this.j].status = "Obst";
+				// tira os obstáculos do caminho
+				if (this.i == 1 && (this.j>0 && this.j<6)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.i == 4 && (this.j>2 && this.j<6)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 3 && (this.i==2 || this.i==3)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 5 && (this.i>1 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
 	}else if(this.fase==13) {
 		// Nível médio: 10 passos mudando a direção 2x
 		this.pontoInicialX = 1;
 		this.pontoInicialY = 1;
-		this.pontoFinalX = 6;
+		this.pontoBonusX = 4;
+		this.pontoBonusY = 1;
+		this.pontoFinalX = 2;
 		this.pontoFinalY = 6;
 		this.direcaoInicial = "Right";
 		this.status = new Array();
@@ -432,20 +435,19 @@ var Programacao = function (fase) {
 			for (this.j = 0; this.j < 8; this.j++) {
 				// coloca obstáculos em tudo
 				this.status[this.i].j[this.j].status = "Obst";
-				// tira os obstáculos da primeira parte do caminho
-				if (this.j == 1 && (this.i>0 && this.i<4)) this.status[this.i].j[this.j].status = "Vazio";
-				// tira os obstáculos da segunda parte do caminho
-				else if (this.i==3 && (this.j>1 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
-				// tira os obstáculos da terceira parte do caminho
-				else if (this.j==6 && (this.i>3 && this.i<7)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos do caminho
+				if (this.i == 2 && (this.j>1 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.i == 5 && (this.j>1 && this.j<6)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 1 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 5 && (this.i==4 || this.i==3)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
 	}else if(this.fase==14) {
 		// Nível Difícil: 12 passos mudando a direção 3x
 		this.pontoInicialX = 6;
 		this.pontoInicialY = 6;
-		this.pontoBonusX = 3;
-		this.pontoBonusY = 4;
+		this.pontoBonusX = 2;
+		this.pontoBonusY = 5;
 		this.pontoFinalX = 5;
 		this.pontoFinalY = 1;
 		this.direcaoInicial = "Up";
@@ -455,15 +457,13 @@ var Programacao = function (fase) {
 			for (this.j = 0; this.j < 8; this.j++) {
 				// coloca obstáculos em tudo
 				this.status[this.i].j[this.j].status = "Obst";
-				// tira os obstáculos da primeira parte do caminho
-				if (this.i == 6 && (this.j>3 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
-				// tira os obstáculos da segunda parte do caminho
-				else if (this.j==4 && (this.i>1 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
-				// tira os obstáculos da terceira parte do caminho
-				else if (this.i==2 && (this.j>0 && this.j<4)) this.status[this.i].j[this.j].status = "Vazio";
-				// tira os obstáculos da quarta parte do caminho
-				else if (this.j==1 && (this.i>2 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
-				else if (this.i==5 && (this.j== 2 || this.j==3)) this.status[this.i].j[this.j].status = "Vazio";
+				// tira os obstáculos do caminho
+				if (this.i == 1 && (this.j>1 && this.j<5)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.i == 4 && (this.j>2 && this.j<5)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.i == 5 && (this.j>1 && this.j<4)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.i == 6 && (this.j>4 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 1 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+				if (this.j == 5 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 
 			}
 		}
