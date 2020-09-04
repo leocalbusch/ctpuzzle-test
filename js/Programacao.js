@@ -31,6 +31,8 @@ var Programacao = function (fase) {
 	this.highlightCom.img = tdsImagens[83];
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
+	this.botaoContinuar= new Imagem(230,565,150,25,"");
+	this.botaoContinuar.img = tdsImagens[7];
 	this.comandoPosicao = new Array();
 	this.loopPosicao = new Array();
 	this.comando = new Array();
@@ -543,21 +545,11 @@ Programacao.prototype.Draw = function(){
 		}
 
 		if(this.tempo>=0)this.botaoPular.x=10;
-		//Essa partezinha � um outro estilo, pra se errar voltar pro come�o ao inv�s de continuar de onde parou
-		//Mas acho que n�o vou usar isso n�o
-		/*if(this.errou){
-			if(this.contTempo+1<this.tempo){
-				this.personagem.x=this.pontos[this.pontoInicialX].j[this.pontoInicialY].x - (this.personagem.width/2);
-				this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
-				this.personagem.animaParado(this.direcaoInicial);
-				this.pontoX=pontoInicialX;
-				this.pontoY=pontoInicialY;
-				this.errou=false;
-			}
-		}else */
+
 		if(this.ganhou && !this.executaComando){
 			//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-			context.fillText("Correto! Continuar",110,590);
+			context.fillText("Correto!",110,588);
+			context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 			// A variável "pause" fica setada para true até que o usuário clique na tela
 			// Isso faz com que a tela fique parada mostrando "Correto" até o clique
 			this.pause = true;
@@ -835,6 +827,18 @@ Programacao.prototype.Draw = function(){
 						//n�o entendi esse if aqui, pq ser� que fiz isso?
 						if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
 						this.highlightCom.x=1000;
+						if (!this.ganhou){// Se não pegou os dois objetivos, reseta o boneco e os objetivos
+							this.personagem.x=this.pontos[this.pontoInicialX].j[this.pontoInicialY].x - (this.personagem.width/2);
+							this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
+							this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
+							this.personagem.animaParado(this.direcaoInicial);
+							this.pontoX=this.pontoInicialX;
+							this.pontoY=this.pontoInicialY;
+							this.squareBonus = tdsImagens[78];
+							this.pegouBonus = false;
+							this.square = tdsImagens[78];
+							this.pegouFinal = false;
+						}
 					}	
 				}
 			}
@@ -949,10 +953,11 @@ Programacao.prototype.MouseUp = function(mouseEvent) {
 		//Se já está na tela de correto que aguarda o clique para ir pra próxima fase,
 		//só seta o ativo da tela para false e a próxima atualização da tela faz seguir o jogo
 		if (this.pause && this.ganhou){
-			this.ativo = false;
-			return;
-		}
-		if(!this.executaComando){
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.ativo = false;
+				return;
+			}
+		}else if(!this.executaComando){
 			if(!this.ganhou){
 				//Se apertar no bot�o play
 				if(posMouseX>this.botaoPlay.x && posMouseX<(this.botaoPlay.x + this.botaoPlay.width) && posMouseY>this.botaoPlay.y && posMouseY<(this.botaoPlay.y + this.botaoPlay.height)){
@@ -963,7 +968,7 @@ Programacao.prototype.MouseUp = function(mouseEvent) {
 					}
 					if(this.loopVazio){
 						this.loopVazio=false;
-						this.msgErro="Voc� n�o pode executar um la�o de repeti��o vazio.";
+						this.msgErro="Você não pode executar um laço de repetição vazio.";
 					}else if(this.comando.length>0){
 						this.executaComando=true;
 						this.contPlay++;
@@ -992,9 +997,9 @@ Programacao.prototype.MouseUp = function(mouseEvent) {
 
 				}
 				//Verificar se soltou um comando no programa
-				if(posMouseX>this.novaInter.x && posMouseX<(this.novaInter.x + 520) && posMouseY>this.novaInter.y && posMouseY<(this.novaInter.y + 200)){
+				//if(posMouseX>this.novaInter.x && posMouseX<(this.novaInter.x + 520) && posMouseY>this.novaInter.y && posMouseY<(this.novaInter.y + 200)){
 					if(this.follow!="none")this.AddComando(this.follow);
-				}
+				//}
 				//Pular a fase
 				if(this.tempo>=0){
 					if(posMouseX>this.botaoPular.x && posMouseX<(this.botaoPular.x + this.botaoPular.width) && posMouseY>this.botaoPular.y && posMouseY<(this.botaoPular.y + this.botaoPular.height)){
