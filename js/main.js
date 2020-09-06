@@ -108,6 +108,18 @@ function draw() {
       tela = new Programacao(14);
       telaAtual = "Programacao14";
     } else if (telaAtual == "Programacao14") {
+      tela = new Programacao(15);
+      telaAtual = "Programacao15";
+    } else if (telaAtual == "Programacao15") {
+      tela = new Programacao(16);
+      telaAtual = "Programacao16";
+    } else if (telaAtual == "Programacao16") {
+      tela = new Programacao(17);
+      telaAtual = "Programacao17";
+    } else if (telaAtual == "Programacao17") {
+      tela = new Programacao(18);
+      telaAtual = "Programacao18";
+    } else if (telaAtual == "Programacao18") {
       tela = new Programacao(1);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {

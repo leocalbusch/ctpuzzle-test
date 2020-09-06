@@ -10,18 +10,19 @@ var Programacao = function (fase) {
 	this.cenario = new Image();
 	// "img/Programacao/Cenario.png" = tabuleiro
 	this.cenario = tdsImagens[77];
-	this.square = new Image();
-	// "img/Programacao/OrangeSquare.png" = destino
-	this.square = tdsImagens[78];
-	this.squareBonus = new Image();
-	// "img/Programacao/OrangeSquare.png" = destino
-	this.squareBonus = tdsImagens[78];
-	this.pegouBonus = false;
-	this.pegouFinal = false;
+	this.squareObjetivo1 = new Image();
+	this.squareObjetivo1 = tdsImagens[78]; // "img/Programacao/OrangeSquare.png" = destino
+	this.squareObjetivo2 = new Image();
+	this.squareObjetivo2 = tdsImagens[78];
+	this.squareObjetivo3 = new Image();
+	this.squareObjetivo3 = tdsImagens[78];
+	this.pegouObjetivo1 = false;
+	this.pegouObjetivo2 = false;
+	this.pegouObjetivo3 = false;
 	this.botaoPlay = new Imagem(480,558,21,29,"");
 	this.botaoPlay.img = tdsImagens[79];
 	this.novaInter = new Imagem(15,350,770,249,"");
-	this.novaInter.img = tdsImagens[80];
+	this.novaInter.img = tdsImagens[80]; // "img/Programacao/newInterfaceNoLoop.png" = fundo comandos
 	this.botaoExclui = new Imagem(1000,400,17,17,"");
 	this.botaoExclui.img = tdsImagens[81];
 	this.botaoExcluiTudo = new Imagem(420,556,28,34,"");
@@ -113,28 +114,28 @@ var Programacao = function (fase) {
 		if(this.random<50){
 			if(this.random<6.25){
 				this.pontoInicialX=0;
-				this.pontoFinalX=0;
+				this.primeiroObjetivoX=0;
 			}else if(this.random<12.5){
 				this.pontoInicialX=1;
-				this.pontoFinalX=1;
+				this.primeiroObjetivoX=1;
 			}else if(this.random<18.75){
 				this.pontoInicialX=2;
-				this.pontoFinalX=2;
+				this.primeiroObjetivoX=2;
 			}else if(this.random<25){
 				this.pontoInicialX=3;
-				this.pontoFinalX=3;
+				this.primeiroObjetivoX=3;
 			}else if(this.random<31.25){
 				this.pontoInicialX=4;
-				this.pontoFinalX=4;
+				this.primeiroObjetivoX=4;
 			}else if(this.random<37.5){
 				this.pontoInicialX=5;
-				this.pontoFinalX=5;
+				this.primeiroObjetivoX=5;
 			}else if(this.random<43.75){
 				this.pontoInicialX=6;
-				this.pontoFinalX=6;
+				this.primeiroObjetivoX=6;
 			}else{
 				this.pontoInicialX=7;
-				this.pontoFinalX=7;
+				this.primeiroObjetivoX=7;
 			}
 			if(this.random2<12.5)this.pontoInicialY=0;
 			else if(this.random2<25)this.pontoInicialY=1;
@@ -145,37 +146,37 @@ var Programacao = function (fase) {
 			else if(this.random2<87.5)this.pontoInicialY=5;
 			else this.pontoInicialY=4;
 			if(this.pontoInicialY<=3){	
-				this.pontoFinalY=this.pontoInicialY+4;
+				this.primeiroObjetivoY=this.pontoInicialY+4;
 				this.direcaoInicial="Down";
 			}else{
-				this.pontoFinalY=this.pontoInicialY-4;
+				this.primeiroObjetivoY=this.pontoInicialY-4;
 				this.direcaoInicial="Up";
 			}
 		}else{
 			if(this.random<56.25){
 				this.pontoInicialY=0;
-				this.pontoFinalY=0;
+				this.primeiroObjetivoY=0;
 			}else if(this.random<62.5){
 				this.pontoInicialY=1;
-				this.pontoFinalY=1;
+				this.primeiroObjetivoY=1;
 			}else if(this.random<68.75){
 				this.pontoInicialY=2;
-				this.pontoFinalY=2;
+				this.primeiroObjetivoY=2;
 			}else if(this.random<75){
 				this.pontoInicialY=3;
-				this.pontoFinalY=3;
+				this.primeiroObjetivoY=3;
 			}else if(this.random<81.25){
 				this.pontoInicialY=4;
-				this.pontoFinalY=4;
+				this.primeiroObjetivoY=4;
 			}else if(this.random<87.5){
 				this.pontoInicialY=5;
-				this.pontoFinalY=5;
+				this.primeiroObjetivoY=5;
 			}else if(this.random<93.75){
 				this.pontoInicialY=6;
-				this.pontoFinalY=6;
+				this.primeiroObjetivoY=6;
 			}else{
 				this.pontoInicialY=7;
-				this.pontoFinalY=7;
+				this.primeiroObjetivoY=7;
 			}
 			if(this.random2<12.5)this.pontoInicialX=0;
 			else if(this.random2<25)this.pontoInicialX=1;
@@ -186,15 +187,16 @@ var Programacao = function (fase) {
 			else if(this.random2<87.5)this.pontoInicialX=5;
 			else this.pontoInicialX=4;
 			if(this.pontoInicialX<=3){	
-				this.pontoFinalX=this.pontoInicialX+4;
+				this.primeiroObjetivoX=this.pontoInicialX+4;
 				this.direcaoInicial="Right";
 			}else{
-				this.pontoFinalX=this.pontoInicialX-4;
+				this.primeiroObjetivoX=this.pontoInicialX-4;
 				this.direcaoInicial="Left";
 			}	
 		}
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
 			this.status[this.i]= new Matriz(8);
@@ -222,10 +224,10 @@ var Programacao = function (fase) {
 	//prog2--------------------------------------------
 		this.pontoInicialX=0;
 		this.pontoInicialY=4;
-		this.pontoFinalX=4;
-		this.pontoFinalY=4;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=4;
+		this.primeiroObjetivoY=4;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Down";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -242,10 +244,10 @@ var Programacao = function (fase) {
 	//prog3-------------------------------------------
 		this.pontoInicialX=4;
 		this.pontoInicialY=5;
-		this.pontoFinalX=7;
-		this.pontoFinalY=7;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=7;
+		this.primeiroObjetivoY=7;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Baixo";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -264,10 +266,10 @@ var Programacao = function (fase) {
 	//prog4--------------------------------------------
 		this.pontoInicialX=7;
 		this.pontoInicialY=7;
-		this.pontoFinalX=6;
-		this.pontoFinalY=5;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=6;
+		this.primeiroObjetivoY=5;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Left";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -285,10 +287,10 @@ var Programacao = function (fase) {
 	//prog5--------------------------------------------
 		this.pontoInicialX=6;
 		this.pontoInicialY=5;
-		this.pontoFinalX=0;
-		this.pontoFinalY=0;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=0;
+		this.primeiroObjetivoY=0;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Left";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -306,10 +308,10 @@ var Programacao = function (fase) {
 	//prog6--------------------------------------------
 		this.pontoInicialX=0;
 		this.pontoInicialY=0;
-		this.pontoFinalX=2;
-		this.pontoFinalY=4;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=2;
+		this.primeiroObjetivoY=4;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Down";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -327,10 +329,10 @@ var Programacao = function (fase) {
 	//prog7--------------------------------------------
 		this.pontoInicialX=2;
 		this.pontoInicialY=4;
-		this.pontoFinalX=5;
-		this.pontoFinalY=7;
-		this.pontoBonusX = this.pontoFinalX;
-		this.pontoBonusY = this.pontoFinalY;
+		this.primeiroObjetivoX=5;
+		this.primeiroObjetivoY=7;
+		this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+		this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 		this.direcaoInicial="Down";
 		this.status = new Array();
 		for(this.i=0; this.i<8; this.i++){
@@ -355,10 +357,10 @@ var Programacao = function (fase) {
 		if(fase==8){
 			this.pontoInicialX=7;
 			this.pontoInicialY=7;
-			this.pontoFinalX=0;
-			this.pontoFinalY=0;
-			this.pontoBonusX = this.pontoFinalX;
-			this.pontoBonusY = this.pontoFinalY;
+			this.primeiroObjetivoX=0;
+			this.primeiroObjetivoY=0;
+			this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+			this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 			this.direcaoInicial="Left";
 			this.status = new Array();
 			for(this.i=0; this.i<8; this.i++){
@@ -377,10 +379,10 @@ var Programacao = function (fase) {
 		}else if(fase==9){
 			this.pontoInicialX=0;
 			this.pontoInicialY=0;
-			this.pontoFinalX=3;
-			this.pontoFinalY=6;
-			this.pontoBonusX = this.pontoFinalX;
-			this.pontoBonusY = this.pontoFinalY;
+			this.primeiroObjetivoX=3;
+			this.primeiroObjetivoY=6;
+			this.segundoObjetivoX = this.terceiroObjetivoX = this.primeiroObjetivoX;
+			this.segundoObjetivoY = this.terceiroObjetivoY = this.primeiroObjetivoY;
 			this.direcaoInicial="Left";
 			this.status = new Array();
 			for(this.i=0; this.i<8; this.i++){
@@ -398,34 +400,28 @@ var Programacao = function (fase) {
 			}
 		}
 	}else if(this.fase==11) {
-		// Nível fácil: 5 passos sem mudar a direção
+		// Nível fácil: 5 passos sem mudar a direção, 1 objetivo
 		this.pontoInicialX = 3;
 		this.pontoInicialY = 1;
-		this.pontoBonusX = 3;
-		this.pontoBonusY = 3;
-		this.pontoFinalX = 3;
-		this.pontoFinalY = 6;
+		this.primeiroObjetivoX = this.segundoObjetivoX = this.terceiroObjetivoX = 3;
+		this.primeiroObjetivoY = this.segundoObjetivoY = this.terceiroObjetivoY = 6;
 		this.direcaoInicial = "Down";
 		this.status = new Array();
 		for (this.i = 0; this.i < 8; this.i++) {
 			this.status[this.i] = new Matriz(8);
 			for (this.j = 0; this.j < 8; this.j++) {
-				// coloca vazio em tudo
-				this.status[this.i].j[this.j].status = "Vazio";
-				// coloca obstáculos em todas as posições exceto a linha 3
-				if (this.i != 3) this.status[this.i].j[this.j].status = "Obst";
-				// na linha 3 coloca obstáculos na posição 0 e 7
-				else if (this.j==0 || this.j==7) this.status[this.i].j[this.j].status = "Obst";
+				// coloca obstáculos em tudo
+				this.status[this.i].j[this.j].status = "Obst";
+				// tira os obstáculos do caminho
+				if (this.i == 3 && (this.j>0 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
 	}else if(this.fase==12) {
-		// Nível fácil: 8 passos mudando a direção 1x
+		// Nível fácil: 8 passos mudando a direção 1x, 1 objetivo
 		this.pontoInicialX = 5;
 		this.pontoInicialY = 5;
-		this.pontoBonusX = 3;
-		this.pontoBonusY = 5;
-		this.pontoFinalX = 1;
-		this.pontoFinalY = 1;
+		this.primeiroObjetivoX = this.segundoObjetivoX = this.terceiroObjetivoX = 1;
+		this.primeiroObjetivoY = this.segundoObjetivoY = this.terceiroObjetivoY = 1;
 		this.direcaoInicial = "Left";
 		this.status = new Array();
 		for (this.i = 0; this.i < 8; this.i++) {
@@ -441,13 +437,13 @@ var Programacao = function (fase) {
 			}
 		}
 	}else if(this.fase==13) {
-		// Nível médio: 10 passos mudando a direção 2x
+		// Nível médio: 10 passos mudando a direção 2x, 2 objetivos
 		this.pontoInicialX = 1;
 		this.pontoInicialY = 1;
-		this.pontoBonusX = 4;
-		this.pontoBonusY = 1;
-		this.pontoFinalX = 2;
-		this.pontoFinalY = 6;
+		this.primeiroObjetivoX = 2;
+		this.primeiroObjetivoY = 6;
+		this.segundoObjetivoX = this.terceiroObjetivoX = 4;
+		this.segundoObjetivoY = this.terceiroObjetivoY  = 1;
 		this.direcaoInicial = "Right";
 		this.status = new Array();
 		for (this.i = 0; this.i < 8; this.i++) {
@@ -463,13 +459,13 @@ var Programacao = function (fase) {
 			}
 		}
 	}else if(this.fase==14) {
-		// Nível Difícil: 12 passos mudando a direção 3x
+		// Nível Difícil: 12 passos mudando a direção 3+x
 		this.pontoInicialX = 6;
 		this.pontoInicialY = 6;
-		this.pontoBonusX = 2;
-		this.pontoBonusY = 5;
-		this.pontoFinalX = 5;
-		this.pontoFinalY = 1;
+		this.primeiroObjetivoX = 5;
+		this.primeiroObjetivoY = 1;
+		this.segundoObjetivoX = this.terceiroObjetivoX = 2;
+		this.segundoObjetivoY = this.terceiroObjetivoY = 5;
 		this.direcaoInicial = "Up";
 		this.status = new Array();
 		for (this.i = 0; this.i < 8; this.i++) {
@@ -484,11 +480,127 @@ var Programacao = function (fase) {
 				if (this.i == 6 && (this.j>4 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
 				if (this.j == 1 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 				if (this.j == 5 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+			}
+		}
+	}else if(this.fase>14){
+		this.comLoop= new Imagem(625,550,69,39,"");
+		this.comLoop.img = tdsImagens[88];
+		this.rectComLoop=new Imagem(625,550,69,39,"");
+		this.highlightLoop= new Imagem(1000,388,83,49,"");
+		this.highlightLoop.img = tdsImagens[89];
+		this.insideLoop=false;
+		this.multipleLoop=false;
 
+		if(this.fase==15) {
+			// Nível Médio com Loop: até 5 repetições de 1 passo + 2 objetivos
+			this.pontoInicialX = 0;
+			this.pontoInicialY = 7;
+			this.primeiroObjetivoX = 5;
+			this.primeiroObjetivoY = 7;
+			this.segundoObjetivoX = this.terceiroObjetivoX = 7;
+			this.segundoObjetivoY = this.terceiroObjetivoY = 5;
+			this.direcaoInicial = "Down";
+			this.status = new Array();
+
+			for(this.i=0; this.i<8; this.i++){
+				this.status[this.i]= new Matriz(8);
+				for(this.j=0; this.j<8; this.j++){
+					// coloca obstáculos em tudo
+					this.status[this.i].j[this.j].status = "Obst";
+					// tira os obstáculos do caminho
+					if ((this.i == 2 || this.i == 7) && (this.j>0 && this.j<6)) this.status[this.i].j[this.j].status = "Vazio";
+					if (this.i == 5 && this.j == 6) this.status[this.i].j[this.j].status = "Vazio";
+					if (this.j == 1 && this.i>1) this.status[this.i].j[this.j].status = "Vazio";
+					if (this.j == 5 && (this.i>2 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
+					if (this.j == 7 && this.i<6) this.status[this.i].j[this.j].status = "Vazio";
+				}
+			}
+		}else if(this.fase==16){
+			// Nível Médio com Loop: até 7 repetições de 2 passos + 2 objetivos
+			this.pontoInicialX = 0;
+			this.pontoInicialY = 0;
+			this.primeiroObjetivoX = 7;
+			this.primeiroObjetivoY = 7;
+			this.segundoObjetivoX = this.terceiroObjetivoX = 3;
+			this.segundoObjetivoY = this.terceiroObjetivoY = 0;
+			this.direcaoInicial = "Down";
+			this.status = new Array();
+
+			for(this.i=0; this.i<8; this.i++){
+				this.status[this.i]= new Matriz(8);
+				for(this.j=0; this.j<8; this.j++){
+					// coloca vazio em tudo
+					this.status[this.i].j[this.j].status = "Vazio";
+					// Coloca os obstáculos
+					if (this.i == 1 && (this.j==0 || (this.j>2 && this.j<7))) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 2 && (this.j==0 || this.j==1 || (this.j>3 && this.j<7))) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 3 && (this.j==2 || this.j==5 || this.j==6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 4 && (this.j==3 || this.j==6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 5 && (this.j==1 || this.j==4)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 6 && (this.j==2 || this.j==5)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 7 && this.j==0) this.status[this.i].j[this.j].status = "Obst";
+				}
+			}
+		}else if(this.fase==17){
+			// Nível Difícil com Loop: até 3 repetições de 3 passos + 3 objetivos
+			this.pontoInicialX = 7;
+			this.pontoInicialY = 0;
+			this.primeiroObjetivoX = 4;
+			this.primeiroObjetivoY = 6;
+			this.segundoObjetivoX = 0;
+			this.segundoObjetivoY = 4;
+			this.terceiroObjetivoX = 2;
+			this.terceiroObjetivoY = 0;
+			this.direcaoInicial = "Left";
+			this.status = new Array();
+
+			for(this.i=0; this.i<8; this.i++){
+				this.status[this.i]= new Matriz(8);
+				for(this.j=0; this.j<8; this.j++){
+					// coloca vazio em tudo
+					this.status[this.i].j[this.j].status = "Vazio";
+					// Coloca os obstáculos
+					if (this.i == 0 && (this.j==0 || this.j==1)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 1 && (this.j==3 || this.j==4 || this.j==6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 2 && (this.j>0 && this.j<5)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 3 && (this.j>0 && this.j<6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 4 && (this.j>0 && this.j<4)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 5 && (this.j==1 || this.j==5 || this.j==6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 6 && (this.j>2 && this.j<7)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 7 && this.j==1) this.status[this.i].j[this.j].status = "Obst";
+				}
+			}
+		}else if(this.fase==18){
+			// Nível Muito Difícil com Loop: até 4 repetições de 3 passos + 3 objetivos
+			// + colide com barreira sem se mover, mas que tornam solução mais curta).
+			this.pontoInicialX = 0;
+			this.pontoInicialY = 1;
+			this.primeiroObjetivoX = 7;
+			this.primeiroObjetivoY = 5;
+			this.segundoObjetivoX = 1;
+			this.segundoObjetivoY = 5;
+			this.terceiroObjetivoX = 1;
+			this.terceiroObjetivoY = 3;
+			this.direcaoInicial = "Down";
+			this.status = new Array();
+
+			for(this.i=0; this.i<8; this.i++){
+				this.status[this.i]= new Matriz(8);
+				for(this.j=0; this.j<8; this.j++){
+					// coloca vazio em tudo
+					this.status[this.i].j[this.j].status = "Vazio";
+					// Coloca os obstáculos
+					if (this.i == 0 && (this.j==0 || this.j==2)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 1 && (this.j==4 || this.j==6)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 2 && (this.j==1 || (this.j>2 && this.j<7))) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 3 && (this.j==1 || this.j==4 || this.j==5)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 4 && (this.j==1 || this.j==2 || this.j==4 || this.j==5 || this.j==7)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 5 && (this.j==1 || this.j==2 || this.j==5 || this.j==7)) this.status[this.i].j[this.j].status = "Obst";
+					if (this.i == 6 && ((this.j>0 && this.j<4) || this.j==5 || this.j==7)) this.status[this.i].j[this.j].status = "Obst";
+				}
 			}
 		}
 	}
-
 	//---------------------
 	this.ativo=true;
 	this.comLeft=new Imagem(575,486,83,48,"");
@@ -631,7 +743,7 @@ Programacao.prototype.Draw = function(){
 					this.comRight.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
 					this.mouseAntY=posMouseY;
-				}else if((this.fase==8||this.fase==9) && this.follow=="Loop"){
+				}else if((this.fase>14) && this.follow=="Loop"){
 					this.comLoop.x+=posMouseX-this.mouseAntX;
 					this.comLoop.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
@@ -646,7 +758,7 @@ Programacao.prototype.Draw = function(){
 					this.comLeft.y=this.rectComLeft.y;
 					this.comRight.x=this.rectComRight.x;
 					this.comRight.y=this.rectComRight.y;
-					if(this.fase==8||this.fase==9){
+					if(this.fase>14){
 						this.comLoop.x=this.rectComLoop.x;
 						this.comLoop.y=this.rectComLoop.y;
 					}
@@ -654,6 +766,7 @@ Programacao.prototype.Draw = function(){
 				//Aqui come�am as verifica��es das coisas que podem acontecer enquanto n�o est�
 				//sendo executado nenhum programa
 				this.insideLoop=false;
+				this.multipleLoop=false;
 				this.maisOver=false;
 				this.menosOver=false;
 				if(!this.executaComando){
@@ -667,7 +780,7 @@ Programacao.prototype.Draw = function(){
 								//Aqui faz o bot�o excluir ser posicionado em cima do comando
 								this.botaoExclui.x=this.comandoPosicao[this.i].x;
 								this.botaoExclui.y=this.comandoPosicao[this.i].y;
-								if((this.fase==8||this.fase==9) && this.comando[this.i].substring(0,4)=="Loop"){
+								if((this.fase>14) && this.comando[this.i].substring(0,4)=="Loop"){
 									this.cont=this.i;
 									this.cont2=this.i;
 									if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
@@ -762,21 +875,26 @@ Programacao.prototype.Draw = function(){
 								}
 								//Se chegou no x e y certinho ou andou parado at� 40, ent�o faz as verifica��es finais
 								if((this.xOk && this.yOk) || this.contAnda>40){
-									// verifica se passou pelo bonus
-									if(this.pontoX==this.pontoBonusX && this.pontoY==this.pontoBonusY){
-										this.squareBonus = tdsImagens[95];
-										this.pegouBonus = true;
+									// verifica se passou pelo objetivo 1
+									if(this.pontoX==this.primeiroObjetivoX && this.pontoY==this.primeiroObjetivoY){
+										this.squareObjetivo1 = tdsImagens[95];
+										this.pegouObjetivo1 = true;
 									}
-									// verifica se passou pelo final
-									if(this.pontoX==this.pontoFinalX && this.pontoY==this.pontoFinalY){
-										this.square = tdsImagens[95];
-										this.pegouFinal = true;
+									// verifica se passou pelo objetivo 2
+									if(this.pontoX==this.segundoObjetivoX && this.pontoY==this.segundoObjetivoY){
+										this.squareObjetivo2 = tdsImagens[95];
+										this.pegouObjetivo2 = true;
+									}
+									// verifica se passou pelo objetivo 3
+									if(this.pontoX==this.terceiroObjetivoX && this.pontoY==this.terceiroObjetivoY){
+										this.squareObjetivo3 = tdsImagens[95];
+										this.pegouObjetivo3 = true;
 									}
 									//AQUI VERIFICA SE GANHOU OU N�O
-									if(this.pegouFinal && this.pegouBonus){
+									if(this.pegouObjetivo1 && this.pegouObjetivo2 && this.pegouObjetivo3){
 										this.ganhou=true;
 									}
-/*									if(this.pontoX==this.pontoFinalX && this.pontoY==this.pontoFinalY){
+/*									if(this.pontoX==this.primeiroObjetivoX && this.pontoY==this.primeiroObjetivoY){
 										if((this.indice+this.comTotalLoop[this.indice])==this.comando.length-1 && this.quantidade[this.indice]<=1){
 											//Muda o quadrado pra verde se ganhou
 											this.square = tdsImagens[95];
@@ -827,17 +945,18 @@ Programacao.prototype.Draw = function(){
 						//n�o entendi esse if aqui, pq ser� que fiz isso?
 						if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
 						this.highlightCom.x=1000;
-						if (!this.ganhou){// Se não pegou os dois objetivos, reseta o boneco e os objetivos
+						if (!this.ganhou){// Se não pegou todos os objetivos, reseta o boneco e os objetivos
 							this.personagem.x=this.pontos[this.pontoInicialX].j[this.pontoInicialY].x - (this.personagem.width/2);
-							this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
 							this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
 							this.personagem.animaParado(this.direcaoInicial);
 							this.pontoX=this.pontoInicialX;
 							this.pontoY=this.pontoInicialY;
-							this.squareBonus = tdsImagens[78];
-							this.pegouBonus = false;
-							this.square = tdsImagens[78];
-							this.pegouFinal = false;
+							this.squareObjetivo1 = tdsImagens[78];
+							this.pegouObjetivo1 = false;
+							this.squareObjetivo2 = tdsImagens[78];
+							this.pegouObjetivo2 = false;
+							this.squareObjetivo3 = tdsImagens[78];
+							this.pegouObjetivo3 = false;
 						}
 					}	
 				}
@@ -845,8 +964,9 @@ Programacao.prototype.Draw = function(){
 		}
 
 		context.drawImage(this.novaInter.img, this.novaInter.x, this.novaInter.y);
-		context.drawImage(this.square, this.pontos[this.pontoFinalX].j[this.pontoFinalY].x-34, this.pontos[this.pontoFinalX].j[this.pontoFinalY].y-25,75,42);//55,31
-		context.drawImage(this.squareBonus, this.pontos[this.pontoBonusX].j[this.pontoBonusY].x-34, this.pontos[this.pontoBonusX].j[this.pontoBonusY].y-25,75,42);//55,31
+		context.drawImage(this.squareObjetivo1, this.pontos[this.primeiroObjetivoX].j[this.primeiroObjetivoY].x-34, this.pontos[this.primeiroObjetivoX].j[this.primeiroObjetivoY].y-25,75,42);//55,31
+		context.drawImage(this.squareObjetivo2, this.pontos[this.segundoObjetivoX].j[this.segundoObjetivoY].x-34, this.pontos[this.segundoObjetivoX].j[this.segundoObjetivoY].y-25,75,42);//55,31
+		context.drawImage(this.squareObjetivo3, this.pontos[this.terceiroObjetivoX].j[this.terceiroObjetivoY].x-34, this.pontos[this.terceiroObjetivoX].j[this.terceiroObjetivoY].y-25,75,42);//55,31
 		for(this.i=7; this.i>=0; this.i--){
 			for(this.j=0; this.j<8; this.j++){
 				if(this.pontos[this.i].j[this.j].status=="Obst")context.drawImage(this.obst, this.pontos[this.i].j[this.j].x-24, this.pontos[this.i].j[this.j].y-34);//50,43
@@ -857,7 +977,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.personagem.imagem, this.personagem.x, this.personagem.y);
 		context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
 		for(this.i=0; this.i<this.comandoPosicao.length; this.i++){
-			if((this.fase==8||this.fase==9) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
+			if((this.fase>14) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
 				context.drawImage(this.loopPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
 				if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
 					context.font="15px Georgia";
@@ -877,7 +997,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.comRight.img, this.comRight.x, this.comRight.y);
 		context.drawImage(this.comUp.img, this.comUp.x, this.comUp.y);
 		context.drawImage(this.comDown.img, this.comDown.x, this.comDown.y);
-		if((this.fase==8||this.fase==9)){
+		if((this.fase>14)){
 			context.drawImage(this.comLoop.img, this.comLoop.x, this.comLoop.y);	
 		}
 		context.drawImage(this.demo.imagem, this.demo.x, this.demo.y);
@@ -939,7 +1059,7 @@ Programacao.prototype.MouseDown = function(mouseEvent) {
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Left";
-		}else if((this.fase==8||this.fase==9) && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
+		}else if((this.fase>14) && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Loop";
@@ -1151,7 +1271,7 @@ Programacao.prototype.MoveBonecoDemo = function (){
 }
 Programacao.prototype.AddComando = function (stringComando){
 	//this.trace=stringComando;
-	if(this.comandoPosicao.length<=(6*4)+3){
+	if(this.comandoPosicao.length<=20){
 		this.contInstrucoes++;
 		//Entra aqui quando � mais de um comando por loop:
 		if(this.multipleLoop && this.excluiComando>-1){
