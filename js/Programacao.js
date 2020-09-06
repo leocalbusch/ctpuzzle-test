@@ -957,6 +957,7 @@ Programacao.prototype.Draw = function(){
 							this.pegouObjetivo2 = false;
 							this.squareObjetivo3 = tdsImagens[78];
 							this.pegouObjetivo3 = false;
+							window.alert("Ainda não pegou todos os objetivos, então é melhor revisar o código! Não desista!")
 						}
 					}	
 				}
