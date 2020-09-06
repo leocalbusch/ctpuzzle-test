@@ -2,7 +2,7 @@ var instrucoes = {
   programacao: [
     { text: 'Olá,\nPreciso chegar na parte laranja\ndo mapa. Pode me ajudar?', x: 370, y: 85 },
     { text: 'Aqui ficam os comandos que\nvocê pode utilizar', x: 370, y: 90 },
-    { text: 'Você pode arrastá-los para \no PROGRAMA e montar \no caminho', x: 370, y: 85 },
+    { text: 'Você pode clicar ou arrastá-los \npara o PROGRAMA e montar \no caminho', x: 370, y: 85 },
     { text: 'Clicando aqui, eu começo andar', x: 370, y: 95 },
     { text: 'E clicando aqui, o caminho é \nzerado', x: 370, y: 95 },
   ]
