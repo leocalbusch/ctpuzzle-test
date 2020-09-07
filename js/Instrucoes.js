@@ -6,7 +6,7 @@ let faseAtual;
 let fases = {
   1: 'programacao',
   //Aqui são as instruções passo a passo pro loop da quinta fase de programação
-  5: 'programacao_loop',
+  155: 'programacao_loop',
   //...
 }
 
@@ -42,7 +42,7 @@ var Instrucoes = function (indice) {
   let nomeGenero = genero == 0 ? 'girl' : 'boy';
   faseAtual = fases[indice];
 
-  if (this.indice == 1) {
+  if (this.indice == 1 || this.indice == 155) {
     let personagem = personagensMap[genero];
     instrucoesPassoAPasso = new InstrucoesPassoAPasso(context, personagem);
     instrucoesPassoAPasso.onFinishSteps = function () {
@@ -215,8 +215,8 @@ Instrucoes.prototype.Draw = function () {
     escore.Calcula();
     //aqui faz parar de desenhar recursivamente depois de mostrar a tela final
     telaAtual = false;
-  /*} else if (this.indice == 18) {
-    escore.ResultadoFinal();*/
+    /*} else if (this.indice == 18) {
+      escore.ResultadoFinal();*/
   } else {
     if (this.indice == 2) {
       this.cont2++;
@@ -349,8 +349,8 @@ Instrucoes.prototype.Draw = function () {
 
     let fundo = this.fala ? this.fundoBocaAberta : this.fundoBocaFechada;
 
-      if (fundo.complete)
-        context.drawImage(fundo, 0, 0);
+    if (fundo.complete)
+      context.drawImage(fundo, 0, 0);
 
 
     if (this.indice == 5) {

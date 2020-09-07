@@ -35,7 +35,7 @@ var delayTouch = 50000;
 // essas vars são somente para ajudar no desenvolvimento,
 // para ir direto a uma fase específica.
 // Devem ser removidas da versão final.
-var arrayFases =      ["Programacao1",  "Pontos1",    "Pontos2","Programacao2", "Pontos3",    "Pontos4", "Programacao3",  "Match1",     "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
+var arrayFases =      ["Programacao1",  "Pontos1",  "Pontos2", "Programacao2", "Pontos3",  "Pontos4", "Programacao3",  "Match1",     "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
 var arrayTelaAtual =  ["Instrucoes1",   "Instrucoes2","Pontos1","Instrucoes4",  "Instrucoes3","Pontos3", "Instrucoes6",   "Instrucoes5","Match1", "Instrucoes9", "Instrucoes7", "Tangram1", "Instrucoes9",  "Instrucoes10", "Sequencia1", "Instrucoes13", "Instrucoes12", "Instrucoes14", "Instrucoes15","Programacao8"];
 var msgEscolhaFase = "Escolha a fase para iniciar ou CANCELAR para iniciar normalmente:\r\n";
 for(i=0;i<arrayFases.length;i++){
@@ -108,6 +108,9 @@ function draw() {
       tela = new Programacao(14);
       telaAtual = "Programacao14";
     } else if (telaAtual == "Programacao14") {
+      tela = new Instrucoes(155);
+      telaAtual = "InstrucoesLoop";
+    }else if (telaAtual == "InstrucoesLoop"){
       tela = new Programacao(15);
       telaAtual = "Programacao15";
     } else if (telaAtual == "Programacao15") {
