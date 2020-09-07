@@ -5,6 +5,8 @@ let faseAtual;
 // Não usando índice. Usando nomes
 let fases = {
   1: 'programacao',
+  //Aqui são as instruções passo a passo pro loop da quinta fase de programação
+  5: 'programacao_loop',
   //...
 }
 

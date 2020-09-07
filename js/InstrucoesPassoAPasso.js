@@ -5,6 +5,14 @@ var instrucoes = {
     { text: 'Você pode clicar ou arrastá-los \npara o PROGRAMA e montar \no caminho', x: 370, y: 85 },
     { text: 'Clicando aqui, eu começo andar', x: 370, y: 95 },
     { text: 'E clicando aqui, o caminho é \nzerado', x: 370, y: 95 },
+  ],
+  programacao_loop: [
+    { text: 'Agora temos uma nova instrução:\no comando de REPETIÇÃO', x: 370, y: 85 },
+    { text: 'Você pode adicioná-la no\nPROGRAMA como os \noutros comandos ', x: 380, y: 80 },
+    { text: 'Depois arraste para adicionar os \ncomandos que deseja repetir.\nAdicione quantos comandos quiser!', x: 360, y: 80 },
+    { text: 'Para repetir mais vezes,\nclique em + .', x: 370, y: 85 },
+    { text: 'Para repetir menos vezes,\nclique em - .', x: 370, y: 85 },
+    { text: 'Nesse exemplo, vou andar\n4 vezes, até a parte laranja.\nVamos tentar?', x: 370, y: 80 },
   ]
 }
 

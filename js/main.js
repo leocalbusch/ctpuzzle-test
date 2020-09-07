@@ -339,6 +339,14 @@ function carregarImagens() {
   loadImage('img/Instrucoes/guias/programacao/frame0003.png');
   loadImage('img/Instrucoes/guias/programacao/frame0004.png');
 
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0000.png');
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0001.png');
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0002.png');
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0003.png');
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0004.png');
+  loadImage('img/Instrucoes/guias/programacao_loop/frame0005.png');
+
+
   loadImage('img/Instrucoes/guias/girl0000.png');
   loadImage('img/Instrucoes/guias/girl0001.png');
   loadImage('img/Instrucoes/guias/boy0000.png');
