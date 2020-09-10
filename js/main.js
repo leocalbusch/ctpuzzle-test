@@ -35,8 +35,8 @@ var delayTouch = 50000;
 // essas vars são somente para ajudar no desenvolvimento,
 // para ir direto a uma fase específica.
 // Devem ser removidas da versão final.
-var arrayFases =      ["Programacao1",  "Pontos1",  "Pontos2", "Programacao2", "Pontos3",  "Pontos4", "Programacao3",  "Match1",     "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
-var arrayTelaAtual =  ["Instrucoes1",   "Instrucoes2","Pontos1","Instrucoes4",  "Instrucoes3","Pontos3", "Instrucoes6",   "Instrucoes5","Match1", "Instrucoes9", "Instrucoes7", "Tangram1", "Instrucoes9",  "Instrucoes10", "Sequencia1", "Instrucoes13", "Instrucoes12", "Instrucoes14", "Instrucoes15","Programacao8"];
+var arrayFases =      ["Programacao11","Programacao12","Programacao13","Programacao14","Programacao15","Programacao16","Programacao17","Programacao18","Programacao1",  "Pontos1",  "Pontos2", "Programacao2", "Pontos3",  "Pontos4", "Programacao3", "Match1", "Match2", "Programacao4","Tangram1",    "Tangram2", "Programacao5","Sequencia1",    "Sequencia2", "Programacao6", "Classifica",   "Programacao7", "Programacao8","Programacao9"];
+var arrayTelaAtual =  ["Instrucoes1", "Programacao11","Programacao12","Programacao13","InstrucoesLoop", "Programacao15","Programacao16","Programacao17", "Programacao18", "Instrucoes2","Pontos1","Instrucoes4",  "Instrucoes3","Pontos3", "Instrucoes6",   "Instrucoes5","Match1", "Instrucoes9", "Instrucoes7", "Tangram1", "Instrucoes9",  "Instrucoes10", "Sequencia1", "Instrucoes13", "Instrucoes12", "Instrucoes14", "Instrucoes15","Programacao8"];
 var msgEscolhaFase = "Escolha a fase para iniciar ou CANCELAR para iniciar normalmente:\r\n";
 for(i=0;i<arrayFases.length;i++){
   msgEscolhaFase+= i + ". "+arrayFases[i]+"\r\n";
@@ -88,7 +88,7 @@ function draw() {
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
       //telaAtual = window.prompt(msgEscolhaFase);
-      if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 20) {
+      if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 30) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
         tela = new Instrucoes(1);
@@ -96,34 +96,7 @@ function draw() {
       }
 
     } else if (telaAtual == "Instrucoes1") {
-      tela = new Programacao(11);
-      telaAtual = "Programacao11";
-    } else if (telaAtual == "Programacao11") {
-      tela = new Programacao(12);
-      telaAtual = "Programacao12";
-    } else if (telaAtual == "Programacao12") {
-      tela = new Programacao(13);
-      telaAtual = "Programacao13";
-    } else if (telaAtual == "Programacao13") {
-      tela = new Programacao(14);
-      telaAtual = "Programacao14";
-    } else if (telaAtual == "Programacao14") {
-      tela = new Instrucoes(155);
-      telaAtual = "InstrucoesLoop";
-    }else if (telaAtual == "InstrucoesLoop"){
-      tela = new Programacao(15);
-      telaAtual = "Programacao15";
-    } else if (telaAtual == "Programacao15") {
-      tela = new Programacao(16);
-      telaAtual = "Programacao16";
-    } else if (telaAtual == "Programacao16") {
-      tela = new Programacao(17);
-      telaAtual = "Programacao17";
-    } else if (telaAtual == "Programacao17") {
-      tela = new Programacao(18);
-      telaAtual = "Programacao18";
-    } else if (telaAtual == "Programacao18") {
-      tela = new Programacao(1);
+       tela = new Programacao(1);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {
       escore.Programacao(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
@@ -202,10 +175,13 @@ function draw() {
       tela = new Instrucoes(11);
       telaAtual = "Instrucoes11";
     } else if (telaAtual == "Instrucoes11") {
+      tela = new Instrucoes(155);
+      telaAtual = "InstrucoesLoop";
+    }else if (telaAtual == "InstrucoesLoop"){
       tela = new Programacao(5);
       telaAtual = "Programacao5";
     } else if (telaAtual == "Programacao5") {
-      escore.Programacao(4, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      escore.ProgramacaoLoop(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
       tela = new Instrucoes(10);
       telaAtual = "Instrucoes10";
     } else if (telaAtual == "Instrucoes10") {
@@ -223,32 +199,25 @@ function draw() {
       tela = new Programacao(6);
       telaAtual = "Programacao6";
     } else if (telaAtual == "Programacao6") {
-      escore.Programacao(5, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      escore.ProgramacaoLoop(1, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
       tela = new Instrucoes(12);
       telaAtual = "Instrucoes12";
     } else if (telaAtual == "Instrucoes12") {
-      escore.Classifica(Math.round(tela.tempo), tela.errou, tela.limpou, tela.contDicas, tela.pulou);
       tela = new Classifica();
       telaAtual = "Classifica";
     } else if (telaAtual == "Classifica") {
+      escore.Classifica(Math.round(tela.tempo), tela.errou, tela.limpou, tela.contDicas, tela.pulou);
       tela = new Instrucoes(14);
       telaAtual = "Instrucoes14";
     } else if (telaAtual == "Instrucoes14") {
       tela = new Programacao(7);
       telaAtual = "Programacao7";
     } else if (telaAtual == "Programacao7") {
-      escore.Programacao(6, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
-      tela = new Instrucoes(15);
-      telaAtual = "Instrucoes15";
-    } else if (telaAtual == "Instrucoes15") {
+      escore.ProgramacaoLoop(2, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
       tela = new Programacao(8);
       telaAtual = "Programacao8";
     } else if (telaAtual == "Programacao8") {
-      escore.ProgramacaoLoop(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
-      tela = new Programacao(9);
-      telaAtual = "Programacao9";
-    } else if (telaAtual == "Programacao9") {
-      escore.ProgramacaoLoop(1, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
+      escore.ProgramacaoLoop(3, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
       escore.Calcula();

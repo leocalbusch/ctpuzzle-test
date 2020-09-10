@@ -20,6 +20,8 @@ var Sequencia = function (fase) {
 	//
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
+	this.botaoContinuar= new Imagem(380,565,150,25,"");
+	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
 	this.posRespCorreta = new Imagem(0,0,0,0,"");
@@ -72,14 +74,14 @@ Sequencia.prototype.Draw = function(){
 			this.segundos = this.agora.getSeconds();
 		}
 	}
-	if(this.tempo>=0)this.botaoPular.x=10;
+	if(this.tempo>=0)this.botaoPular.x=160;
 	
-	context.font="40px Georgia";
+	context.font="30px Georgia";
 
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		if(this.fase==1)context.fillText("Correto! Continuar",150,590);
-		else context.fillText("Correto! Continuar",150,510);
+		context.fillText("Correto!",260,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		this.msg="";
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
@@ -87,8 +89,8 @@ Sequencia.prototype.Draw = function(){
 		if(!this.pause)this.ativo=false;
 	}else if(this.perdeu){
 		//Essa parte é responsável por contar os erros
-		if(this.fase==1)context.fillText("Errado Continuar",220,590);
-		else context.fillText("Errado! Continuar",220,510);
+		context.fillText("Errado!",260,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		this.msg="";
 		this.follow=-1;
 
@@ -184,12 +186,16 @@ Sequencia.prototype.MouseDown = function(mouseEvent) {
 Sequencia.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
 		if (this.pause && this.ganhou){
-			this.pause = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.pause = false;
+				return;
+			}
 		}
 		if (this.pause && this.perdeu){
-			this.pause = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.pause = false;
+				return;
+			}
 		}
 		if(!this.perdeu && !this.ganhou){
 		//Pular a fase

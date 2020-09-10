@@ -18,6 +18,8 @@ var Tangram = function (fase) {
 	//
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
+	this.botaoContinuar= new Imagem(230,565,150,25,"");
+	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoLeft= new Imagem(700,500,43,89,"");
 	this.botaoLeft.img = tdsImagens[169];
 	this.botaoRight= new Imagem(640,500,43,89,"");
@@ -226,10 +228,11 @@ Tangram.prototype.Draw = function(){
 	if(this.tempo>=0)this.botaoPular.x=10;
 	
 	context.drawImage(this.fundo, 0, 0);
-	context.font="40px Georgia";
+	context.font="30px Georgia";
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto! Continuar",110,590);
+		context.fillText("Correto!",110,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
 		this.pause = true;
@@ -367,8 +370,10 @@ Tangram.prototype.MouseUp = function(mouseEvent) {
 		//Se já está na tela de correto que aguarda o clique para ir pra próxima fase,
 		//só seta o ativo da tela para false e a próxima atualização da tela faz seguir o jogo
 		if (this.pause && this.ganhou){
-			this.ativo = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.ativo = false;
+				return;
+			}
 		}
 		if(this.selected==-1){
 			//Pular a fase

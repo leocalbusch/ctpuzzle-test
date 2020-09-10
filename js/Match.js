@@ -22,6 +22,8 @@ var Match = function (fase) {
 	//
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
+	this.botaoContinuar= new Imagem(230,565,150,25,"");
+	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoLeft= new Imagem(700,500,43,89,"");
 	this.botaoLeft.img = tdsImagens[169];
 	this.botaoRight= new Imagem(640,500,43,89,"");
@@ -188,10 +190,11 @@ Match.prototype.Draw = function(){
 	if(this.tempo>=0)this.botaoPular.x=10;
 	
 	context.drawImage(this.fundo, 0, 0);
-	context.font="40px Georgia";
+	context.font="30px Georgia";
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto! Continuar",150,590);
+		context.fillText("Correto!",110,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
 		// *ver MouseUp
@@ -477,8 +480,10 @@ Match.prototype.MouseDown = function(mouseEvent) {
 Match.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
 		if (this.pause && this.ganhou){
-			this.pause = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.pause = false;
+				return;
+			}
 		}
 		if(this.selected==-1){
 			if(this.fase==1)for(this.i=0;this.i<this.figs.length;this.i++)this.figs[this.i].img=tdsImagens[171];

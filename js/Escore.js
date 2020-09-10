@@ -1,19 +1,19 @@
 var Escore = function () {
-	this.tempoProg = new Array(0,0,0,0,0,0,0);
-	this.comandosProg = new Array(0,0,0,0,0,0,0);
-	this.deletadosProg = new Array(0,0,0,0,0,0,0);
-	this.limpouProg = new Array(0,0,0,0,0,0,0);
-	this.playProg = new Array(0,0,0,0,0,0,0);
-	this.pulouProg = new Array(false,false,false,false,false,false,false);
+	this.tempoProg = new Array(0,0,0,0);
+	this.comandosProg = new Array(0,0,0,0);
+	this.deletadosProg = new Array(0,0,0,0);
+	this.limpouProg = new Array(0,0,0,0);
+	this.playProg = new Array(0,0,0,0);
+	this.pulouProg = new Array(false,false,false,false);
 
-	this.tempoProgLoop = new Array(0,0);
-	this.comandosProgLoop = new Array(0,0);
-	this.deletadosProgLoop = new Array(0,0);
-	this.limpouProgLoop = new Array(0,0);
-	this.playProgLoop = new Array(0,0);
-	this.loopInstProgLoop = new Array(0,0);
-	this.loopProgLoop = new Array(0,0);
-	this.pulouProgLoop = new Array(false,false);
+	this.tempoProgLoop = new Array(0,0,0,0);
+	this.comandosProgLoop = new Array(0,0,0,0);
+	this.deletadosProgLoop = new Array(0,0,0,0);
+	this.limpouProgLoop = new Array(0,0,0,0);
+	this.playProgLoop = new Array(0,0,0,0);
+	this.loopInstProgLoop = new Array(0,0,0,0);
+	this.loopProgLoop = new Array(0,0,0,0);
+	this.pulouProgLoop = new Array(false,false,false,false);
 	
 	this.tempoPontos = new Array(0,0,0,0);
 	this.cliquesPontos = new Array(0,0,0,0);
@@ -46,8 +46,8 @@ var Escore = function () {
 	
 	//RESULTADOS:
 	
-	this.progResult= new Array(0,0,0,0,0,0,0);
-	this.progLoopResult= new Array(0,0);
+	this.progResult= new Array(0,0,0,0);
+	this.progLoopResult= new Array(0,0,0,0);
 	this.pontosResult = new Array(0,0,0,0);
 	this.matchResult = new Array(0,0);
 	this.tangramResult = new Array(0,0);
@@ -107,11 +107,11 @@ Escore.prototype.Sequencia = function(fase, tempo, tentativas, dicas, pulou){
 }
 
 Escore.prototype.Classifica = function(tempo,tentativas,limpou,dicas,pulou){
-	this.tempoClas = 0;
-	this.tentativasClas = 0;
-	this.limpouClas = 0;
-	this.dicasClas = 0;
-	this.pulouClas=0;	
+	this.tempoClas = tempo;
+	this.tentativasClas = tentativas;
+	this.limpouClas = limpou;
+	this.dicasClas = dicas;
+	this.pulouClas=pulou;
 }
 
 Escore.prototype.Calcula = function(){
@@ -122,20 +122,20 @@ Escore.prototype.Calcula = function(){
 	for(this.i=0;this.i<this.progResult.length;this.i++){
 		if(this.pulouProg[this.i])this.progResult[this.i]=0;
 		else{
-			if(this.i==0 || this.i==1){
-				if(this.playProg[this.i]==1) {
+			if(this.i==0 || this.i==1){ //se é a fase 1 ou 2 sem loop
+				if(this.playProg[this.i]==1) { // se passou com apenas 1 play
 					// número de instruções utilizadas na melhor solução
 					this.Imin=4;
 					// número de plays utilizados na melhor solução
 					this.Pmax=1;
-				}else if(this.playProg[this.i]==2 || this.playProg[this.i]==3){
+				}else if(this.playProg[this.i]==2 || this.playProg[this.i]==3){ // se passou com 2 ou 3 play
 					this.Imin=2;
 					this.Pmax=2;
-				}else{
+				}else{ // se passou com mais de 3 play
 					this.Imin=1;
 					this.Pmax=4;
 				}
-			}else if(this.i==2){
+			}else if(this.i==2){ // se é a fase 3
 				if(this.playProg[this.i]==1){
 					this.Imin=5;
 					this.Pmax=1;
@@ -146,7 +146,7 @@ Escore.prototype.Calcula = function(){
 					this.Imin=2;
 					this.Pmax=5;
 				}
-			}else if(this.i==3){
+			}else if(this.i==3){ // se é a fase 4
 				if(this.playProg[this.i]==1){
 					this.Imin=5;
 					this.Pmax=1;
@@ -155,51 +155,6 @@ Escore.prototype.Calcula = function(){
 					this.Pmax=2;
 				}else{
 					this.Imin=3;
-					this.Pmax=3;
-				}
-			}else if(this.i==4){
-				if(this.playProg[this.i]==1){
-					this.Imin=11;
-					this.Pmax=1;
-				}else if(this.playProg[this.i]==2){
-					this.Imin=8;
-					this.Pmax=2;
-				}else if(this.playProg[this.i]==3){
-					this.Imin=6;
-					this.Pmax=3;
-				}else if(this.playProg[this.i]>=4 && this.playProg[this.i]<=6){
-					this.Imin=4;
-					this.Pmax=4;
-				}else if(this.playProg[this.i]>=7 && this.playProg[this.i]<=8){
-					this.Imin=3;
-					this.Pmax=7;
-				}else{
-					this.Imin=2;
-					this.Pmax=9;
-				}
-			}else if(this.i==5){
-				if(this.playProg[this.i]==1){
-					this.Imin=8;
-					this.Pmax=1;
-				}else if(this.playProg[this.i]>=2 && this.playProg[this.i]<=3){
-					this.Imin=6;
-					this.Pmax=2;
-				}else if(this.playProg[this.i]>=4 && this.playProg[this.i]<=5){
-					this.Imin=5;
-					this.Pmax=4;
-				}else{
-					this.Imin=4;
-					this.Pmax=6;
-				}
-			}else if(this.i==6){
-				if(this.playProg[this.i]==1){
-					this.Imin=6;
-					this.Pmax=1;
-				}else if(this.playProg[this.i]==2){
-					this.Imin=4;
-					this.Pmax=2;
-				}else{
-					this.Imin=2;
 					this.Pmax=3;
 				}
 			}
@@ -226,75 +181,84 @@ Escore.prototype.Calcula = function(){
 	for(this.i=0;this.i<this.progLoopResult.length;this.i++){
 		if(this.pulouProgLoop[this.i])this.progLoopResult[this.i]=0;
 		else{
+			// se não usou loop
 			if(this.loopInstProgLoop[this.i]==0){
+				// se é a primeira fase de loop
 				if(this.i==0){
-					if(this.playProgLoop[this.i]==1) {
+					if(this.playProgLoop[this.i]==1) { // se apertou Play 1 vez
 						this.Imin=14;
 						this.Pmax=1;
-					}else if(this.playProgLoop[this.i]==2){
+					}else if(this.playProgLoop[this.i]==2){ // se apertou Play 2 vezes
 						this.Imin=8;
 						this.Pmax=2;
-					}else if(this.playProgLoop[this.i]==3){
+					}else if(this.playProgLoop[this.i]==3){ // se apertou Play 3 vezes
 						this.Imin=6;
 						this.Pmax=3;
-					}else if(this.playProgLoop[this.i]==4 || this.playProgLoop[this.i]==5){
+					}else if(this.playProgLoop[this.i]==4 || this.playProgLoop[this.i]==5){ // se apertou Play 4 ou 5 vezes
 						this.Imin=4;
 						this.Pmax=4;
-					}else{
+					}else{ // se apertou Play mais de 5 vezes
 						this.Imin=2;
 						this.Pmax=7;
 					}
+					// se é a segunda fase de loop
 				}else if(this.i==1){
-					if(this.playProgLoop[this.i]==1){
+					if(this.playProgLoop[this.i]==1){ // se apertou Play 1 vez
 						this.Imin=9;
 						this.Pmax=1;
-					}else if(this.playProgLoop[this.i]==2){
+					}else if(this.playProgLoop[this.i]==2){ // se apertou Play 2 vezes
 						this.Imin=5;
 						this.Pmax=2;
-					}else if(this.playProgLoop[this.i]>=3 && this.playProgLoop[this.i]<=5){
+					}else if(this.playProgLoop[this.i]>=3 && this.playProgLoop[this.i]<=5){ // se apertou Play , 4 ou 5 vezes
 						this.Imin=3;
 						this.Pmax=3;
-					}else{
+					}else{ // se apertou Play mais de 5 vezes
 						this.Imin=2;
 						this.Pmax=6;
 					}
 				}
 				this.progLoopResult[this.i] = 0.7-((this.comandosProgLoop[this.i]-this.Imin)*0.001)-(this.deletadosProgLoop[this.i]*0.001)-(this.limpouProgLoop[this.i]*0.001)-((this.playProgLoop[this.i]-this.Pmax)*0.001)-(this.tempoProgLoop[this.i]*0.001)-(this.loopProgLoop[this.i]*0.001);
+			// se usou loops
 			}else if(this.loopInstProgLoop[this.i]>0){
+				// se é a primeira fase de loop
 				if(this.i==0){
 					this.Lomin=1;
+					//se tem 1 loop
 					if(this.loopInstProgLoop[this.i]==1) {
 						this.M=0.85;
 						this.ILomin=1;
-						if(this.playProgLoop[this.i]==1) {
+						if(this.playProgLoop[this.i]==1) { // se apertou Play 1 vez
 							this.Imin=9;
-						}else if(this.playProgLoop[this.i]==2){
+						}else if(this.playProgLoop[this.i]==2){ // se apertou Play 2 vezes
 							this.Imin=6;
-						}else if(this.playProgLoop[this.i]==3){
+						}else if(this.playProgLoop[this.i]==3){ // se apertou Play 3 vezes
 							this.Imin=5;
-						}else if(this.playProgLoop[this.i]>=4 && this.playProgLoop[this.i]<=6){
+						}else if(this.playProgLoop[this.i]>=4 && this.playProgLoop[this.i]<=6){ // se apertou Play 4, 5 ou 6 vezes
 							this.Imin=4;
 						}else{
-							this.Imin=3;
+							this.Imin=3; // se apertou Play mais de 6 vezes
 						}
+					//se tem mais de 1 loop
 					}else{
 						this.M=1;
 						this.ILomin=2;
 						this.Imin=3;
 					}
+				// se é a segunda fase de loop
 				}else if(this.i==1){
+					// se tem 1 loop
 					if(this.loopInstProgLoop[this.i]==1) {
 						this.M=0.85;
 						this.ILomin=1;
 						this.Lomin=1;
-						if(this.playProgLoop[this.i]==1) {
+						if(this.playProgLoop[this.i]==1) { // se apertou Play 1 vez
 							this.Imin=5;
-						}else if(this.playProgLoop[this.i]==2){
+						}else if(this.playProgLoop[this.i]==2){ // se apertou Play 2 vezes
 							this.Imin=4;
-						}else{
+						}else{ // se apertou Play mais de 2 vezes
 							this.Imin=3;
 						}
-					}else{
+					}else{ //se tem mais de 1 loop
 						this.M=1;
 						this.Lomin=2;
 						this.ILomin=2;
@@ -398,10 +362,10 @@ Escore.prototype.Calcula = function(){
 	
 	context.fillStyle="black";
 
-	this.algoritmo=(((this.progResult[0]*0.4)+(this.progResult[1]*0.4)+(this.progResult[2]*0.4)+(this.progResult[3]*0.4)+(this.progResult[4]*0.4)+(this.progResult[5]*0.4)+(this.progResult[6]*0.4)+(this.progLoopResult[0]*0.4)+(this.progLoopResult[1]*0.4))/3.6);
-	this.abstracao=(((this.progResult[0]*0.1)+(this.progResult[1]*0.1)+(this.progResult[2]*0.1)+(this.progResult[3]*0.1)+(this.progResult[4]*0.1)+(this.progResult[5]*0.1)+(this.progResult[6]*0.1)+(this.progLoopResult[0]*0.1)+(this.progLoopResult[1]*0.1)+(this.pontosResult[0]*0.4)+(this.pontosResult[1]*0.4)+(this.pontosResult[2]*0.4)+(this.pontosResult[3]*0.4)+(this.matchResult[0]*0.2)+(this.matchResult[1]*0.2)+(this.tangramResult[0]*0.2)+(this.tangramResult[1]*0.2)+(this.seqResult[0]*0.2)+(this.seqResult[1]*0.2)+(this.clasResult*0.4))/4.1);
-	this.decomposicao=(((this.progResult[0]*0.45)+(this.progResult[1]*0.45)+(this.progResult[2]*0.45)+(this.progResult[3]*0.45)+(this.progResult[4]*0.45)+(this.progResult[5]*0.45)+(this.progResult[6]*0.45)+(this.progLoopResult[0]*0.4)+(this.progLoopResult[1]*0.4)+(this.pontosResult[0]*0.2)+(this.pontosResult[1]*0.2)+(this.pontosResult[2]*0.2)+(this.pontosResult[3]*0.2)+(this.matchResult[0]*0.4)+(this.matchResult[1]*0.4)+(this.tangramResult[0]*0.4)+(this.tangramResult[1]*0.4)+(this.seqResult[0]*0.4)+(this.seqResult[1]*0.4)+(this.clasResult*0.3))/7.45);
-	this.reconhecimento=(((this.progResult[0]*0.1)+(this.progResult[1]*0.1)+(this.progResult[2]*0.1)+(this.progResult[3]*0.1)+(this.progResult[4]*0.1)+(this.progResult[5]*0.1)+(this.progResult[6]*0.1)+(this.progLoopResult[0]*0.1)+(this.progLoopResult[1]*0.1)+(this.pontosResult[0]*0.4)+(this.pontosResult[1]*0.4)+(this.pontosResult[2]*0.4)+(this.pontosResult[3]*0.4)+(this.matchResult[0]*0.4)+(this.matchResult[1]*0.4)+(this.tangramResult[0]*0.4)+(this.tangramResult[1]*0.4)+(this.seqResult[0]*0.4)+(this.seqResult[1]*0.4)+(this.clasResult*0.3))/5.2);
+	this.algoritmo=(((this.progResult[0]*0.4)+(this.progResult[1]*0.4)+(this.progResult[2]*0.4)+(this.progResult[3]*0.4)+(this.progLoopResult[0]*0.4)+(this.progLoopResult[1]*0.4)+(this.progLoopResult[2]*0.4)+(this.progLoopResult[3]*0.4))/3.2);
+	this.abstracao=(((this.progResult[0]*0.1)+(this.progResult[1]*0.1)+(this.progResult[2]*0.1)+(this.progResult[3]*0.1)+(this.progLoopResult[0]*0.1)+(this.progLoopResult[1]*0.1)+(this.progLoopResult[2]*0.1)+(this.progLoopResult[3]*0.1)+(this.pontosResult[0]*0.4)+(this.pontosResult[1]*0.4)+(this.pontosResult[2]*0.4)+(this.pontosResult[3]*0.4)+(this.matchResult[0]*0.2)+(this.matchResult[1]*0.2)+(this.tangramResult[0]*0.2)+(this.tangramResult[1]*0.2)+(this.seqResult[0]*0.2)+(this.seqResult[1]*0.2)+(this.clasResult*0.4))/4);
+	this.decomposicao=(((this.progResult[0]*0.45)+(this.progResult[1]*0.45)+(this.progResult[2]*0.45)+(this.progResult[3]*0.45)+(this.progLoopResult[0]*0.45)+(this.progLoopResult[1]*0.45)+(this.progLoopResult[2]*0.4)+(this.progLoopResult[3]*0.4)+(this.pontosResult[0]*0.2)+(this.pontosResult[1]*0.2)+(this.pontosResult[2]*0.2)+(this.pontosResult[3]*0.2)+(this.matchResult[0]*0.4)+(this.matchResult[1]*0.4)+(this.tangramResult[0]*0.4)+(this.tangramResult[1]*0.4)+(this.seqResult[0]*0.4)+(this.seqResult[1]*0.4)+(this.clasResult*0.3))/7);
+	this.reconhecimento=(((this.progResult[0]*0.1)+(this.progResult[1]*0.1)+(this.progResult[2]*0.1)+(this.progResult[3]*0.1)+(this.progLoopResult[0]*0.1)+(this.progLoopResult[1]*0.1)+(this.progLoopResult[2]*0.1)+(this.progLoopResult[3]*0.1)+(this.pontosResult[0]*0.4)+(this.pontosResult[1]*0.4)+(this.pontosResult[2]*0.4)+(this.pontosResult[3]*0.4)+(this.matchResult[0]*0.4)+(this.matchResult[1]*0.4)+(this.tangramResult[0]*0.4)+(this.tangramResult[1]*0.4)+(this.seqResult[0]*0.4)+(this.seqResult[1]*0.4)+(this.clasResult*0.3))/5.1);
 	
 	context.font="22px Georgia";
 	context.fillText("Algoritmo:" + Math.round(this.algoritmo*100) + "    Abstração: "+ Math.round(this.abstracao*100) + "    Decomposição:"+ Math.round(this.decomposicao*100) + "     Reconhecimento de padrões:" + Math.round(this.reconhecimento*100) ,10,90); 
@@ -540,30 +504,6 @@ Escore.prototype.Calcula = function(){
 	this.str+= "progApagouAll3=" + this.limpouProg[3] + "&";
 	this.str+= "progPlay3=" + this.playProg[3] + "&";
 	this.str+= "progPulou3=" + this.pulouProg[3] + "&";
-	//Fase Prog Nível 4
-	this.str+= "progGeral4=" + this.progResult[4] + "&";
-	this.str+= "progTempo4=" + this.tempoProg[4] + "&";
-	this.str+= "progInstrucoes4=" + this.comandosProg[4] + "&";
-	this.str+= "progApagou4=" + this.deletadosProg[4] + "&";
-	this.str+= "progApagouAll4=" + this.limpouProg[4] + "&";
-	this.str+= "progPlay4=" + this.playProg[4] + "&";
-	this.str+= "progPulou4=" + this.pulouProg[4] + "&";
-	//Fase Prog Nível 5
-	this.str+= "progGeral5=" + this.progResult[5] + "&";
-	this.str+= "progTempo5=" + this.tempoProg[5] + "&";
-	this.str+= "progInstrucoes5=" + this.comandosProg[5] + "&";
-	this.str+= "progApagou5=" + this.deletadosProg[5] + "&";
-	this.str+= "progApagouAll5=" + this.limpouProg[5] + "&";
-	this.str+= "progPlay5=" + this.playProg[5] + "&";
-	this.str+= "progPulou5=" + this.pulouProg[5] + "&";
-	//Fase Prog Nível 6
-	this.str+= "progGeral6=" + this.progResult[6] + "&";
-	this.str+= "progTempo6=" + this.tempoProg[6] + "&";
-	this.str+= "progInstrucoes6=" + this.comandosProg[6] + "&";
-	this.str+= "progApagou6=" + this.deletadosProg[6] + "&";
-	this.str+= "progApagouAll6=" + this.limpouProg[6] + "&";
-	this.str+= "progPlay6=" + this.playProg[6] + "&";
-	this.str+= "progPulou6=" + this.pulouProg[6] + "&";
 
 	////////// FASE PROGRAMAÇÃO COM LOOP//////////
 
@@ -587,13 +527,33 @@ Escore.prototype.Calcula = function(){
 	this.str+= "progLoopLoop1=" + this.loopProgLoop[1] + "&";
 	this.str+= "progInstrucoesLoopLoop1=" + this.loopInstProgLoop[1] + "&";
 	this.str+= "progPulouLoop1=" + this.pulouProgLoop[1] + "&";
+	//Fase ProgLoop Nível 2
+	this.str+= "progLoopGeral2=" + this.progLoopResult[2] + "&";
+	this.str+= "progTempoLoop2=" + this.tempoProgLoop[2] + "&";
+	this.str+= "progInstrucoesLoop2=" + this.comandosProgLoop[2] + "&";
+	this.str+= "progApagouLoop2=" + this.deletadosProgLoop[2] + "&";
+	this.str+= "progApagouAllLoop2=" + this.limpouProgLoop[2] + "&";
+	this.str+= "progPlayLoop2=" + this.playProgLoop[2] + "&";
+	this.str+= "progLoopLoop2=" + this.loopProgLoop[2] + "&";
+	this.str+= "progInstrucoesLoopLoop2=" + this.loopInstProgLoop[2] + "&";
+	this.str+= "progPulouLoop2=" + this.pulouProgLoop[2] + "&";
+	//Fase ProgLoop Nível 3
+	this.str+= "progLoopGeral3=" + this.progLoopResult[3] + "&";
+	this.str+= "progTempoLoop3=" + this.tempoProgLoop[3] + "&";
+	this.str+= "progInstrucoesLoop3=" + this.comandosProgLoop[3] + "&";
+	this.str+= "progApagouLoop3=" + this.deletadosProgLoop[3] + "&";
+	this.str+= "progApagouAllLoop3=" + this.limpouProgLoop[3] + "&";
+	this.str+= "progPlayLoop3=" + this.playProgLoop[3] + "&";
+	this.str+= "progLoopLoop3=" + this.loopProgLoop[3] + "&";
+	this.str+= "progInstrucoesLoopLoop3=" + this.loopInstProgLoop[3] + "&";
+	this.str+= "progPulouLoop3=" + this.pulouProgLoop[3] + "&";
 
 	////////// ESCORE NOS PILARES DO PC //////////
 	this.str+= "abstracao=" + this.abstracao + "&";
 	this.str+= "decomposicao=" + this.decomposicao + "&";
 	this.str+= "reconhecimento=" + this.reconhecimento + "&";
 	this.str+= "algoritmo=" + this.algoritmo;
-
+	console.log(this.str);
 
 
 	// Adiciona resultado no BD

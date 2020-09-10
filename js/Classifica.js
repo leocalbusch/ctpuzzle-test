@@ -18,6 +18,8 @@ var Classifica = function () {
 	//
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
+	this.botaoContinuar= new Imagem(230,565,150,25,"");
+	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
 	this.botaoLimpar= new Imagem(700,560,86,36,"");
@@ -33,8 +35,8 @@ var Classifica = function () {
 	this.follow=-1;
 	this.trace="";
 	this.msg="";
-	this.titulo1="Analise os objetos e os organize na tabela considerando suas características";
-	this.titulo2="em comum. As linhas devem representar uma característica e as colunas outra.";
+	this.titulo1="Descubra o que esses objetos têm em comum e arraste-os para a";
+	this.titulo2="tabela. Objetos similares devem ficar na mesma linha ou coluna.";
 	this.dicaAtual=-1;
 	this.idTabela=new Array();
 	this.contDicas=0;
@@ -73,12 +75,13 @@ Classifica.prototype.Draw = function(){
 		}
 	}
 	if(this.tempo>=0)this.botaoPular.x=10;
-	
-	context.font="40px Georgia";
+
+	context.font="30px Georgia";
 
 	if(this.ganhou){
 		//Essa parte é responsável por mostrar que está certo e ir pra próxima fase
-		context.fillText("Correto! Continuar",100,590);
+		context.fillText("Correto!",110,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		this.msg="";
 		// A variável "pause" fica setada para true até que o usuário clique na tela
 		// Isso faz com que a tela fique parada mostrando "Correto" até o clique
@@ -87,7 +90,8 @@ Classifica.prototype.Draw = function(){
 
 	}else if(this.perdeu){
 		//Essa parte é responsável por contar os erros
-		context.fillText("Errado! Continuar",100,590);
+		context.fillText("Errado!",110,588);
+		context.drawImage(this.botaoContinuar.img, this.botaoContinuar.x, this.botaoContinuar.y);
 		this.msg="";
 		this.follow=-1;
 
@@ -157,7 +161,7 @@ Classifica.prototype.Draw = function(){
 	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
 	context.fillText("" + this.titulo1,30,65);
-	context.fillText("" + this.titulo2,15,90);
+	context.fillText("" + this.titulo2,30,90);
 	context.fillText("" + this.msg,150,585);
 /*	context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
@@ -202,12 +206,16 @@ Classifica.prototype.MouseDown = function(mouseEvent) {
 Classifica.prototype.MouseUp = function(mouseEvent) {
 	if(!this.pulou){
 		if (this.pause && this.ganhou){
-			this.pause = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)){
+				this.pause = false;
+				return;
+			}
 		}
 		if (this.pause && this.perdeu){
-			this.pause = false;
-			return;
+			if(posMouseX>this.botaoContinuar.x && posMouseX<(this.botaoContinuar.x + this.botaoContinuar.width) && posMouseY>this.botaoContinuar.y && posMouseY<(this.botaoContinuar.y + this.botaoContinuar.height)) {
+				this.pause = false;
+				return;
+			}
 		}
 		if(!this.perdeu && !this.ganhou){
 			//Pular a fase

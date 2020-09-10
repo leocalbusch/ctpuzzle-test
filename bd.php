@@ -2,10 +2,13 @@
 require "sessao.php";
 require "conexao.php";
 //Se o teste está sendo feito pela primiera vez para esse estudante nessa amostra
-if($_SESSION["idResultado"]==0) {
+$sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $_SESSION["idAmostra"];
+require "executaQuery.php";
+if (!mysqli_num_rows($result)) {
+
     //insere o resultado
     $sql = "INSERT INTO resultados ";
-    $sql .= "(dataHora, idEstudante, pontosGeral0, pontosDica0, pontosClicks0, pontosTempo0, pontosLimpar0, pontosPulou0, pontosGeral1,pontosDica1, pontosClicks1, pontosTempo1, pontosLimpar1, pontosPulou1, pontosGeral2, pontosDica2, pontosClicks2, pontosTempo2, pontosLimpar2, pontosPulou2, pontosGeral3, pontosDica3, pontosClicks3, pontosTempo3, pontosLimpar3, pontosPulou3, matchGeral0, matchDica0, matchClicks0, matchTempo0, matchGiros0, matchPulou0, matchGeral1, matchDica1, matchClicks1, matchTempo1, matchGiros1, matchPulou1, tangramGeral0, tangramDica0, tangramClicks0, tangramTempo0, tangramGiros0, tangramPulou0, tangramGeral1, tangramDica1, tangramClicks1, tangramTempo1, tangramGiros1, tangramPulou1, classificaGeral,classificaTempo, classificaDica, classificaTentativa, classificaLimpar, classificaPulou, sequenciaGeral0, sequenciaTempo0, sequenciaDica0, sequenciaTentativa0, sequenciaPulou0, sequenciaGeral1, sequenciaTempo1, sequenciaDica1, sequenciaTentativa1, sequenciaPulou1, progGeral0, progTempo0, progInstrucoes0, progApagou0, progApagouAll0, progPlay0, progPulou0, progGeral1, progTempo1, progInstrucoes1, progApagou1, progApagouAll1, progPlay1, progPulou1, progGeral2, progTempo2, progInstrucoes2, progApagou2, progApagouAll2, progPlay2, progPulou2, progGeral3, progTempo3, progInstrucoes3, progApagou3, progApagouAll3, progPlay3, progPulou3, progGeral4, progTempo4, progInstrucoes4, progApagou4, progApagouAll4, progPlay4, progPulou4, progGeral5, progTempo5, progInstrucoes5, progApagou5, progApagouAll5, progPlay5, progPulou5, progGeral6, progTempo6, progInstrucoes6, progApagou6, progApagouAll6, progPlay6, progPulou6, progLoopGeral0, progTempoLoop0, progInstrucoesLoop0, progApagouLoop0, progApagouAllLoop0, progPlayLoop0, progLoopLoop0, progInstrucoesLoopLoop0, progPulouLoop0, progLoopGeral1, progTempoLoop1, progInstrucoesLoop1, progApagouLoop1, progApagouAllLoop1, progPlayLoop1, progLoopLoop1, progInstrucoesLoopLoop1, progPulouLoop1, abstracao, decomposicao, reconhecimento, algoritmo) ";
+    $sql .= "(dataHora, idEstudante, pontosGeral0, pontosDica0, pontosClicks0, pontosTempo0, pontosLimpar0, pontosPulou0, pontosGeral1,pontosDica1, pontosClicks1, pontosTempo1, pontosLimpar1, pontosPulou1, pontosGeral2, pontosDica2, pontosClicks2, pontosTempo2, pontosLimpar2, pontosPulou2, pontosGeral3, pontosDica3, pontosClicks3, pontosTempo3, pontosLimpar3, pontosPulou3, matchGeral0, matchDica0, matchClicks0, matchTempo0, matchGiros0, matchPulou0, matchGeral1, matchDica1, matchClicks1, matchTempo1, matchGiros1, matchPulou1, tangramGeral0, tangramDica0, tangramClicks0, tangramTempo0, tangramGiros0, tangramPulou0, tangramGeral1, tangramDica1, tangramClicks1, tangramTempo1, tangramGiros1, tangramPulou1, classificaGeral,classificaTempo, classificaDica, classificaTentativa, classificaLimpar, classificaPulou, sequenciaGeral0, sequenciaTempo0, sequenciaDica0, sequenciaTentativa0, sequenciaPulou0, sequenciaGeral1, sequenciaTempo1, sequenciaDica1, sequenciaTentativa1, sequenciaPulou1, progGeral0, progTempo0, progInstrucoes0, progApagou0, progApagouAll0, progPlay0, progPulou0, progGeral1, progTempo1, progInstrucoes1, progApagou1, progApagouAll1, progPlay1, progPulou1, progGeral2, progTempo2, progInstrucoes2, progApagou2, progApagouAll2, progPlay2, progPulou2, progGeral3, progTempo3, progInstrucoes3, progApagou3, progApagouAll3, progPlay3, progPulou3, progLoopGeral0, progTempoLoop0, progInstrucoesLoop0, progApagouLoop0, progApagouAllLoop0, progPlayLoop0, progLoopLoop0, progInstrucoesLoopLoop0, progPulouLoop0, progLoopGeral1, progTempoLoop1, progInstrucoesLoop1, progApagouLoop1, progApagouAllLoop1, progPlayLoop1, progLoopLoop1, progInstrucoesLoopLoop1, progPulouLoop1, progLoopGeral2, progTempoLoop2, progInstrucoesLoop2, progApagouLoop2, progApagouAllLoop2, progPlayLoop2, progLoopLoop2, progInstrucoesLoopLoop2, progPulouLoop2, progLoopGeral3, progTempoLoop3, progInstrucoesLoop3, progApagouLoop3, progApagouAllLoop3, progPlayLoop3, progLoopLoop3, progInstrucoesLoopLoop3, progPulouLoop3,  abstracao, decomposicao, reconhecimento, algoritmo) ";
     $sql .= "VALUES ";
     $sql .= "(now()";
     $sql .= ", " . ($_SESSION["idUsuario"]);
@@ -101,27 +104,6 @@ if($_SESSION["idResultado"]==0) {
     $sql .= ", " . ($_POST['progApagouAll3']);
     $sql .= ", " . ($_POST['progPlay3']);
     $sql .= ", " . ($_POST['progPulou3']);
-    $sql .= ", " . ($_POST['progGeral4']);
-    $sql .= ", " . ($_POST['progTempo4']);
-    $sql .= ", " . ($_POST['progInstrucoes4']);
-    $sql .= ", " . ($_POST['progApagou4']);
-    $sql .= ", " . ($_POST['progApagouAll4']);
-    $sql .= ", " . ($_POST['progPlay4']);
-    $sql .= ", " . ($_POST['progPulou4']);
-    $sql .= ", " . ($_POST['progGeral5']);
-    $sql .= ", " . ($_POST['progTempo5']);
-    $sql .= ", " . ($_POST['progInstrucoes5']);
-    $sql .= ", " . ($_POST['progApagou5']);
-    $sql .= ", " . ($_POST['progApagouAll5']);
-    $sql .= ", " . ($_POST['progPlay5']);
-    $sql .= ", " . ($_POST['progPulou5']);
-    $sql .= ", " . ($_POST['progGeral6']);
-    $sql .= ", " . ($_POST['progTempo6']);
-    $sql .= ", " . ($_POST['progInstrucoes6']);
-    $sql .= ", " . ($_POST['progApagou6']);
-    $sql .= ", " . ($_POST['progApagouAll6']);
-    $sql .= ", " . ($_POST['progPlay6']);
-    $sql .= ", " . ($_POST['progPulou6']);
     $sql .= ", " . ($_POST['progLoopGeral0']);
     $sql .= ", " . ($_POST['progTempoLoop0']);
     $sql .= ", " . ($_POST['progInstrucoesLoop0']);
@@ -140,12 +122,31 @@ if($_SESSION["idResultado"]==0) {
     $sql .= ", " . ($_POST['progLoopLoop1']);
     $sql .= ", " . ($_POST['progInstrucoesLoopLoop1']);
     $sql .= ", " . ($_POST['progPulouLoop1']);
+    $sql .= ", " . ($_POST['progLoopGeral2']);
+    $sql .= ", " . ($_POST['progTempoLoop2']);
+    $sql .= ", " . ($_POST['progInstrucoesLoop2']);
+    $sql .= ", " . ($_POST['progApagouLoop2']);
+    $sql .= ", " . ($_POST['progApagouAllLoop2']);
+    $sql .= ", " . ($_POST['progPlayLoop2']);
+    $sql .= ", " . ($_POST['progLoopLoop2']);
+    $sql .= ", " . ($_POST['progInstrucoesLoopLoop2']);
+    $sql .= ", " . ($_POST['progPulouLoop2']);
+    $sql .= ", " . ($_POST['progLoopGeral3']);
+    $sql .= ", " . ($_POST['progTempoLoop3']);
+    $sql .= ", " . ($_POST['progInstrucoesLoop3']);
+    $sql .= ", " . ($_POST['progApagouLoop3']);
+    $sql .= ", " . ($_POST['progApagouAllLoop3']);
+    $sql .= ", " . ($_POST['progPlayLoop3']);
+    $sql .= ", " . ($_POST['progLoopLoop3']);
+    $sql .= ", " . ($_POST['progInstrucoesLoopLoop3']);
+    $sql .= ", " . ($_POST['progPulouLoop3']);
     $sql .= ", " . ($_POST['abstracao']);
     $sql .= ", " . ($_POST['decomposicao']);
     $sql .= ", " . ($_POST['reconhecimento']);
     $sql .= ", " . ($_POST['algoritmo']) . ")";
 
 }else {
+    if(!(isset($_SESSION["idResultado"])) || $_SESSION["idResultado"] == 0) $_SESSION["idResultado"] = mysqli_fetch_array($result)["idResultado"];
     // se o estudante já havia iniciado ou completado o teste dentro dessa amostra, só atualiza a tabela de resultados
     $sql = "UPDATE resultados SET ";
     $sql.='idEstudante ='.$_SESSION["idUsuario"].',';
@@ -242,27 +243,6 @@ if($_SESSION["idResultado"]==0) {
     $sql.='progApagouAll3 ='.$_POST['progApagouAll3'].',';
     $sql.='progPlay3 ='.$_POST['progPlay3'].',';
     $sql.='progPulou3 ='.$_POST['progPulou3'].',';
-    $sql.='progGeral4 ='.$_POST['progGeral4'].',';
-    $sql.='progTempo4 ='.$_POST['progTempo4'].',';
-    $sql.='progInstrucoes4 ='.$_POST['progInstrucoes4'].',';
-    $sql.='progApagou4 ='.$_POST['progApagou4'].',';
-    $sql.='progApagouAll4 ='.$_POST['progApagouAll4'].',';
-    $sql.='progPlay4 ='.$_POST['progPlay4'].',';
-    $sql.='progPulou4 ='.$_POST['progPulou4'].',';
-    $sql.='progGeral5 ='.$_POST['progGeral5'].',';
-    $sql.='progTempo5 ='.$_POST['progTempo5'].',';
-    $sql.='progInstrucoes5 ='.$_POST['progInstrucoes5'].',';
-    $sql.='progApagou5 ='.$_POST['progApagou5'].',';
-    $sql.='progApagouAll5 ='.$_POST['progApagouAll5'].',';
-    $sql.='progPlay5 ='.$_POST['progPlay5'].',';
-    $sql.='progPulou5 ='.$_POST['progPulou5'].',';
-    $sql.='progGeral6 ='.$_POST['progGeral6'].',';
-    $sql.='progTempo6 ='.$_POST['progTempo6'].',';
-    $sql.='progInstrucoes6 ='.$_POST['progInstrucoes6'].',';
-    $sql.='progApagou6 ='.$_POST['progApagou6'].',';
-    $sql.='progApagouAll6 ='.$_POST['progApagouAll6'].',';
-    $sql.='progPlay6 ='.$_POST['progPlay6'].',';
-    $sql.='progPulou6 ='.$_POST['progPulou6'].',';
     $sql.='progLoopGeral0 ='.$_POST['progLoopGeral0'].',';
     $sql.='progTempoLoop0 ='.$_POST['progTempoLoop0'].',';
     $sql.='progInstrucoesLoop0 ='.$_POST['progInstrucoesLoop0'].',';
@@ -281,13 +261,31 @@ if($_SESSION["idResultado"]==0) {
     $sql.='progLoopLoop1 ='.$_POST['progLoopLoop1'].',';
     $sql.='progInstrucoesLoopLoop1 ='.$_POST['progInstrucoesLoopLoop1'].',';
     $sql.='progPulouLoop1 ='.$_POST['progPulouLoop1'].',';
+    $sql.='progLoopGeral2 ='.$_POST['progLoopGeral2'].',';
+    $sql.='progTempoLoop2 ='.$_POST['progTempoLoop2'].',';
+    $sql.='progInstrucoesLoop2 ='.$_POST['progInstrucoesLoop2'].',';
+    $sql.='progApagouLoop2 ='.$_POST['progApagouLoop2'].',';
+    $sql.='progApagouAllLoop2 ='.$_POST['progApagouAllLoop2'].',';
+    $sql.='progPlayLoop2 ='.$_POST['progPlayLoop2'].',';
+    $sql.='progLoopLoop2 ='.$_POST['progLoopLoop2'].',';
+    $sql.='progInstrucoesLoopLoop2 ='.$_POST['progInstrucoesLoopLoop2'].',';
+    $sql.='progPulouLoop2 ='.$_POST['progPulouLoop2'].',';
+    $sql.='progLoopGeral3 ='.$_POST['progLoopGeral3'].',';
+    $sql.='progTempoLoop3 ='.$_POST['progTempoLoop3'].',';
+    $sql.='progInstrucoesLoop3 ='.$_POST['progInstrucoesLoop3'].',';
+    $sql.='progApagouLoop3 ='.$_POST['progApagouLoop3'].',';
+    $sql.='progApagouAllLoop3 ='.$_POST['progApagouAllLoop3'].',';
+    $sql.='progPlayLoop3 ='.$_POST['progPlayLoop3'].',';
+    $sql.='progLoopLoop3 ='.$_POST['progLoopLoop3'].',';
+    $sql.='progInstrucoesLoopLoop3 ='.$_POST['progInstrucoesLoopLoop3'].',';
+    $sql.='progPulouLoop3 ='.$_POST['progPulouLoop3'].',';
     $sql.='abstracao ='.$_POST['abstracao'].',';
     $sql.='decomposicao ='.$_POST['decomposicao'].',';
     $sql.='reconhecimento ='.$_POST['reconhecimento'].',';
     $sql.='algoritmo ='.$_POST['algoritmo'];
     $sql.=' WHERE idResultado = '.$_SESSION["idResultado"];
 }
-//file_put_contents("teste.txt", $sql);
+file_put_contents("sql.txt", $sql);
 
 require "executaQuery.php";
 

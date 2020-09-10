@@ -110,7 +110,7 @@ var Programacao = function (fase) {
 	//prog1----------------------------------	
 //	this.trace="fase:" + fase;
 	this.fase=fase;
-	if(this.fase==1){
+/*	if(this.fase==1){
 		if(this.random<50){
 			if(this.random<6.25){
 				this.pontoInicialX=0;
@@ -399,7 +399,9 @@ var Programacao = function (fase) {
 				}
 			}
 		}
-	}else if(this.fase==11) {
+	}else */
+
+	if(this.fase==1) {
 		// Nível fácil: 5 passos sem mudar a direção, 1 objetivo
 		this.pontoInicialX = 3;
 		this.pontoInicialY = 1;
@@ -416,7 +418,7 @@ var Programacao = function (fase) {
 				if (this.i == 3 && (this.j>0 && this.j<7)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
-	}else if(this.fase==12) {
+	}else if(this.fase==2) {
 		// Nível fácil: 8 passos mudando a direção 1x, 1 objetivo
 		this.pontoInicialX = 5;
 		this.pontoInicialY = 5;
@@ -436,7 +438,7 @@ var Programacao = function (fase) {
 				if (this.j == 5 && (this.i>1 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
-	}else if(this.fase==13) {
+	}else if(this.fase==3) {
 		// Nível médio: 10 passos mudando a direção 2x, 2 objetivos
 		this.pontoInicialX = 1;
 		this.pontoInicialY = 1;
@@ -458,7 +460,7 @@ var Programacao = function (fase) {
 				if (this.j == 5 && (this.i==4 || this.i==3)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
-	}else if(this.fase==14) {
+	}else if(this.fase==4) {
 		// Nível Difícil: 12 passos mudando a direção 3+x
 		this.pontoInicialX = 6;
 		this.pontoInicialY = 6;
@@ -482,7 +484,7 @@ var Programacao = function (fase) {
 				if (this.j == 5 && (this.i>0 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 			}
 		}
-	}else if(this.fase>14){
+	}else if(this.fase>4){
 		this.comLoop= new Imagem(625,550,69,39,"");
 		this.comLoop.img = tdsImagens[88];
 		this.rectComLoop=new Imagem(625,550,69,39,"");
@@ -491,7 +493,7 @@ var Programacao = function (fase) {
 		this.insideLoop=false;
 		this.multipleLoop=false;
 
-		if(this.fase==15) {
+		if(this.fase==5) {
 			// Nível Médio com Loop: até 5 repetições de 1 passo + 2 objetivos
 			this.pontoInicialX = 0;
 			this.pontoInicialY = 7;
@@ -515,7 +517,7 @@ var Programacao = function (fase) {
 					if (this.j == 7 && this.i<6) this.status[this.i].j[this.j].status = "Vazio";
 				}
 			}
-		}else if(this.fase==16){
+		}else if(this.fase==6){
 			// Nível Médio com Loop: até 7 repetições de 2 passos + 2 objetivos
 			this.pontoInicialX = 0;
 			this.pontoInicialY = 0;
@@ -541,7 +543,7 @@ var Programacao = function (fase) {
 					if (this.i == 7 && this.j==0) this.status[this.i].j[this.j].status = "Obst";
 				}
 			}
-		}else if(this.fase==17){
+		}else if(this.fase==7){
 			// Nível Difícil com Loop: até 3 repetições de 3 passos + 3 objetivos
 			this.pontoInicialX = 7;
 			this.pontoInicialY = 0;
@@ -570,7 +572,7 @@ var Programacao = function (fase) {
 					if (this.i == 7 && this.j==1) this.status[this.i].j[this.j].status = "Obst";
 				}
 			}
-		}else if(this.fase==18){
+		}else if(this.fase==8){
 			// Nível Muito Difícil com Loop: até 4 repetições de 3 passos + 3 objetivos
 			// + colide com barreira sem se mover, mas que tornam solução mais curta).
 			this.pontoInicialX = 0;
@@ -743,7 +745,7 @@ Programacao.prototype.Draw = function(){
 					this.comRight.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
 					this.mouseAntY=posMouseY;
-				}else if((this.fase>14) && this.follow=="Loop"){
+				}else if((this.fase>4) && this.follow=="Loop"){
 					this.comLoop.x+=posMouseX-this.mouseAntX;
 					this.comLoop.y+=posMouseY-this.mouseAntY;
 					this.mouseAntX=posMouseX;
@@ -758,7 +760,7 @@ Programacao.prototype.Draw = function(){
 					this.comLeft.y=this.rectComLeft.y;
 					this.comRight.x=this.rectComRight.x;
 					this.comRight.y=this.rectComRight.y;
-					if(this.fase>14){
+					if(this.fase>4){
 						this.comLoop.x=this.rectComLoop.x;
 						this.comLoop.y=this.rectComLoop.y;
 					}
@@ -780,7 +782,7 @@ Programacao.prototype.Draw = function(){
 								//Aqui faz o bot�o excluir ser posicionado em cima do comando
 								this.botaoExclui.x=this.comandoPosicao[this.i].x;
 								this.botaoExclui.y=this.comandoPosicao[this.i].y;
-								if((this.fase>14) && this.comando[this.i].substring(0,4)=="Loop"){
+								if((this.fase>4) && this.comando[this.i].substring(0,4)=="Loop"){
 									this.cont=this.i;
 									this.cont2=this.i;
 									if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
@@ -978,7 +980,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.personagem.imagem, this.personagem.x, this.personagem.y);
 		context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
 		for(this.i=0; this.i<this.comandoPosicao.length; this.i++){
-			if((this.fase>14) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
+			if((this.fase>4) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
 				context.drawImage(this.loopPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
 				if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
 					context.font="15px Georgia";
@@ -998,7 +1000,7 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.comRight.img, this.comRight.x, this.comRight.y);
 		context.drawImage(this.comUp.img, this.comUp.x, this.comUp.y);
 		context.drawImage(this.comDown.img, this.comDown.x, this.comDown.y);
-		if((this.fase>14)){
+		if((this.fase>4)){
 			context.drawImage(this.comLoop.img, this.comLoop.x, this.comLoop.y);	
 		}
 		context.drawImage(this.demo.imagem, this.demo.x, this.demo.y);
@@ -1060,7 +1062,7 @@ Programacao.prototype.MouseDown = function(mouseEvent) {
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Left";
-		}else if((this.fase>14) && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
+		}else if((this.fase>4) && posMouseX>this.rectComLoop.x && posMouseX<(this.rectComLoop.x + this.rectComLoop.width) && posMouseY>this.rectComLoop.y && posMouseY<(this.rectComLoop.y + this.rectComLoop.height)){
 			this.mouseAntX=posMouseX;
 			this.mouseAntY=posMouseY;
 			this.follow="Loop";
