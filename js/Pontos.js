@@ -25,6 +25,8 @@ var Pontos = function (fase) {
 	this.botaoLimpar.img = tdsImagens[150];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
+	this.botaoDicaUsada= new Imagem(0,0,0,0,"");
+	this.botaoDicaUsada.img = tdsImagens[276];
 	this.dicaMostrada=new Array();
 	this.dicaImagem=new Array();
 	this.pontos=new Array();
@@ -35,7 +37,7 @@ var Pontos = function (fase) {
 	this.dicaX=new Array();
 	this.dicaY=new Array();
 	this.indPonto=-1;
-	this.dicas = 3;
+	this.dicasUsadas = new Array(false,false,false);
 	this.trace="";
 	this.msg="";
 	this.dicaAtual=-1;
@@ -256,8 +258,11 @@ Pontos.prototype.Draw = function(){
 	
 	
 	//aqui mostra os botões das dicas
-	for(this.i=0;this.i<this.dicas;this.i++){
-		context.drawImage(this.botaoDica.img, 710-(this.i*60), 15);
+	for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+		if(this.dicasUsadas[this.i]) {
+			context.drawImage(this.botaoDicaUsada.img, 710-(this.i*60), 15);
+		}
+		else context.drawImage(this.botaoDica.img, 710-(this.i*60), 15);
 	}
 	
 	//Desenhando o botão pular
@@ -428,10 +433,10 @@ Pontos.prototype.MouseUp = function(mouseEvent) {
 				}
 			}
 		}
-		for(this.i=0;this.i<this.dicas;this.i++){
-			if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34){
-				this.dicas--;
-				this.contDicas++;
+		for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+			if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34 && !this.dicasUsadas[this.i]){
+				this.dicasUsadas[this.i] = true;
+				if(this.contDicas<3)this.contDicas++;
 				if(!this.retas[0]){
 					this.dicaX.push(this.pontos[0].x+(this.pontos[0].width/2));
 					this.dicaY.push(this.pontos[0].y+(this.pontos[0].height/2));

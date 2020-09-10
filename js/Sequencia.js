@@ -24,13 +24,15 @@ var Sequencia = function (fase) {
 	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
+	this.botaoDicaUsada= new Imagem(0,0,0,0,"");
+	this.botaoDicaUsada.img = tdsImagens[276];
 	this.posRespCorreta = new Imagem(0,0,0,0,"");
 	this.respCorreta = 0;
 	this.dicaMostrada=new Array();
 	this.dicaImagem=new Array();
 	this.respostas=new Array();
 	this.iRespostas = new Array();
-	this.dicas = 3;
+	this.dicasUsadas = new Array(false,false,false);
 	this.follow=-1;
 	this.selected=-1;
 	this.trace="";
@@ -75,7 +77,7 @@ Sequencia.prototype.Draw = function(){
 		}
 	}
 	if(this.tempo>=0)this.botaoPular.x=160;
-	
+
 	context.font="30px Georgia";
 
 	if(this.ganhou){
@@ -125,29 +127,32 @@ Sequencia.prototype.Draw = function(){
 						this.respostas[this.i].x = 20+(this.i*160);
 						this.respostas[this.i].y = 400;
 					}
-				}	
-			}	
+				}
+			}
 		}
-	}	
-	
+	}
+
 	//aqui mostra as opções de respostas
 	for(this.i=0;this.i<this.respostas.length;this.i++){
 		context.drawImage(this.respostas[this.i].img, this.respostas[this.i].x, this.respostas[this.i].y);
 	}
-	
+
 	//aqui mostra os botões das dicas
-	for(this.i=0;this.i<this.dicas;this.i++){
-		context.drawImage(this.botaoDica.img, 710-(this.i*60), 20);
+	for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+		if(this.dicasUsadas[this.i]) {
+			context.drawImage(this.botaoDicaUsada.img, 710-(this.i*60), 15);
+		}
+		else context.drawImage(this.botaoDica.img, 710-(this.i*60), 15);
 	}
-	
+
 	//Desenhando o botão pular
 	context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
-	
+
 	context.fillText("" + this.trace,150,70);
 	context.font="24px Georgia";
-	context.fillText("" + this.msg2,150,570);
+	context.fillText("" + this.msg2,150,540);
 	context.fillText("" + this.msg,20,540);
-	context.fillText("" + this.msg3,150,540);
+	context.fillText("" + this.msg3,150,510);
 	/*context.font="28px Georgia";
 	context.fillText("Tempo: " + Math.round(this.tempo),10,40);
 	context.fillStyle="#FF003C";
@@ -216,28 +221,28 @@ Sequencia.prototype.MouseUp = function(mouseEvent) {
 					this.pause=true;
 					this.respostas[this.follow].x=this.posRespCorreta.x;
 					this.respostas[this.follow].y=this.posRespCorreta.y;
-				}	
+				}
 			}
 			this.follow=-1;
 
-			for(this.i=0;this.i<this.dicas;this.i++){
-				if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34){
-					this.dicas--;
-					this.contDicas++;
+			for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+				if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34 ){
+					this.dicasUsadas[this.i] = true;
+					if(this.contDicas<3)this.contDicas++;
 					if(this.fase==1){
-						if(this.dicas==2)this.msg="O último quadro representa o próximo passo da direção do quadrado e círculo.";
-						else if(this.dicas==1)this.msg="Verifique a direção que o círculo laranja avança em cada quadro.";
-						else if(this.dicas==0)this.msg="Verifique a direção que o quadrado azul avança em cada quadro.";
+						if(this.i==2)this.msg="Parece que, a cada quadro, o círculo e o quadrado estão se movendo...";
+						else if(this.i==1)this.msg="Para qual direção o círculo laranja avança em cada quadro?";
+						else if(this.i==0)this.msg="Para qual direção o quadrado azul avança em cada quadro?";
 					}else{
-						if(this.dicas==2){
-							this.msg3="Perceba que na sequência da esquerda para a direita";
-							this.msg2="uma coluna desaparece a cada passo.";
-						}else if(this.dicas==1){
-							this.msg3="Perceba que na sequência de cima para baixo";
-							this.msg2="uma linha é inserida ao final em cada passo.";
-						}else if(this.dicas==0){
-							this.msg3="A resposta tem uma coluna a menos que seu vizinho";
-							this.msg2="da esquerda e uma linha a mais que o vizinho de cima";
+						if(this.i==0){
+							this.msg3="Quanto mais à direita, menos colunas";
+							this.msg2="a sequência de bolinhas apresenta...";
+						}else if(this.i==1){
+							this.msg3="Quanto mais abaixo, mais linhas";
+							this.msg2="a sequência de bolinhas apresenta...";
+						}else if(this.i==2){
+							this.msg3="A resposta tem o número máximo de linhas";
+							this.msg2="e o número mínimo de colunas da sequência.";
 						}
 					}
 					break;

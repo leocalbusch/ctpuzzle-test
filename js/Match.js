@@ -30,6 +30,8 @@ var Match = function (fase) {
 	this.botaoRight.img = tdsImagens[170];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
+	this.botaoDicaUsada= new Imagem(0,0,0,0,"");
+	this.botaoDicaUsada.img = tdsImagens[276];
 	this.figs= new Array();
 	this.rotacoes= new Array();
 	this.locked=new Array();
@@ -37,7 +39,7 @@ var Match = function (fase) {
 	this.dicaMostrada=new Array();
 	this.dicaImagem=new Array();
 	this.dicaRotacao=new Array();
-	this.dicas = 3;
+	this.dicasUsadas = new Array(false,false,false);
 	this.follow=-1;
 	this.selected=-1;
 	this.trace="";
@@ -396,10 +398,13 @@ Match.prototype.Draw = function(){
 			}
 		}
 	}
-	
+
 	//aqui mostra os botões das dicas
-	for(this.i=0;this.i<this.dicas;this.i++){
-		context.drawImage(this.botaoDica.img, 710-(this.i*60), 20);
+	for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+		if(this.dicasUsadas[this.i]) {
+			context.drawImage(this.botaoDicaUsada.img, 710-(this.i*60), 15);
+		}
+		else context.drawImage(this.botaoDica.img, 710-(this.i*60), 15);
 	}
 	
 	context.drawImage(this.botaoLeft.img, this.botaoLeft.x, this.botaoLeft.y);
@@ -498,11 +503,11 @@ Match.prototype.MouseUp = function(mouseEvent) {
 					this.pulou=true;
 				}
 			}
-			for(this.i=0;this.i<this.dicas;this.i++){
-				if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34){
-					this.dicas--;
+			for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+				if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34 && !this.dicasUsadas[this.i]){
+					this.dicasUsadas[this.i] = true;
 					this.haDicas=false;
-					this.contDicas++;
+					if(this.contDicas<3)this.contDicas++;
 				for(this.j=0;this.j<this.dicaMostrada.length;this.j++){
 						if(!this.dicaMostrada[this.j]){
 							this.haDicas=true;

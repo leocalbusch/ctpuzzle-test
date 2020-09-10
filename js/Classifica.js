@@ -22,6 +22,8 @@ var Classifica = function () {
 	this.botaoContinuar.img = tdsImagens[7];
 	this.botaoDica= new Imagem(0,0,0,0,"");
 	this.botaoDica.img = tdsImagens[151];
+	this.botaoDicaUsada= new Imagem(0,0,0,0,"");
+	this.botaoDicaUsada.img = tdsImagens[276];
 	this.botaoLimpar= new Imagem(700,560,86,36,"");
 	this.botaoLimpar.img = tdsImagens[150];
 	this.posRespCorreta = new Imagem(0,0,0,0,"");
@@ -31,7 +33,7 @@ var Classifica = function () {
 	this.posRespostas = new Array();
 	this.selecao= new Imagem(-1000,0,0,0,"");
 	this.selecao.img=tdsImagens[221];
-	this.dicas = 3;
+	this.dicasUsadas = new Array(false,false,false);
 	this.follow=-1;
 	this.trace="";
 	this.msg="";
@@ -148,10 +150,12 @@ Classifica.prototype.Draw = function(){
 	for(this.i=0;this.i<this.respostas.length;this.i++){
 		context.drawImage(this.respostas[this.i].img, this.respostas[this.i].x, this.respostas[this.i].y);
 	}
-	
-	//aqui mostra os botões das dicas
-	for(this.i=0;this.i<this.dicas;this.i++){
-		context.drawImage(this.botaoDica.img, 710-(this.i*60), 5);
+
+	for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
+		if(this.dicasUsadas[this.i]) {
+			context.drawImage(this.botaoDicaUsada.img, 710-(this.i*60), 15);
+		}
+		else context.drawImage(this.botaoDica.img, 710-(this.i*60), 15);
 	}
 	
 	//Desenhando o botão pular
@@ -286,13 +290,13 @@ Classifica.prototype.MouseUp = function(mouseEvent) {
 			}
 			this.follow=-1;
 
-			for(this.i=0;this.i<this.dicas;this.i++){
+			for(this.i=0;this.i<this.dicasUsadas.length;this.i++){
 				if(posMouseX>710-(this.i*60) && posMouseX<710-(this.i*60)+56 && posMouseY>20  && posMouseY<20+34){
-					this.dicas--;
-					this.contDicas++;
-					if(this.dicas==2)this.msg="Verifique as cores das figuras.";
-					else if(this.dicas==1)this.msg="Verifique o tipo das figuras.";
-					else if(this.dicas==0)this.msg="Tente criar uma sequências utilizando as cores e tipo.";
+					this.dicasUsadas[this.i] = true;
+					if(this.contDicas<3)this.contDicas++;
+					if(this.i==0)this.msg="Algumas figuras têm a mesma cor...";
+					else if(this.i==1)this.msg="Figuras do mesmo tipo devem ser alinhadas...";
+					else if(this.i==2)this.msg="Crie linhas e colunas de coisas relacionadas...";
 					break;
 				}
 			}

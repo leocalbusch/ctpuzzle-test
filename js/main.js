@@ -464,6 +464,7 @@ function carregarImagens() {
   tdsImagens[149].src = "img/Programacao/BoyDown4.png";
   tdsImagens[150].src = "img/Pontos/LimparPontos.png";
   tdsImagens[151].src = "img/Pontos/DicaPontos.png";
+  tdsImagens[276].src = "img/Pontos/DicaPontosUsada.png";
   tdsImagens[152].src = "img/Pontos/PontoAtivo.png";
   tdsImagens[153].src = "img/Pontos/PontoGrande.png";
   tdsImagens[154].src = "img/Pontos/PontoPequeno.png";
