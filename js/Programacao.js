@@ -30,6 +30,8 @@ var Programacao = function (fase) {
 	this.comandos = new Imagem(0,0,0,0,"nenhum");
 	this.highlightCom= new Imagem(1000,388,69,40,"");
 	this.highlightCom.img = tdsImagens[83];
+	this.highlightLoop= new Imagem(1000,388,69,40,"");
+	this.highlightLoop.img = tdsImagens[89];
 	this.botaoPular= new Imagem(1000,560,86,36,"");
 	this.botaoPular.img = tdsImagens[84];
 	this.botaoContinuar= new Imagem(230,565,150,25,"");
@@ -51,8 +53,8 @@ var Programacao = function (fase) {
 	this.preparaPontos=true;
 	this.pontoX=0;
 	this.pontoY=0;
-	this.velocidadeX=0.9;
-	this.velocidadeY=0.5;
+	this.velocidadeX=0.4;//0.9;
+	this.velocidadeY=0.2;//0.5;
 	this.follow="none";
 	this.mouseAntX=0;
 	this.mouseAntY=0;
@@ -488,8 +490,6 @@ var Programacao = function (fase) {
 		this.comLoop= new Imagem(625,550,69,39,"");
 		this.comLoop.img = tdsImagens[88];
 		this.rectComLoop=new Imagem(625,550,69,39,"");
-		this.highlightLoop= new Imagem(1000,388,83,49,"");
-		this.highlightLoop.img = tdsImagens[89];
 		this.insideLoop=false;
 		this.multipleLoop=false;
 
@@ -772,6 +772,8 @@ Programacao.prototype.Draw = function(){
 				this.maisOver=false;
 				this.menosOver=false;
 				if(!this.executaComando){
+					// se nao estiver sobre comandos loop, o highlight loop desaparece
+					this.highlightLoop.x = 10000;
 					for(this.i=this.indice;this.i<this.comandoPosicao.length;this.i++){
 						if(posMouseX>this.comandoPosicao[this.i].x && posMouseX<this.comandoPosicao[this.i].x+this.comandoPosicao[this.i].width && posMouseY>this.comandoPosicao[this.i].y && posMouseY<this.comandoPosicao[this.i].y+this.comandoPosicao[this.i].height){
 							//Caso o mouse passar por algum comando, essa
@@ -813,6 +815,7 @@ Programacao.prototype.Draw = function(){
 								this.insideLoop=true;
 								this.highlightLoop.x=this.comandoPosicao[this.i].x;
 								this.highlightLoop.y=this.comandoPosicao[this.i].y;
+
 							}else if(this.comando[this.i].substring(0,4)=="Loop"){
 								this.multipleLoop=true;
 								this.highlightLoop.x=this.comandoPosicao[this.i].x;
@@ -831,8 +834,17 @@ Programacao.prototype.Draw = function(){
 						//O ponto atual do personagem vai ficar vazio novamente
 						this.pontos[this.pontoX].j[this.pontoY].status="Vazio";
 						//O highlight vai ficar em cima do comando sendo executado
-						this.highlightCom.x=this.comandoPosicao[this.indice+this.comAtualLoop[this.indice]].x;
-						this.highlightCom.y=this.comandoPosicao[this.indice+this.comAtualLoop[this.indice]].y;
+						if(this.comando[this.indice].substring(0,4)=="Loop"){
+							this.highlightLoop.x = this.comandoPosicao[this.indice + this.comAtualLoop[this.indice]].x;
+							this.highlightLoop.y = this.comandoPosicao[this.indice + this.comAtualLoop[this.indice]].y;
+							this.highlightCom.x = 10000;
+							this.highlightCom.y = 10000;
+						}else{
+							this.highlightLoop.x = 10000;
+							this.highlightLoop.y = 10000;
+							this.highlightCom.x = this.comandoPosicao[this.indice + this.comAtualLoop[this.indice]].x;
+							this.highlightCom.y = this.comandoPosicao[this.indice + this.comAtualLoop[this.indice]].y;
+						}
 						//A anima��o do personagem deve ser na dire��o que o comando indica
 						this.personagem.animaWalk(this.comando[this.indice+this.comAtualLoop[this.indice]]);
 						//Essa partezinha prepara o ponto, pra verificar
@@ -945,8 +957,10 @@ Programacao.prototype.Draw = function(){
 						}
 						//o highlight sai da tela, bom, deveria voltar
 						//n�o entendi esse if aqui, pq ser� que fiz isso?
-						if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
+						//if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
+						this.highlightLoop.x=1000;
 						this.highlightCom.x=1000;
+
 						if (!this.ganhou){// Se não pegou todos os objetivos, reseta o boneco e os objetivos
 							this.personagem.x=this.pontos[this.pontoInicialX].j[this.pontoInicialY].x - (this.personagem.width/2);
 							this.personagem.y=this.pontos[this.pontoInicialX].j[this.pontoInicialY].y - this.personagem.height;
@@ -979,7 +993,10 @@ Programacao.prototype.Draw = function(){
 		context.drawImage(this.botaoExcluiTudo.img, this.botaoExcluiTudo.x, this.botaoExcluiTudo.y);
 		context.drawImage(this.personagem.imagem, this.personagem.x, this.personagem.y);
 		context.drawImage(this.botaoPular.img, this.botaoPular.x, this.botaoPular.y);
+		context.drawImage(this.highlightLoop.img, this.highlightLoop.x, this.highlightLoop.y, this.highlightLoop.width, this.highlightLoop.height);
+		context.drawImage(this.highlightCom.img, this.highlightCom.x, this.highlightCom.y, this.highlightCom.width, this.highlightCom.height);
 		for(this.i=0; this.i<this.comandoPosicao.length; this.i++){
+			context.drawImage(this.comandoPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
 			if((this.fase>4) && (this.comando[this.i]=="LoopRight" || this.comando[this.i]=="LoopLeft" || this.comando[this.i]=="LoopUp" || this.comando[this.i]=="LoopDown")){
 				context.drawImage(this.loopPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
 				if(this.comTotalLoop[this.i]==20000 || this.comTotalLoop[this.i]==0){
@@ -992,9 +1009,11 @@ Programacao.prototype.Draw = function(){
 					if(this.quantidade[this.i]>1)context.drawImage(this.botaoMenos.img, this.comandoPosicao[this.i].x+51, this.comandoPosicao[this.i].y+27,12,12);
 				}
 			}
-			context.drawImage(this.comandoPosicao[this.i].img, this.comandoPosicao[this.i].x, this.comandoPosicao[this.i].y);
+
 		}
-		context.drawImage(this.highlightCom.img, this.highlightCom.x, this.highlightCom.y,this.highlightCom.width,this.highlightCom.height);
+
+
+
 		context.drawImage(this.botaoExclui.img, this.botaoExclui.x, this.botaoExclui.y);
 		context.drawImage(this.comLeft.img, this.comLeft.x, this.comLeft.y);
 		context.drawImage(this.comRight.img, this.comRight.x, this.comRight.y);
@@ -1034,7 +1053,7 @@ Programacao.prototype.Draw = function(){
 			context.fillText("Play: " + this.contPlay,710,40)
 		}*/
 		context.fillStyle="black";
-		context.font="30px Georgia";
+		context.font="20px Georgia";
 		context.fillText("" + this.trace,150,70);
 		context.fillText(" " + this.msgErro ,160,40);
 		if(this.pulou){
@@ -1121,7 +1140,11 @@ Programacao.prototype.MouseUp = function(mouseEvent) {
 				}
 				//Verificar se soltou um comando no programa
 				//if(posMouseX>this.novaInter.x && posMouseX<(this.novaInter.x + 520) && posMouseY>this.novaInter.y && posMouseY<(this.novaInter.y + 200)){
-					if(this.follow!="none")this.AddComando(this.follow);
+					if(this.follow!="none"){
+						this.AddComando(this.follow);
+						this.highlightLoop.x = 10000;
+
+					}
 				//}
 				//Pular a fase
 				if(this.tempo>=0){
@@ -1146,7 +1169,8 @@ Programacao.prototype.KeyDown = function (keyCode){}
 Programacao.prototype.VerificaRemoveuComando = function (){
 	//TENHO QUE TESTAR MAIS ESSA PARTE POIS TAVA DANDO ERROS, RESOLVI A MAIORIA
 	//MAS PODE TER OUTROS
-	if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
+	//if(this.indice>0)this.highlightCom.x=this.comandoPosicao[this.indice-1].x;
+	//if(this.indice>0)this.highlightLoop.x=this.comandoPosicao[this.indice-1].x;
 	//10000 � o meio do loop//20000 � o fim do loop//0 � loop de um comando s�
 	//entre 1 e 1000 � a qtd certinha de comandos que tem em cada loop			
 	if(this.removeUltimo){
