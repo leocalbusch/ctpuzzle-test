@@ -13,6 +13,9 @@ var instrucoes = {
     { text: 'Para repetir mais vezes,\nclique em + .', x: 370, y: 85 },
     { text: 'Para repetir menos vezes,\nclique em - .', x: 370, y: 85 },
     { text: 'Nesse exemplo, vou andar\n4 vezes, até a parte laranja.\nVamos tentar?', x: 370, y: 80 },
+  ],
+  programacao_objetivos: [
+    { text: 'Agora o objetivo é passar por\ntodas as partes laranjas.\nVamos tentar?', x: 370, y: 80 },
   ]
 }
 

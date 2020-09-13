@@ -129,9 +129,9 @@ function draw() {
       telaAtual = "Pontos4";
     } else if (telaAtual == "Pontos4") {
       escore.Pontos(3, Math.round(tela.tempo), tela.cliques, tela.limpou, tela.contDicas, tela.pulou);
-      tela = new Instrucoes(6);
-      telaAtual = "Instrucoes6";
-    } else if (telaAtual == "Instrucoes6") {
+      tela = new Instrucoes(156);
+      telaAtual = "InstrucoesProgramacaoObjetivos";
+    } else if (telaAtual == "InstrucoesProgramacaoObjetivos") {
       tela = new Programacao(3);
       telaAtual = "Programacao3";
     } else if (telaAtual == "Programacao3") {
@@ -305,6 +305,16 @@ function carregarImagens() {
   tdsImagens['programacao_girl'] = new Image();
   tdsImagens['programacao_girl'].src = "img/Instrucoes/guias/programacao_girl.png";
 
+  tdsImagens['programacao_loop_boy'] = new Image();
+  tdsImagens['programacao_loop_boy'].src = "img/Instrucoes/guias/programacao_loop/fundo_boy.png";
+  tdsImagens['programacao_loop_girl'] = new Image();
+  tdsImagens['programacao_loop_girl'].src = "img/Instrucoes/guias/programacao_loop/fundo_girl.png";
+  
+  tdsImagens['programacao_objetivos_boy'] = new Image();
+  tdsImagens['programacao_objetivos_boy'].src = "img/Instrucoes/guias/programacao_objetivos/fundo_boy.png";
+  tdsImagens['programacao_objetivos_girl'] = new Image();
+  tdsImagens['programacao_objetivos_girl'].src = "img/Instrucoes/guias/programacao_objetivos/fundo_girl.png";
+
   loadImage('img/Instrucoes/guias/programacao/frame0000.png');
   loadImage('img/Instrucoes/guias/programacao/frame0001.png');
   loadImage('img/Instrucoes/guias/programacao/frame0002.png');
@@ -318,6 +328,7 @@ function carregarImagens() {
   loadImage('img/Instrucoes/guias/programacao_loop/frame0004.png');
   loadImage('img/Instrucoes/guias/programacao_loop/frame0005.png');
 
+  loadImage('img/Instrucoes/guias/programacao_objetivos/frame0000.png');
 
   loadImage('img/Instrucoes/guias/girl0000.png');
   loadImage('img/Instrucoes/guias/girl0001.png');

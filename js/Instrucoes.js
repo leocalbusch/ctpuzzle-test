@@ -7,6 +7,8 @@ let fases = {
   1: 'programacao',
   //Aqui são as instruções passo a passo pro loop da quinta fase de programação
   155: 'programacao_loop',
+  //Aqui são as instruções passo sobre as fases que tem mais de um objetivo
+  156: 'programacao_objetivos',
   //...
 }
 
@@ -28,7 +30,6 @@ let personagensMap = {
       images: [
         'img/Instrucoes/guias/boy0000.png',
         'img/Instrucoes/guias/boy0001.png'
-
       ]
     }
   },
@@ -42,15 +43,15 @@ var Instrucoes = function (indice) {
   let nomeGenero = genero == 0 ? 'girl' : 'boy';
   faseAtual = fases[indice];
 
-  if (this.indice == 1 || this.indice == 155) {
+  if (this.indice == 1 || this.indice == 155 || this.indice == 156) {
     let personagem = personagensMap[genero];
     instrucoesPassoAPasso = new InstrucoesPassoAPasso(context, personagem);
     instrucoesPassoAPasso.onFinishSteps = function () {
       self.ativo = false;
     }
     // mesma imagem pros dois casos (boca fechada e aberta)
-    this.fundoBocaAberta = tdsImagens['programacao_' + nomeGenero];
-    this.fundoBocaFechada = tdsImagens['programacao_' + nomeGenero];
+    this.fundoBocaAberta = tdsImagens[faseAtual+ '_' + nomeGenero];
+    this.fundoBocaFechada = tdsImagens[faseAtual+ '_' + nomeGenero];
   }
 
   if (genero == 0) {
@@ -577,7 +578,8 @@ Instrucoes.prototype.Draw = function () {
       context.drawImage(this.seta.img, this.seta.x, this.seta.y);
     }
   }
-  instrucoesPassoAPasso.desenhaInstrucao(faseAtual, this.fala);
+  if (instrucoesPassoAPasso)
+    instrucoesPassoAPasso.desenhaInstrucao(faseAtual, this.fala);
 
 }
 
