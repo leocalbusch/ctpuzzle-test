@@ -7,15 +7,15 @@ var instrucoes = {
     { text: 'E clicando aqui, o caminho é \nzerado', x: 370, y: 95 },
   ],
   programacao_loop: [
-    { text: 'Agora temos uma nova instrução:\no comando de REPETIÇÃO', x: 370, y: 85 },
-    { text: 'Você pode adicioná-la no\nPROGRAMA como os \noutros comandos ', x: 380, y: 80 },
-    { text: 'Depois arraste para adicionar os \ncomandos que deseja repetir.\nAdicione quantos comandos quiser!', x: 360, y: 80 },
-    { text: 'Para repetir mais vezes,\nclique em + .', x: 370, y: 85 },
-    { text: 'Para repetir menos vezes,\nclique em - .', x: 370, y: 85 },
-    { text: 'Nesse exemplo, vou andar\n4 vezes, até a parte laranja.\nVamos tentar?', x: 370, y: 80 },
+    { text: 'Agora temos uma nova instrução:\na REPETIÇÃO serve para repetir\nautomaticamente seus comandos.', x: 370, y: 80 },
+    { text: 'Os comandos que você coloca dentro\nda REPETIÇÃO executam sozinhos\nquantas vezes você quiser.', x: 355, y: 80 },
+    { text: 'ARRASTE quantos comandos\nquiser para dentro da REPETIÇÃO.', x: 370, y: 85 },
+    { text: 'Use os botões de + e - para controlar\nquantas vezes essa sequência de\ncomandos será repetida.', x: 355, y: 80 },
+    { text: 'Se precisar, você pode usar mais\nde uma REPETIÇÃO para repetir\nsequências diferentes de comandos.', x: 355, y: 80 },
+    { text: 'Nesse exemplo, o comando de andar\nvai se repetir sozinho 4 vezes.\nVamos tentar um desafio agora?', x: 355, y: 80 },
   ],
   programacao_objetivos: [
-    { text: 'Agora o objetivo é passar por\ntodas as partes laranjas.\nVamos tentar?', x: 370, y: 80 },
+    { text: 'Agora é obrigatório passar por\ntodos os quadrados laranja.\nVamos tentar?', x: 370, y: 80 },
   ]
 }
 

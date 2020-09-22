@@ -87,12 +87,14 @@ function draw() {
   // se telaAtual estiver setado pra alguma tela, continua o jogo
   if (!tela.ativo) {
     if (telaAtual == "EscolhaPersonagem") {
-      telaAtual = window.prompt(msgEscolhaFase);
+      //telaAtual = window.prompt(msgEscolhaFase);
       if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 30) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
-        tela = new Instrucoes(1);
-        telaAtual = "Instrucoes1";
+         tela = new Instrucoes(1);
+         telaAtual = "Instrucoes1";
+        //tela = new Programacao(8);
+        //telaAtual = "Programacao8";
       }
 
     } else if (telaAtual == "Instrucoes1") {
@@ -364,8 +366,8 @@ function carregarImagens() {
   tdsImagens[38].src = "img/Instrucoes/Instrucoes19b.png";
   tdsImagens[39].src = "img/Instrucoes/Instrucoes21a.png";
   tdsImagens[40].src = "img/Instrucoes/Instrucoes21b.png";
-  tdsImagens[41].src = "img/Instrucoes/Instrucoes22a.png";
-  tdsImagens[42].src = "img/Instrucoes/Instrucoes22b.png";
+  tdsImagens[41].src = "img/Instrucoes/Instrucoes22a_new.png";
+  tdsImagens[42].src = "img/Instrucoes/Instrucoes22b_new.png";
   tdsImagens[43].src = "img/Instrucoes/Instrucoes1c.png";
   tdsImagens[44].src = "img/Instrucoes/Instrucoes1d.png";
   tdsImagens[45].src = "img/Instrucoes/Instrucoes2c.png";
@@ -396,8 +398,8 @@ function carregarImagens() {
   tdsImagens[70].src = "img/Instrucoes/Instrucoes19d.png";
   tdsImagens[71].src = "img/Instrucoes/Instrucoes21c.png";
   tdsImagens[72].src = "img/Instrucoes/Instrucoes21d.png";
-  tdsImagens[73].src = "img/Instrucoes/Instrucoes22c.png";
-  tdsImagens[74].src = "img/Instrucoes/Instrucoes22d.png";
+  tdsImagens[73].src = "img/Instrucoes/Instrucoes22c_new.png";
+  tdsImagens[74].src = "img/Instrucoes/Instrucoes22d_new.png";
   tdsImagens[75].src = "img/Programacao/Fundo.png";
   tdsImagens[76].src = "img/Programacao/ObstaculoProg.png";
   tdsImagens[77].src = "img/Programacao/Cenario.png";

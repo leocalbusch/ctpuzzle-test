@@ -510,9 +510,10 @@ var Programacao = function (fase) {
 					// coloca obstáculos em tudo
 					this.status[this.i].j[this.j].status = "Obst";
 					// tira os obstáculos do caminho
+					if(this.i==0 && this.j>1)this.status[this.i].j[this.j].status = "Vazio";
 					if ((this.i == 2 || this.i == 7) && (this.j>0 && this.j<6)) this.status[this.i].j[this.j].status = "Vazio";
 					if (this.i == 5 && this.j == 6) this.status[this.i].j[this.j].status = "Vazio";
-					if (this.j == 1 && this.i>1) this.status[this.i].j[this.j].status = "Vazio";
+					if (this.j == 1) this.status[this.i].j[this.j].status = "Vazio";
 					if (this.j == 5 && (this.i>2 && this.i<6)) this.status[this.i].j[this.j].status = "Vazio";
 					if (this.j == 7 && this.i<6) this.status[this.i].j[this.j].status = "Vazio";
 				}
