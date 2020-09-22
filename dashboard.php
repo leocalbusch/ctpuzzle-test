@@ -109,7 +109,7 @@ require "conexao.php";
     <div class="row">
         <div class="col">
         </div>
-        <div class="col-6">
+        <div class="col-10">
             <?php
             if ($_SESSION["tipoUsuario"] == 3) { ?>
                 <div class="card d-flex flex-row">
