@@ -303,9 +303,9 @@ function carregarImagens() {
   tdsImagens[11].src = "img/Instrucoes/Instrucoes1a.png";
 
   tdsImagens['programacao_boy'] = new Image();
-  tdsImagens['programacao_boy'].src = "img/Instrucoes/guias/programacao.png";
+  tdsImagens['programacao_boy'].src = "img/Instrucoes/guias/programacao/fundo_boy.png";
   tdsImagens['programacao_girl'] = new Image();
-  tdsImagens['programacao_girl'].src = "img/Instrucoes/guias/programacao_girl.png";
+  tdsImagens['programacao_girl'].src = "img/Instrucoes/guias/programacao/fundo_girl.png";
 
   tdsImagens['programacao_loop_boy'] = new Image();
   tdsImagens['programacao_loop_boy'].src = "img/Instrucoes/guias/programacao_loop/fundo_boy.png";
