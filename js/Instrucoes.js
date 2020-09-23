@@ -50,8 +50,8 @@ var Instrucoes = function (indice) {
       self.ativo = false;
     }
     // mesma imagem pros dois casos (boca fechada e aberta)
-    this.fundoBocaAberta = tdsImagens[faseAtual+ '_' + nomeGenero];
-    this.fundoBocaFechada = tdsImagens[faseAtual+ '_' + nomeGenero];
+    this.fundoBocaAberta = tdsImagens[faseAtual + '_' + nomeGenero];
+    this.fundoBocaFechada = tdsImagens[faseAtual + '_' + nomeGenero];
   }
 
   if (genero == 0) {
@@ -586,7 +586,8 @@ Instrucoes.prototype.Draw = function () {
 Instrucoes.prototype.MouseDown = function (mouseEvent) { }
 
 Instrucoes.prototype.MouseUp = function (mouseEvent) {
-  instrucoesPassoAPasso.avancaInstrucao();
+  if (instrucoesPassoAPasso)
+    instrucoesPassoAPasso.avancaInstrucao();
   if (this.indice == 4 || this.indice == 6 || this.indice == 8 || this.indice == 9 || this.indice == 11 || this.indice == 12 || this.indice == 13 || this.indice == 14 || this.indice == 15 || this.indice == 16) this.ativo = false;
   else if (this.indice == 5 && this.parteInst[11]) this.ativo = false;
   else if (this.indice == 7 && this.parteInst[7]) this.ativo = false;
