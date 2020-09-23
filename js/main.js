@@ -91,13 +91,142 @@ function draw() {
       if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 30) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
-         tela = new Instrucoes(1);
-         telaAtual = "Instrucoes1";
-        //tela = new Programacao(8);
-        //telaAtual = "Programacao8";
+//         tela = new Instrucoes(1);
+//         telaAtual = "Instrucoes1";
+        tela = new Instrucoes(2);
+        telaAtual = "Instrucoes2";
       }
 
+    //////////////////////////////////////////////// VERSÃO JUÍZES //////////////////////////////////////////////////
+    } else if (telaAtual == "Instrucoes2") {
+      tela = new Pontos(1);
+      telaAtual = "Pontos1";
+    } else if (telaAtual == "Pontos1") {
+      escore.Pontos(0, Math.round(tela.tempo), tela.cliques, tela.limpou, tela.contDicas, tela.pulou);
+      tela = new Pontos(2);
+      telaAtual = "Pontos2";
+    } else if (telaAtual == "Pontos2") {
+      escore.Pontos(1, Math.round(tela.tempo), tela.cliques, tela.limpou, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(3);
+      telaAtual = "Instrucoes3";
+    } else if (telaAtual == "Instrucoes3") {
+      tela = new Pontos(3);
+      telaAtual = "Pontos3";
+    } else if (telaAtual == "Pontos3") {
+      escore.Pontos(2, Math.round(tela.tempo), tela.cliques, tela.limpou, tela.contDicas, tela.pulou);
+      tela = new Pontos(4);
+      telaAtual = "Pontos4";
+    } else if (telaAtual == "Pontos4") {
+      escore.Pontos(3, Math.round(tela.tempo), tela.cliques, tela.limpou, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(5);
+      telaAtual = "Instrucoes5";
+    } else if (telaAtual == "Instrucoes5") {
+      //Eu programei o tutorial como fase 1, mas não faz sentido se já deu a resposta no tutorial
+      //então vamos começar com a fase 2
+      tela = new Match(2);
+      telaAtual = "Match1";
+    } else if (telaAtual == "Match1") {
+      escore.Match(0, Math.round(tela.tempo), tela.cliques, tela.giros, tela.contDicas, tela.pulou);
+      tela = new Match(3);
+      telaAtual = "Match2";
+      //Existem a fase 4,5 e 6 - para caso quiserem aumentar o número de fases, basta
+      //colocar na sequencia os Match4, Match5 e Match6
+    } else if (telaAtual == "Match2") {
+      escore.Match(1, Math.round(tela.tempo), tela.cliques, tela.giros, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(7);
+      telaAtual = "Instrucoes7";
+    } else if (telaAtual == "Instrucoes7") {
+      tela = new Tangram(1);
+      telaAtual = "Tangram1";
+    } else if (telaAtual == "Tangram1") {
+      escore.Tangram(0, Math.round(tela.tempo), tela.cliques, tela.giros, tela.contDicas, tela.pulou);
+      tela = new Tangram(2);
+      telaAtual = "Tangram2";
+    } else if (telaAtual == "Tangram2") {
+      escore.Tangram(1, Math.round(tela.tempo), tela.cliques, tela.giros, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(10);
+      telaAtual = "Instrucoes10";
+    } else if (telaAtual == "Instrucoes10") {
+      tela = new Sequencia(1);
+      telaAtual = "Sequencia1";
+    } else if (telaAtual == "Sequencia1") {
+      escore.Sequencia(0, Math.round(tela.tempo), tela.errou, tela.contDicas, tela.pulou);
+      tela = new Sequencia(2);
+      telaAtual = "Sequencia2";
+    } else if (telaAtual == "Sequencia2") {
+      escore.Sequencia(1, Math.round(tela.tempo), tela.errou, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(12);
+      telaAtual = "Instrucoes12";
+    } else if (telaAtual == "Instrucoes12") {
+      tela = new Classifica();
+      telaAtual = "Classifica";
+    } else if (telaAtual == "Classifica") {
+      escore.Classifica(Math.round(tela.tempo), tela.errou, tela.limpou, tela.contDicas, tela.pulou);
+      tela = new Instrucoes(1);
+      telaAtual = "Instrucoes1";
     } else if (telaAtual == "Instrucoes1") {
+      tela = new Programacao(1);
+      telaAtual = "Programacao1";
+    } else if (telaAtual == "Programacao1") {
+      escore.Programacao(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      tela = new Instrucoes(4);
+      telaAtual = "Instrucoes4";
+    } else if (telaAtual == "Instrucoes4") {
+      tela = new Programacao(2);
+      telaAtual = "Programacao2";
+    } else if (telaAtual == "Programacao2") {
+      escore.Programacao(1, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      tela = new Instrucoes(156);
+      telaAtual = "InstrucoesProgramacaoObjetivos";
+    } else if (telaAtual == "InstrucoesProgramacaoObjetivos") {
+      tela = new Programacao(3);
+      telaAtual = "Programacao3";
+    } else if (telaAtual == "Programacao3") {
+      escore.Programacao(2, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      tela = new Instrucoes(9);
+      telaAtual = "Instrucoes9";
+    } else if (telaAtual == "Instrucoes9") {
+      tela = new Programacao(4);
+      telaAtual = "Programacao4";
+    } else if (telaAtual == "Programacao4") {
+      escore.Programacao(3, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.pulou);
+      tela = new Instrucoes(8);
+      telaAtual = "Instrucoes8";
+    } else if (telaAtual == "Instrucoes8") {
+      tela = new Instrucoes(11);
+      telaAtual = "Instrucoes11";
+    } else if (telaAtual == "Instrucoes11") {
+      tela = new Instrucoes(155);
+      telaAtual = "InstrucoesLoop";
+    }else if (telaAtual == "InstrucoesLoop"){
+      tela = new Programacao(5);
+      telaAtual = "Programacao5";
+    } else if (telaAtual == "Programacao5") {
+      escore.ProgramacaoLoop(0, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
+      tela = new Instrucoes(13);
+      telaAtual = "Instrucoes13";
+    } else if (telaAtual == "Instrucoes13") {
+      tela = new Programacao(6);
+      telaAtual = "Programacao6";
+    } else if (telaAtual == "Programacao6") {
+      escore.ProgramacaoLoop(1, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
+      tela = new Instrucoes(14);
+      telaAtual = "Instrucoes14";
+    } else if (telaAtual == "Instrucoes14") {
+      tela = new Programacao(7);
+      telaAtual = "Programacao7";
+    } else if (telaAtual == "Programacao7") {
+      escore.ProgramacaoLoop(2, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
+      tela = new Programacao(8);
+      telaAtual = "Programacao8";
+    } else if (telaAtual == "Programacao8") {
+      escore.ProgramacaoLoop(3, Math.round(tela.tempo), tela.contInstrucoes, tela.contApagouIndiv, tela.contApagouAll, tela.contPlay, tela.contLoop, tela.contInstrLoop, tela.pulou);
+      tela = new Instrucoes(16);
+      telaAtual = "Instrucoes16";
+      escore.Calcula();
+    }
+    //////////////////////////////////////////////// VERSÃO COLETA //////////////////////////////////////////////////
+    /*} else if (telaAtual == "Instrucoes1") {
        tela = new Programacao(1);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {
@@ -223,7 +352,7 @@ function draw() {
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
       escore.Calcula();
-    } /*else if (telaAtual == "Instrucoes16") {
+    }*/ /*else if (telaAtual == "Instrucoes16") {
       tela = new Instrucoes(17);
       telaAtual = "Instrucoes17";
     }*/

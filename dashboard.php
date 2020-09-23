@@ -109,7 +109,7 @@ require "conexao.php";
     <div class="row">
         <div class="col">
         </div>
-        <div class="col-10">
+        <div class="col-lg-6 col-sm-10">
             <?php
             if ($_SESSION["tipoUsuario"] == 3) { ?>
                 <div class="card d-flex flex-row">
@@ -143,7 +143,7 @@ require "conexao.php";
                     </div>
                 </div>
                 <div class="card d-flex flex-row">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
+                    <div class="card-body ml-5" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
                         <p class="card-text pr-5">Para iniciar seu teste, você precisa informar aqui na caixinha a sua chave de acesso! Ainda não possui uma ou não sabe do que eu tô falando? Pergunta pra pessoa responsável pela aplicacão do teste, provavelmente seu professor! Vamos lá?</p>
                     </div>
                     <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
@@ -152,14 +152,14 @@ require "conexao.php";
                     <img src="img/Instrucoes/guias/boy0000.png" class="w-25 h-25 mt-auto" alt="">
                     <div class="card-body">
                         <form action='processaVinculaAmostra.php' method='post' >
-                            <div class='form-group pl-5'>
+                            <div class='form-group'>
                                 <label for='chaveAmostra'>Chave:</label>
                                 <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'><br/>
                                 <button type='submit' class='btn btn-primary'>Iniciar</button>
                             </div>
                         </form>
                     </div>
-                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
+                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25 mt-auto" alt="">
                 </div>
                 <?php
             }
