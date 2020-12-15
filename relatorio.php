@@ -98,7 +98,7 @@ require "conexao.php";
     <div class="row">
         <div class="col">
         </div>
-        <div class="col-8">
+        <div class="col-8 table-responsive">
             <table class="table table-sm table-hover mb-0" id="minhaAmostra">
 
                 <?php
@@ -106,37 +106,41 @@ require "conexao.php";
                 require "executaQuery.php";
                 $cont = 0;
                 if (mysqli_num_rows($result) > 0) {
-                    while ($amostra = mysqli_fetch_array($result)){
-                        $thead = "
+                    while ($amostra = mysqli_fetch_assoc($result)){
+                        if ($cont ==0 ){
+                            $thead = "
                 <thead>
                 <tr>
                     <th colspan='7'>Amostra: $amostra[nomeAmostra]<br/>Data da aplicação: $amostra[dataAplicacao]</th>
                 </tr>
                 <tr>
                     <th scope='col'>#</th>
-                    <th scope='col'>Nome</th>
-                    <th scope='col'>E-mail</th>
-                    <th scope='col' class='text-center'>Abstração</th>
-                    <th scope='col' class='text-center'>Decomposição</th>
-                    <th scope='col' class='text-center'>Rec. Padrões</th>
-                    <th scope='col' class='text-center'>Algoritmos</th>
-                </tr>
-                </thead>
-                <tbody>                    
                     ";
+
+                        foreach($amostra as $coluna => $valor){
+                            $thead.= "<th scope='col'>$coluna</th>";
+                        }
+//                    <th scope='col'>Nome</th>
+//                    <th scope='col'>E-mail</th>
+//                    <th scope='col' class='text-center'>Abstração</th>
+//                    <th scope='col' class='text-center'>Decomposição</th>
+//                    <th scope='col' class='text-center'>Rec. Padrões</th>
+//                    <th scope='col' class='text-center'>Algoritmos</th>
+                $thead.= "
+                </tr>
+                </thead><tbody>";}
+                $tbody= "";
+
 
                         $cont++;
                         $tbody.= "
                             <tr> 
-                                <th scope='col'>$cont</th>
-                                <td>$amostra[nome]</td>
-                                <td>$amostra[email]</td>
-                                <td>$amostra[abstracao]</td>
-                                <td>$amostra[decomposicao]</td>
-                                <td>$amostra[reconhecimento]</td>
-                                <td>$amostra[algoritmo]</td>
-                            </tr>
-                        ";
+                                <th scope='col'>$cont</th>";
+                        foreach($amostra as $coluna => $valor){
+                            $tbody.= " <td>$valor</td>";
+                        }
+
+                        $tbody.="</tr>";
                     }
                     echo $thead.$tbody;
                 }

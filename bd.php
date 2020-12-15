@@ -285,7 +285,7 @@ if (!mysqli_num_rows($result)) {
     $sql.='algoritmo ='.$_POST['algoritmo'];
     $sql.=' WHERE idResultado = '.$_SESSION["idResultado"];
 }
-file_put_contents("sql.txt", $sql);
+file_put_contents("sql.txt", date("Y-m-d H:i:s").$sql);
 
 require "executaQuery.php";
 

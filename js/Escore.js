@@ -553,7 +553,7 @@ Escore.prototype.Calcula = function(){
 	this.str+= "decomposicao=" + this.decomposicao + "&";
 	this.str+= "reconhecimento=" + this.reconhecimento + "&";
 	this.str+= "algoritmo=" + this.algoritmo;
-	console.log(this.str);
+	//console.log(this.str);
 
 
 	// Adiciona resultado no BD
