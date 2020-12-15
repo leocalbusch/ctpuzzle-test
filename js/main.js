@@ -91,13 +91,13 @@ function draw() {
       if (!(isNaN(telaAtual)) && !(telaAtual===null) && !(telaAtual===undefined) && !(telaAtual.trim() == "") && telaAtual >= 0 && telaAtual <= 30) {
         telaAtual = arrayTelaAtual[telaAtual];
       } else {
-//         tela = new Instrucoes(1);
-//         telaAtual = "Instrucoes1";
-        tela = new Instrucoes(2);
-        telaAtual = "Instrucoes2";
+         tela = new Instrucoes(1);
+         telaAtual = "Instrucoes1";
+        //tela = new Instrucoes(2);
+        //telaAtual = "Instrucoes2";
       }
 
-    //////////////////////////////////////////////// VERSÃO JUÍZES //////////////////////////////////////////////////
+   /* //////////////////////////////////////////////// VERSÃO JUÍZES //////////////////////////////////////////////////
     } else if (telaAtual == "Instrucoes2") {
       tela = new Pontos(1);
       telaAtual = "Pontos1";
@@ -224,9 +224,9 @@ function draw() {
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
       escore.Calcula();
-    }
+    }*/
     //////////////////////////////////////////////// VERSÃO COLETA //////////////////////////////////////////////////
-    /*} else if (telaAtual == "Instrucoes1") {
+    } else if (telaAtual == "Instrucoes1") {
        tela = new Programacao(1);
       telaAtual = "Programacao1";
     } else if (telaAtual == "Programacao1") {
@@ -352,7 +352,7 @@ function draw() {
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
       escore.Calcula();
-    }*/ /*else if (telaAtual == "Instrucoes16") {
+    } /*else if (telaAtual == "Instrucoes16") {
       tela = new Instrucoes(17);
       telaAtual = "Instrucoes17";
     }*/
