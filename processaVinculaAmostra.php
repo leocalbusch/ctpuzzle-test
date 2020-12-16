@@ -11,7 +11,8 @@ if(mysqli_num_rows($result)==0){
 }else {
     $amostra = mysqli_fetch_array($result);
     $_SESSION["idAmostra"]=$amostra["idAmostra"];
-    $sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $amostra["idAmostra"];
+    //$sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $amostra["idAmostra"];
+    $sql = "select r.idEstudante, r.idResultado from resultados r where r.idEstudante = " . $_SESSION["idUsuario"];
     require "executaQuery.php";
     if (mysqli_num_rows($result)) {
         $chave = false;
