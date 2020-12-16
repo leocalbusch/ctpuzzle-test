@@ -2,28 +2,26 @@
 require "sessao.php";
 require "conexao.php";
 
-$sql="SELECT * FROM amostras WHERE chave = '".$_POST["chaveAmostra"]."' AND aberta = 1";
-require "executaQuery.php";
-
-if(mysqli_num_rows($result)==0){
+/*if(mysqli_num_rows($result)==0){
     $chave = false;
     $msg = "Chave inválida ou teste não liberado. Favor contatar o responsável.";
 }else {
     $amostra = mysqli_fetch_array($result);
-    $_SESSION["idAmostra"]=$amostra["idAmostra"];
-    $sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $amostra["idAmostra"];
+    $_SESSION["idAmostra"]=$amostra["idAmostra"];*/
+    $sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $_SESSION["idAmostra"];
     require "executaQuery.php";
     if (mysqli_num_rows($result)) {
-        $chave = false;
         $resultados = mysqli_fetch_array($result);
         $_SESSION["idResultado"]=$resultados["idResultado"];
-        $msg =  "Você já respondeu o teste. Agradecemos sua participação!";
+        // atualiza as abertas
+        $sql = "INSERT INTO pesquisa (idResultado, usabilidade, tutoriais, geral, dataResposta) VALUES (".$resultados["idResultado"].",'" .$_POST["usabilidade"]."','" .$_POST["tutoriais"]."','".$_POST["geral"]."', now())";
+        require "executaQuery.php";
+        $msg =  "Sua participação no CT Puzzle Test está encerrada. Obrigado por colaborar! Pode sair do site ou fechar seu navegador.";
     } else {
-        $chave = true;
         $_SESSION["idResultado"]=0;
-        $msg = "Tudo pronto. Vamos iniciar o teste?";
+        $msg = "Erro.";
     }
-}
+
 mysqli_close($conexao);
 ?>
 <!DOCTYPE html>
@@ -68,7 +66,6 @@ mysqli_close($conexao);
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                <?php if ($chave) echo "<button type='button' class='btn btn-success' id='iniciarTeste' >Vamos lá!</button>"; ?>
             </div>
         </div>
     </div>

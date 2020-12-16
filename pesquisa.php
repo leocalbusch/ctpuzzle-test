@@ -117,73 +117,36 @@ require "conexao.php";
         <div class="col">
         </div>
         <div class="col-lg-6 col-sm-10">
+            <form action='processaPesquisa.php' method='post' >
             <?php
             if ($_SESSION["tipoUsuario"] == 3) { ?>
                 <div class="card d-flex flex-row canvaBoy">
                     <img src="img/Instrucoes/guias/boy0000.png" class="w-25 h-25" alt="">
                     <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_left.png) no-repeat; background-size:100% 100%;">
-                        <p class="card-text pl-5"><strong>Olá <?php echo $_SESSION[nome]; ?>!</strong> Bem-vindo(a) ao CT Puzzle Test, um teste sobre Pensamento Computacional! Antes de começar, temos algumas instruções importantes pra você. <strong>Preste bastante atenção!</strong></p>
+                        <p class="card-text pl-5"><strong>Olá <?php echo $_SESSION[nome]; ?>!</strong> Gostaríamos de saber como foi sua experiência com o CT Puzzle Test! São só três perguntinhas. <strong>Vamos lá? </strong></p>
                     </div>
                 </div>
-                <div class="card d-flex flex-row canvaGirl">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
-                        <p class="card-text pr-5">O objetivo é chegar ao final sem se preocupar com uma pontuação. Você vai encontrar vários tipos de desafios. Para resolvê-los, você vai precisar clicar em objetos, arrastar figuras pela tela, girar e trocar coisas de lugar.</p>
-                    </div>
-                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
+                <br/>
+                <div class='form-group'>
+                    <label for='usabilidade'>Você teve alguma dificuldade com os controles do teste? Algum problema na hora de mexer nos objetos, algo que te atrapalhou? Por favor, descreva o mais detalhadamente possível para nos ajudar a melhorar.</label>
+                    <textarea class="form-control" id='usabilidade' name='usabilidade' rows="3" required></textarea>
                 </div>
-<!--                <div class="card d-flex flex-row canvaBoy">
-                    <img src="img/Instrucoes/guias/boy0000.png" class="w-25 h-25" alt="">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_left.png) no-repeat; background-size:100% 100%;">
-                        <p class="card-text pl-5">Para se dar bem no teste, tente resolvê-lo no menor tempo possível. Além disso, tente sempre encontrar a melhor solução para cada desafio.</p>
-                    </div>
+                <div class='form-group'>
+                    <label for='tutoriais'>Os tutoriais do teste te ajudaram a entender o que fazer em cada desafio ou você ainda ficou com dúvida em algum item? Por favor, descreva o mais detalhadamente possível para nos ajudar a melhorar.</label>
+                    <textarea class="form-control" id="tutoriais" name='tutoriais' rows="3" required></textarea>
                 </div>
-                <div class="card d-flex flex-row canvaGirl">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
-                        <p class="card-text pr-5">Procure usar a menor quantidade de recursos possível, tentando dar menos cliques na tela, menos giros nos objetos, menos comandos nos programas. Você pode pular se estiver muito difícil, mas não desista! Mostre que você consegue!</p>
-                    </div>
-                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
+                <div class='form-group'>
+                    <label for='geral'>Agora que já falamos dos controles e dos tutoriais, por favor, conte como foi pra você realizar esse teste de uma maneira geral. Foi fácil ou difícil? Foi chato ou divertido? Se esse teste fosse para te avaliar, você se sentiria mais a vontade com ele do que com um questionário de múltipla escolha? </label>
+                    <textarea class="form-control" id='geral' name='geral' rows="3" required></textarea>
                 </div>
--->                <div class="card d-flex flex-row canvaBoy">
-                    <img src="img/Instrucoes/guias/boy0000.png" class="w-25 h-25" alt="">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_left.png) no-repeat; background-size:100% 100%;">
-                        <p class="card-text pl-5">Algumas fases possuem dicas que te mostram o próximo passo para resolver o desafio. Tente resolver sem usar dicas, mas se não conseguir avançar, elas estão ali pra te ajudar.</p>
-                    </div>
-                </div>
-                <div class="card d-flex flex-row canvaGirl">
-                    <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
-                        <!-- <p class="card-text pr-5">Para iniciar seu teste, você precisa informar aqui na caixinha a sua chave de acesso! Ainda não possui uma ou não sabe do que eu estou falando? Pergunta pra pessoa responsável pela aplicacão do teste, provavelmente seu professor! Vamos lá?</p> -->
-                        <p class="card-text pr-5">Para iniciar seu teste, você precisa selecionar aqui na caixinha a sua chave de acesso! É só selecionar seu curso / série. Vamos lá?</p>
-                    </div>
-                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
-                </div>
-                <div class="card d-flex flex-row">
-                    <img src="img/Instrucoes/guias/boy0000.png" class="w-25 h-25 mt-auto" alt="">
-                    <div class="card-body">
-                        <form action='processaVinculaAmostra.php' method='post' >
-                            <div class='form-group'>
-                                <label for='chaveAmostra'>Chave de acesso:</label>
-                                <select class="form-control" id="chaveAmostra" name="chaveAmostra" required>
-                                    <option value="">&ltSelecione&gt</option>
-                                    <option value="1INFO">1º ano de Informática</option>
-                                    <option value="2INFO">2º ano de Informática</option>
-                                    <option value="3INFO">3º ano de Informática</option>
-                                    <option value="1QUIM">1º ano de Química</option>
-                                    <option value="2QUIM">2º ano de Química</option>
-                                    <option value="3QUIM">3º ano de Química</option>
-                                </select>
-                                <!-- <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'><br/> -->
-                                <button type='submit' class='btn btn-primary'>Iniciar</button>
-                            </div>
-                        </form>
-                    </div>
-                    <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25 mt-auto" alt="">
-                </div>
+                <button type='submit' class='btn btn-primary'>Enviar Respostas</button>
                 <?php
             }
             if ($_SESSION["tipoUsuario"] == 2) { ?>
             <p>Olá <?php echo $_SESSION[nome]; ?>! Por favor, utilize o menu superior para acessar as opções do site.</p>
             <?php
             } ?>
+            </form>
         </div>
 
         <div class="col">
