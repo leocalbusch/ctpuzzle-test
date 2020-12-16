@@ -167,7 +167,7 @@ session_destroy();
                         <option value="">&ltSelecione&gt</option>
                         <option value="0">Feminino</option>
                         <option value="1">Masculino</option>
-                        <option value="2">Não-binário</option>
+                        <option value="2">Outro</option>
                     </select>
                 </div>
                 <input type="hidden" name="tipo" value="<?php echo $_GET["tipo"]; ?>"/>
