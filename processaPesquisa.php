@@ -14,7 +14,7 @@ require "conexao.php";
         $resultados = mysqli_fetch_array($result);
         $_SESSION["idResultado"]=$resultados["idResultado"];
         // atualiza as abertas
-        $sql = "INSERT INTO pesquisa (idResultado, usabilidade, tutoriais, geral, dataResposta) VALUES (".$resultados["idResultado"].",'" .$_POST["usabilidade"]."','" .$_POST["tutoriais"]."','".$_POST["geral"]."', now())";
+        $sql = "INSERT INTO pesquisa (idResultado, usabilidade, tutoriais, geral, dataResposta) VALUES (".$resultados["idResultado"].",'" .utf8_encode($_POST["usabilidade"])."','" .utf8_encode($_POST["tutoriais"])."','".utf8_encode($_POST["geral"])."', now())";
         require "executaQuery.php";
         $msg =  "Sua participação no CT Puzzle Test está encerrada. Obrigado por colaborar! Pode sair do site ou fechar seu navegador.";
     } else {

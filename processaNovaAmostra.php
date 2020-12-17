@@ -31,17 +31,17 @@ if(mysqli_num_rows($result)>0){
     }
     else {
         $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, serie, turma, instituicao, cidade, estado, pais, idAplicador) VALUES ";
-        $sql .= "('" . $_POST["cadastroNome"] . "'";
-        $sql .= ",'" . $_POST["cadastroDescricao"] . "'";
+        $sql .= "('" . utf8_encode($_POST["cadastroNome"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroDescricao"]) . "'";
         $sql .= ",'" . $_POST["cadastroData"] . "'";
         $sql .= ",0";
-        $sql .= ",'" . $_POST["cadastroChave"] . "'";
-        $sql .= ",'" . $_POST["cadastroSerie"] . "'";
-        $sql .= ",'" . $_POST["cadastroTurma"] . "'";
-        $sql .= ",'" . $_POST["cadastroInstituicao"] . "'";
-        $sql .= ",'" . $_POST["cadastroCidade"] . "'";
-        $sql .= ",'" . $_POST["cadastroEstado"] . "'";
-        $sql .= ",'" . $_POST["cadastroPais"] . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroChave"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroSerie"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroTurma"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroInstituicao"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroCidade"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroEstado"]) . "'";
+        $sql .= ",'" . utf8_encode($_POST["cadastroPais"]) . "'";
         $sql .= "," . $_SESSION["idUsuario"];
         $sql .= ")";
         $msg = "Amostra cadastrada com sucesso! Chave: $_POST[cadastroChave]";
