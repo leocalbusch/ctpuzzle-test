@@ -2,8 +2,18 @@
 require "sessao.php";
 require "conexao.php";
 
+$cadastroNome = utf8_decode($_POST["cadastroNome"]);
+$cadastroDescricao = utf8_decode($_POST["cadastroDescricao"]);
+$cadastroData = $_POST["cadastroData"];
+$cadastroChave = utf8_decode($_POST["cadastroChave"]);
+$cadastroSerie = utf8_decode($_POST["cadastroSerie"]);
+$cadastroTurma = utf8_decode($_POST["cadastroTurma"]);
+$cadastroInstituicao = utf8_decode($_POST["cadastroInstituicao"]);
+$cadastroCidade = utf8_decode($_POST["cadastroCidade"]);
+$cadastroEstado = utf8_decode($_POST["cadastroEstado"]);
+$cadastroPais = utf8_decode($_POST["cadastroPais"]);
 
-$sql="SELECT * FROM amostras WHERE chave = '".$_POST["cadastroChave"]."'";
+$sql="SELECT * FROM amostras WHERE chave = '$cadastroChave'";
 if(isset($_POST["editar"])){
     $sql.=" AND idAmostra <> ".$_POST["idAmostra"];
 }
@@ -16,35 +26,35 @@ if(mysqli_num_rows($result)>0){
     $chave=true;
     if(isset($_POST["editar"])){
         $sql = "UPDATE amostras SET ";
-        $sql.= "nome = '$_POST[cadastroNome]',";
-        $sql.= "descricao = '$_POST[cadastroDescricao]',";
-        $sql.= "dataAplicacao = '$_POST[cadastroData]',";
-        $sql.= "chave = '$_POST[cadastroChave]',";
-        $sql.= "serie = '$_POST[cadastroSerie]',";
-        $sql.= "turma = '$_POST[cadastroTurma]',";
-        $sql.= "instituicao = '$_POST[cadastroInstituicao]',";
-        $sql.= "cidade = '$_POST[cadastroCidade]',";
-        $sql.= "estado = '$_POST[cadastroEstado]',";
-        $sql.= "pais = '$_POST[cadastroPais]' ";
+        $sql.= "nome = '$cadastroNome',";
+        $sql.= "descricao = '$cadastroDescricao',";
+        $sql.= "dataAplicacao = '$cadastroData',";
+        $sql.= "chave = '$cadastroChave',";
+        $sql.= "serie = '$cadastroSerie',";
+        $sql.= "turma = '$cadastroTurma',";
+        $sql.= "instituicao = '$cadastroInstituicao',";
+        $sql.= "cidade = '$cadastroCidade',";
+        $sql.= "estado = '$cadastroEstado',";
+        $sql.= "pais = '$cadastroPais' ";
         $sql.= "WHERE idAmostra = ".$_POST["idAmostra"]." AND idAplicador=".$_SESSION["idUsuario"];
         $msg = "Informações atualizadas com sucesso!";
     }
     else {
         $sql = "INSERT INTO amostras (nome, descricao, dataAplicacao, aberta, chave, serie, turma, instituicao, cidade, estado, pais, idAplicador) VALUES ";
-        $sql .= "('" . $_POST["cadastroNome"] . "'";
-        $sql .= ",'" . $_POST["cadastroDescricao"] . "'";
-        $sql .= ",'" . $_POST["cadastroData"] . "'";
+        $sql .= "('$cadastroNome'";
+        $sql .= ",'$cadastroDescricao'";
+        $sql .= ",'$cadastroData'";
         $sql .= ",0";
-        $sql .= ",'" . $_POST["cadastroChave"] . "'";
-        $sql .= ",'" . $_POST["cadastroSerie"] . "'";
-        $sql .= ",'" . $_POST["cadastroTurma"] . "'";
-        $sql .= ",'" . $_POST["cadastroInstituicao"] . "'";
-        $sql .= ",'" . $_POST["cadastroCidade"] . "'";
-        $sql .= ",'" . $_POST["cadastroEstado"] . "'";
-        $sql .= ",'" . $_POST["cadastroPais"] . "'";
+        $sql .= ",'$cadastroChave'";
+        $sql .= ",'$cadastroSerie'";
+        $sql .= ",'$cadastroTurma'";
+        $sql .= ",'$cadastroInstituicao'";
+        $sql .= ",'$cadastroCidade'";
+        $sql .= ",'$cadastroEstado'";
+        $sql .= ",'$cadastroPais'";
         $sql .= "," . $_SESSION["idUsuario"];
         $sql .= ")";
-        $msg = "Amostra cadastrada com sucesso! Chave: $_POST[cadastroChave]";
+        $msg = "Amostra cadastrada com sucesso! Chave: $cadastroChave";
     }
     require "executaQuery.php";
 }
