@@ -12,7 +12,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $sql = "INSERT INTO usuarios (nome, email, senha, dataNascimento, genero, tipoUsuario, ativo) VALUES (";
-$sql .= "'" . utf8_encode($_POST['cadastroNome']) . "', ";
+$sql .= "'" . $_POST['cadastroNome'] . "', ";
 $sql .= "'" . $_POST['cadastroEmail'] . "', ";
 $sql .= "'" . md5($_POST['cadastroSenha']) . "', ";
 $sql .= "'" . $_POST['cadastroNascimento'] . "', ";
