@@ -11,8 +11,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Minhas Amostras</h5>
-                <p>Aqui você administra suas amostras de aplicação do CT Puzzle Test. Para liberar ou bloquear o acesso de uma amostra ao teste, basta marcar/desmarcar a caixa de seleção correspondente e clicar em "Salvar Alterações".</p><p>Para atualizar os demais dados de uma amostra, <strong>clique sobre o nome da amostra</strong> que deseja alterar.</p>
+                <h5>Minhas Amostras/Turmas</h5>
+                <p>Aqui você administra suas amostras (ou turmas) de aplicação do CT Puzzle Test. Para liberar ou bloquear o acesso de uma amostra ao teste, basta marcar/desmarcar a caixa de seleção correspondente e clicar em "Salvar Alterações".</p><p>Para atualizar os demais dados de uma amostra, <strong>clique sobre o nome da amostra</strong> que deseja alterar.</p>
                 <table class="table table-sm table-hover mb-0" id="minhaAmostra">
                     <thead>
                     <tr>
@@ -27,7 +27,7 @@
                     <?php
                     $sql = "select a.*, count(ar.idAmostra) as respostas FROM amostras a left join amostras_resultados ar ON a.idAmostra = ar.idAmostra where a.idAplicador = ".$_SESSION["idUsuario"]." group by a.idAmostra";
                     require "executaQuery.php";
-                    $msgRodape[1] = "<p class='text-center'>Ops! Parece que você ainda não possui amostras cadastradas!</p>";
+                    $msgRodape[1] = "<p class='text-center'>Ops! Parece que você ainda não possui amostras/turmas cadastradas!</p>";
                     $msgRodape[0] = "<small><ul class='list-inline d-flex justify-content-between'><li class='list-inline-item'><span class='badge badge-primary'><i class='fa fa-bar-chart' ></i></span> <span> = ver relatório</span></li><li class='list-inline-item'><span class='ml-auto'><span class='badge badge-pill badge-danger ml-auto'>?</span><span> = quantidade de respostas</span></span></li></ul></small>";
                     $cont = 0;
                     if (mysqli_num_rows($result) > 0) {
@@ -48,7 +48,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5"><button class="btn btn-outline-primary btn-sm btn-block" type = "button" data-toggle = "modal" data-target = "#modalNovaAmostra" ><i class="fa fa-plus-circle" ></i > Nova Amostra</button ></td>
+                        <td colspan="5"><button class="btn btn-outline-primary btn-sm btn-block" type = "button" data-toggle = "modal" data-target = "#modalNovaAmostra" ><i class="fa fa-plus-circle" ></i > Nova Amostra/Turma</button ></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -75,20 +75,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Altere as informações da sua amostra.</p>
+                    <p>Altere as informações da sua amostra/turma.</p>
                     <form action="processaNovaAmostra.php" method="post" >
                         <input type="hidden" id="idAmostra" name="idAmostra"/>
                         <input type="hidden" id="editar" name="editar" value="1"/>
                         <div class="form-group">
-                            <label for="cadastroNome">Nome identificador da amostra <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Nome da amostra" data-content="Dê um nome que identifique essa amostra, como por exemplo o nome de um projeto, o título de uma pesquisa, o nome da etapa do trabalho ao qual essa amostra se refere, etc."><i class='fa fa-question' ></i></span></label>
+                            <label for="cadastroNome">Nome identificador da amostra/turma <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Nome da amostra/turma" data-content="Dê um nome que identifique essa amostra, como por exemplo a identificação da turma, o nome de um projeto, o título de uma pesquisa, o nome da etapa do trabalho ao qual essa amostra se refere, etc."><i class='fa fa-question' ></i></span></label>
                             <input type="text" class="form-control" id="editaNome" name="cadastroNome" required>
                         </div>
                         <div class="form-group">
-                            <label for="cadastroDescricao">Descrição da amostra <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Descrição da amostra" data-content="Descreva detalhes da amostra, como por exemplo o perfil dos estudantes, faixa etária, características do escopo da pesquisa relacionadas a essa amostra, e qualquer informação importante que possa ser relevante para a análise dos resultados."><i class='fa fa-question' ></i></span></label>
+                            <label for="cadastroDescricao">Descrição da amostra/turma <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Descrição da amostra/turma" data-content="Descreva detalhes da amostra/turma, como por exemplo o perfil dos estudantes, faixa etária, características do escopo da pesquisa relacionadas a essa amostra, e qualquer informação importante que possa ser relevante para a análise dos resultados."><i class='fa fa-question' ></i></span></label>
                             <textarea class="form-control" id="editaDescricao" name="cadastroDescricao" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="cadastroData">Data de criação da amostra ou aplicação do teste <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Data de criação / aplicação" data-content="Se a data de aplicação do teste já estiver definida, ela pode ser informada aqui. Caso contrário, ou ainda se esta informação não se aplica a essa amostra, a data atual poderá ser utilizada para fins de registro no banco de dados."><i class='fa fa-question' ></i></span></label>
+                            <label for="cadastroData">Data de criação da amostra/turma ou aplicação do teste <span class='badge badge-pill badge-info' data-toggle="popover" data-trigger="hover" title="Data de criação / aplicação" data-content="Se a data de aplicação do teste já estiver definida, ela pode ser informada aqui. Caso contrário, ou ainda se esta informação não se aplica a essa amostra/turma, a data atual poderá ser utilizada para fins de registro no banco de dados."><i class='fa fa-question' ></i></span></label>
                             <input type="date" class="form-control" id="editaData" name="cadastroData"  required>
                         </div>
                         <div class="form-group">
