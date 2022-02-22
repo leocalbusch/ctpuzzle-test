@@ -106,6 +106,7 @@ require "conexao.php";
                 require "executaQuery.php";
                 $cont = 0;
                 if (mysqli_num_rows($result) > 0) {
+                    $tbody= "";
                     while ($amostra = mysqli_fetch_assoc($result)){
                         if ($cont ==0 ){
                             $thead = "
@@ -129,7 +130,7 @@ require "conexao.php";
                 $thead.= "
                 </tr>
                 </thead><tbody>";}
-                $tbody= "";
+                
 
 
                         $cont++;
