@@ -139,7 +139,7 @@ require "conexao.php";
                             <tr> 
                                 <th scope='col'>$cont</th>";
                         foreach($amostra as $coluna => $valor){
-                            $tbody.= " <td>$valor</td>";
+                            $tbody.= utf8_encode(" <td>$valor</td>");
                         }
 
                         $tbody.="</tr>";
