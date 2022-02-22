@@ -105,9 +105,9 @@ require "conexao.php";
                 $sql = "select usuarios.nome, usuarios.email, resultados.*, amostras.nome as nomeAmostra, date_format(amostras.dataAplicacao,'%d/%m/%Y') as dataAplicacao from resultados, amostras_resultados, usuarios, amostras WHERE resultados.idResultado = amostras_resultados.idResultado AND amostras.idAmostra = amostras_resultados.idAmostra AND amostras_resultados.idAmostra = $_GET[idAmostra] AND resultados.idEstudante = usuarios.idUsuario AND amostras.idAplicador = $_SESSION[idUsuario]";
                 require "executaQuery.php";
                 $cont = 0;
+                
                 if (mysqli_num_rows($result) > 0) {
-                    $tbody= "";
-                    
+                    $tbody= ""; 
                     while ($amostra = mysqli_fetch_assoc($result)){
                         if ($cont ==0 ){
                             $thead = "
