@@ -107,6 +107,7 @@ require "conexao.php";
                 $cont = 0;
                 if (mysqli_num_rows($result) > 0) {
                     $tbody= "";
+                    
                     while ($amostra = mysqli_fetch_assoc($result)){
                         if ($cont ==0 ){
                             $thead = "
