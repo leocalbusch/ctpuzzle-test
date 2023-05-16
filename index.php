@@ -76,7 +76,7 @@ session_destroy();
                 <div class="form-row">
                     <div class="form-group col-sm-6">
                         <label for="esqueceuEmail">Seu e-mail</label>
-                        <input class="form-control" type="email" placeholder="e-mail"
+                        <input class="form-control" type="email" placeholder="Seu e-mail"
                                aria-label="e-mail" required name="esqueceuEmail">
                     </div>
                     <div class="col-sm-6"></div>
