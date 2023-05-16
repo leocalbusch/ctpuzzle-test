@@ -163,16 +163,7 @@ require "conexao.php";
                         <form action='processaVinculaAmostra.php' method='post' >
                             <div class='form-group'>
                                 <label for='chaveAmostra'>Chave de acesso:</label>
-                                <select class="form-control" id="chaveAmostra" name="chaveAmostra" required>
-                                    <option value="">&ltSelecione&gt</option>
-                                    <option value="1INFO">1º ano de Informática</option>
-                                    <option value="2INFO">2º ano de Informática</option>
-                                    <option value="3INFO">3º ano de Informática</option>
-                                    <option value="1QUIM">1º ano de Química</option>
-                                    <option value="2QUIM">2º ano de Química</option>
-                                    <option value="3QUIM">3º ano de Química</option>
-                                </select>
-                                <!-- <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'><br/> -->
+                                <input type='text' class='form-control' id='chaveAmostra' name='chaveAmostra'><br/>
                                 <button type='submit' class='btn btn-primary'>Iniciar</button>
                             </div>
                         </form>
