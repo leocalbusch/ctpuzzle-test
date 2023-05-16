@@ -152,7 +152,7 @@ require "conexao.php";
                 <div class="card d-flex flex-row canvaGirl">
                     <div class="card-body" style="background:url(img/Instrucoes/guias/chat_bubble_right.png) no-repeat; background-size:100% 100%;">
                         <!-- <p class="card-text pr-5">Para iniciar seu teste, você precisa informar aqui na caixinha a sua chave de acesso! Ainda não possui uma ou não sabe do que eu estou falando? Pergunta pra pessoa responsável pela aplicacão do teste, provavelmente seu professor! Vamos lá?</p> -->
-                        <p class="card-text pr-5">Para iniciar seu teste, você precisa selecionar aqui na caixinha seu curso / série. Vamos lá? Para mais orientações, clica <a href="CT_Puzzle_Test_Guia_Instrucoes.pdf" target="_blank">aqui</a> e veja nosso <a href="CT_Puzzle_Test_Guia_Instrucoes.pdf" target="_blank">guia de instruções</a>!</p>
+                        <p class="card-text pr-5">Para iniciar seu teste, você precisa informar a chave de acesso fornecida pela pessoa responsável pelo teste. Vamos lá? Para mais orientações, clica <a href="CT_Puzzle_Test_Guia_Instrucoes.pdf" target="_blank">aqui</a> e veja nosso <a href="CT_Puzzle_Test_Guia_Instrucoes.pdf" target="_blank">guia de instruções</a>!</p>
                         <p class="card-text pr-5"><strong>IMPORTANTE:</strong> O teste funciona melhor em um COMPUTADOR.</p>
                     </div>
                     <img src="img/Instrucoes/guias/girl0000.png" class="w-25 h-25" alt="">
