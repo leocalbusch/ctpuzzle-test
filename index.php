@@ -90,6 +90,7 @@ session_destroy();
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
