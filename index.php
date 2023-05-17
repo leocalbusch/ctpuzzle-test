@@ -75,7 +75,7 @@ session_destroy();
                 <p>Esqueceu sua senha? Informe abaixo seu e-mail e lhe enviaremos um link para que você possa cadastrar uma nova senha.</p>
                 <div class="form-row">
                     <div class="form-group col-sm-6">
-                        <label for="esqueceuEmail">Seu e-mail</label>
+                        <label for="esqueceuEmail">Seu e-mail:</label>
                         <input class="form-control" type="email" placeholder="Seu e-mail"
                                aria-label="e-mail" required name="esqueceuEmail">
                     </div>
