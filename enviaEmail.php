@@ -1,5 +1,5 @@
 <?php
-
+//Envio de emails
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -47,7 +47,9 @@ try {
         exit();
     }    
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    $erro = "Ocorreu um erro no envio do e-mail. " . $mail->ErrorInfo;
+    require "modalErro.php";
+    exit();
 }
 
 
