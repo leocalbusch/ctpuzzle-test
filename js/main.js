@@ -352,7 +352,7 @@ function draw() {
       tela = new Instrucoes(16);
       telaAtual = "Instrucoes16";
       escore.Calcula();
-      window.setTimeout('window.location = "pesquisa.php"', 5000);
+      window.setTimeout('window.location = "dashboard.php"', 5000);
     } /*else if (telaAtual == "Instrucoes16") {
       tela = new Instrucoes(17);
       telaAtual = "Instrucoes17";
