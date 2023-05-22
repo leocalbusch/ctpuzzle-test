@@ -134,6 +134,7 @@ session_destroy();
         <div class="col">
             <h1>Bem-vindo(a) ao CT Puzzle Test!</h1>
             <p>Utilize o menu superior para ter acesso às opções do site.</p>
+            <p>Qualquer dúvida, entre em contato com ctpuzzletest@gmail.com.</p>
         </div>
         <div class="col">
         </div>
