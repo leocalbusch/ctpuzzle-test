@@ -12,17 +12,22 @@ if(mysqli_num_rows($result)==0){
     $amostra = mysqli_fetch_array($result);
     $_SESSION["idAmostra"]=$amostra["idAmostra"];
     //$sql = "select r.idEstudante, ar.* from resultados r, amostras_resultados ar where ar.idResultado = r.idResultado AND r.idEstudante = " . $_SESSION["idUsuario"]. " AND ar.idAmostra=" . $amostra["idAmostra"];
-    $sql = "select r.idEstudante, r.idResultado from resultados r where r.idEstudante = " . $_SESSION["idUsuario"];
+    $sql = "SELECT COUNT(*) AS total FROM resultados r JOIN amostras_resultados ar ON r.idResultado = ar.idResultado WHERE r.idEstudante = ".$_SESSION["idUsuario"]." AND ar.idAmostra = ".$amostra["idAmostra"]."; ";
     require "executaQuery.php";
     if (mysqli_num_rows($result)) {
         $chave = false;
         $resultados = mysqli_fetch_array($result);
-        $_SESSION["idResultado"]=$resultados["idResultado"];
-        $msg =  "Você já respondeu o teste. Agradecemos sua participação!";
-    } else {
+        if (intval($resultados["total"])>0){
+            $_SESSION["idResultado"]=$resultados["idResultado"];
+            $msg =  "Você já respondeu o teste. Agradecemos sua participação!";    
+        } 
+        else {
         $chave = true;
         $_SESSION["idResultado"]=0;
         $msg = "Tudo pronto. Vamos iniciar o teste?";
+        }
+    }else{
+        $msg = "Não foi possível processar sua solicitação.";
     }
 }
 mysqli_close($conexao);
