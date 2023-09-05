@@ -15,18 +15,20 @@ if(mysqli_num_rows($result)==0){
     $sql = "SELECT COUNT(*) AS total FROM resultados r JOIN amostras_resultados ar ON r.idResultado = ar.idResultado WHERE r.idEstudante = ".$_SESSION["idUsuario"]." AND ar.idAmostra = ".$amostra["idAmostra"]."; ";
     require "executaQuery.php";
     if (mysqli_num_rows($result)) {
-        $chave = false;
+        
         $resultados = mysqli_fetch_array($result);
         if (intval($resultados["total"])>0){
+            $chave = false;
             $_SESSION["idResultado"]=$resultados["idResultado"];
             $msg =  "Você já respondeu o teste. Agradecemos sua participação!";    
         } 
         else {
-        $chave = true;
-        $_SESSION["idResultado"]=0;
-        $msg = "Tudo pronto. Vamos iniciar o teste?";
+            $chave = true;
+            $_SESSION["idResultado"]=0;
+            $msg = "Tudo pronto. Vamos iniciar o teste?";
         }
     }else{
+        $chave = false;
         $msg = "Não foi possível processar sua solicitação.";
     }
 }
